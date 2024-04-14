@@ -22,7 +22,7 @@ namespace DataTask1
         public RoomType RoomType { get => roomType; set => roomType = value; }
         //public string All { get ; set => * = value; }
 
-        public void setIsBooked(bool value) { isBooked = value; }
+        public void SetIsBooked(bool value) { isBooked = value; }
     }
 
     public enum RoomType

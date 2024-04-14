@@ -16,6 +16,35 @@ namespace DataTask1
         {
             this.context = context;
         }
+
+        #region Associations with events
+        // Method to check if a user is associated with an event
+        public bool IsUserInEvent(User user)
+        {
+            foreach (var evt in context.events)
+            {
+                if (evt.guest == user)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Method to check if a room is associated with an event
+        public bool IsRoomInEvent(State room)
+        {
+            foreach (var evt in context.events)
+            {
+                if (evt.room == room)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        #endregion
+
         #region Users
         public void AddUser(User user)
         {
@@ -23,7 +52,7 @@ namespace DataTask1
         }
         public User GetUser(int id)
         {
-            foreach(var user in context.users)
+            foreach (var user in context.users)
             {
                 if (user.Id == id)
                 {
@@ -34,26 +63,32 @@ namespace DataTask1
         }
         public void RemoveUser(int id)
         {
-            User tempUser = GetUser(id);
-
-            foreach (var user in context.users)
+            if (IsUserInEvent(GetUser(id)) == true)
             {
-                if (user.Id == id)
+                throw new Exception("User has an event assigned. Cannot remove user.");
+            }
+            else
+            {
+                foreach (var user in context.users)
                 {
-                    context.users.Remove(user);
+                    if (user.Id == id)
+                    {
+                        context.users.Remove(user);
+                    }
                 }
             }
         }
         //for later implementation
         public void UpdateUser(User user)
         {
-               
+
         }
         public List<User> GetAllUsers()
         {
             return context.users;
         }
-        #endregion
+            #endregion
+
         #region Catalog
         private int counter = 0;
         public void AddCatalog(Catalog catalog)
@@ -76,7 +111,8 @@ namespace DataTask1
 
         public void RemoveCatalog(int id)
         {
-            foreach(var eve in context.events) {
+            foreach (var eve in context.events)
+            {
                 //here create something that checks if a catalog object is used by an event, if so, throw exception
             }
             context.catalogs.Remove(id);
@@ -88,6 +124,7 @@ namespace DataTask1
         public void AddEvent(Event eve)
         {
             context.events.Add(eve);
+            eve.Room.RoomCatalog.SetIsBooked(true);
         }
         public Event GetEvent(int id)
         {
@@ -98,11 +135,20 @@ namespace DataTask1
             return context.events.ToList();
         }
 
-        public void RemoveEvent(int id) 
+        public void RemoveEvent(int id)
         {
+            Event eve = context.events[id];
+
             if (id >= context.events.Count())
+            {
                 throw new Exception("Event does not exist");
-            context.events.Remove(context.events[id]);
+            }
+
+            else
+            {
+                eve.Room.RoomCatalog.SetIsBooked(false);
+                context.events.Remove(eve);
+            }
         }
         #endregion
 
@@ -111,17 +157,21 @@ namespace DataTask1
         {
             context.rooms.Add(state);
         }
-        public State GetState(int id) { return context.rooms[id]; }
+        public State GetState(int id)
+        {
+            return context.rooms[id];
+        }
         public List<State> GetAllStates()
         {
             return context.rooms;
         }
         public void RemoveState(int id)
         {
-            //check if state used, if so, throw an exception
-            context.rooms.Remove(GetState(id));
+            if (IsRoomInEvent(GetState(id)) == true) throw new Exception("State used by an event. Cannot remove this state.");
+                context.rooms.Remove(GetState(id));
         }
         #endregion
-    }
+
+        }
 
 }
