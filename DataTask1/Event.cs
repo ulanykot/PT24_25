@@ -12,6 +12,14 @@ namespace DataTask1
         public required User guest { get; set; }
         public required State room { get; set; }
 
+        public User User { get => guest; set => guest = value; }
+        public State Room { get => room; set => room = value; }
+
+        public Event(User guest, State room)
+        {
+            this.guest = guest;
+            this.room = room;
+        }
     }
     public class BookingEvent : Event
     {
@@ -19,12 +27,19 @@ namespace DataTask1
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
 
+        public BookingEvent(User guest, State room) : base(guest, room) 
+        { 
+        }
+
     }
 
     public class CheckInEvent : Event
     {
         public override string Description => "Check-In";      
         public DateTime CheckInDate { get; set; }
+        public CheckInEvent(User guest, State room) : base(guest, room)
+        {
+        }
 
     }
 
@@ -32,6 +47,10 @@ namespace DataTask1
     {
         public override string Description => "Check-Out";
         public DateTime CheckOutDate { get; set; }
+        public CheckOutEvent(User guest, State room) : base(guest, room)
+        {
+        }
+
 
     }
 
