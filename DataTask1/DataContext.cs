@@ -9,7 +9,7 @@ namespace DataTask1
 {
     public class DataContext
     {
-        public List<User> guests = new List<User>();
+        public List<User> users = new List<User>();
         public Dictionary<int, Catalog> catalogs = new Dictionary<int, Catalog>();
         public ObservableCollection<Event> events = new ObservableCollection<Event>();
         public List<State> rooms = new List<State>();
