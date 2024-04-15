@@ -12,18 +12,16 @@ namespace TestTask1
         private static int userIdCounter = 1;
         private static int roomIdCounter = 101;
 
-        public static Guest GenerateDynamicUser()
+        public static Guest GenerateDynamicUser(int id)
         {
-            string firstName = "User" + userIdCounter;
+            string firstName = "User" + id;
             string lastName = "Test";
-            int id = userIdCounter++;
             return new Guest(firstName, lastName, id);
         }
 
-        public static State GenerateDynamicState()
+        public static State GenerateDynamicState(int roomId, RoomType roomType, int price)
         {
-            Catalog roomCatalog = new Catalog(roomIdCounter++, RoomType.Regular, false);
-            int price = roomIdCounter * 10;
+            Catalog roomCatalog = new Catalog(roomId, roomType, false);
             return new State(roomCatalog, price);
         }
     }
