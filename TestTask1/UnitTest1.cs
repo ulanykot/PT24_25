@@ -25,7 +25,7 @@ namespace TestTask1
         public void AddUser_ValidUser_UserAddedSuccessfully()
         {
             // Arrange
-            User user = TestDataGenerator.GenerateUser(1, "John", "Doe");
+            User user = TestDataGeneratorStatic.GenerateStaticUser(1);
 
             // Act
             _hotelManager.AddUser(user);
@@ -39,7 +39,8 @@ namespace TestTask1
         public void AddRoomToCatalog_ValidRoom_RoomAddedSuccessfully()
         {
             // Arrange
-            Catalog room = TestDataGenerator.GenerateCatalog(101, RoomType.Vip);
+            State roomState = TestDataGeneratorStatic.GenerateStaticState(101, RoomType.Vip, 100);
+            Catalog room = roomState.RoomCatalog;
 
             // Act
             _hotelManager.AddRoomToCatalog(101, room);
@@ -53,8 +54,8 @@ namespace TestTask1
         public void MakeBooking_ValidBooking_BookingEventCreatedSuccessfully()
         {
             // Arrange
-            User guest = TestDataGenerator.GenerateUser(1, "Alice", "Smith");
-            Catalog room = TestDataGenerator.GenerateCatalog(102, RoomType.Regular);
+            User guest = TestDataGeneratorStatic.GenerateStaticUser(1);
+            Catalog room = TestDataGeneratorStatic.GenerateStaticState(102, RoomType.Regular, 100).RoomCatalog;
             DateTime checkInDate = DateTime.Now;
             DateTime checkOutDate = checkInDate.AddDays(3);
 
@@ -68,7 +69,3 @@ namespace TestTask1
 
     }
 }
-
-
-
-
