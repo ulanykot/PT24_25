@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\DataTask1\DataTask1.csproj" />
-  </ItemGroup>
-
 </Project>
