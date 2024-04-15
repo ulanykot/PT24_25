@@ -4,8 +4,7 @@ namespace LogicTask1
 {
     public class HotelManager
     {
-
-        private DataRepository _dataRepository;
+        private IDataRepository _dataRepository;
 
         public HotelManager(DataRepository dataRepository)
         {

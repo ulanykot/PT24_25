@@ -8,7 +8,35 @@ using System.Threading.Tasks;
 
 namespace DataTask1
 {
-    public class DataRepository
+    public interface IDataRepository
+    {
+        //association
+        bool IsUserInEvent(User user);
+        bool IsRoomInEvent(State room);
+        //user
+        public void AddUser(User user);
+        public User GetUser(int id);
+        public void RemoveUser(int id);
+        public List<User> GetAllUsers();
+        //catalog
+        public void AddCatalog(Catalog catalog);
+        public Catalog GetCatalog(int id);
+        public Catalog GetRecentCatalog();
+        public List<Catalog> GetAllCatalogs();
+        public void RemoveCatalog(int id);
+        //event
+        public void AddEvent(Event eve);
+        public Event GetEvent(int id);
+        public List<Event> GetAllEvents();
+        public void RemoveEvent(int id);
+        //state
+        public void AddState(State state);
+        public State GetState(int id);
+        public List<State> GetAllStates();
+        public void RemoveState(int id);
+
+    }
+    public class DataRepository : IDataRepository
     {
         private DataContext context;
 
