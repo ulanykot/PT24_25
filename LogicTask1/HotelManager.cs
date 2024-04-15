@@ -19,7 +19,7 @@ namespace LogicTask1
 
         public void AddRoomToCatalog(int id, Catalog room)
         {
-            var state = new State(room, 0); // Initialize room state with a price of 0
+            var state = new State(room, 0); 
             _dataRepository.AddState(state);
         }
 
