@@ -9,8 +9,8 @@ namespace DataTask1
     public abstract class Event
     {
         public abstract string Description { get; }
-        public required User guest { get; set; }
-        public required State room { get; set; }
+        public User guest { get; set; }
+        public State room { get; set; }
 
         public User User { get => guest; set => guest = value; }
         public State Room { get => room; set => room = value; }

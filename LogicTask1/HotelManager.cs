@@ -23,7 +23,7 @@ namespace LogicTask1
             _dataRepository.AddState(state);
         }
 
-        public void MakeBooking(Guest guest, State room, DateTime checkInDate, DateTime checkOutDate)
+        public void MakeBooking(User guest, State room, DateTime checkInDate, DateTime checkOutDate)
         {
             var bookingEvent = new BookingEvent(guest, room)
             {
@@ -33,7 +33,7 @@ namespace LogicTask1
             _dataRepository.AddEvent(bookingEvent);
         }
 
-        public void CheckInGuest(Guest guest, State room, DateTime checkInDate)
+        public void CheckInGuest(User guest, State room, DateTime checkInDate)
         {
             var checkInEvent = new CheckInEvent(guest, room)
             {
