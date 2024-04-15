@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataTask1\DataTask1.csproj" />
-    <ProjectReference Include="..\TestTask1\TestTask1.csproj" />
+    <ProjectReference Include="..\TestTask1\TestLogicTask1.csproj" />
   </ItemGroup>
 
   <ItemGroup>

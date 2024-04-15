@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataTask1", "..\DataTask1\D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicTask1", "..\LogicTask1\LogicTask1.csproj", "{F7EA7948-059D-4C95-9322-1F8CD3543DCA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestTask1", "..\TestTask1\TestTask1.csproj", "{D472C848-1C35-4FB0-A55F-11896A98769A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestLogicTask1", "..\TestTask1\TestLogicTask1.csproj", "{D472C848-1C35-4FB0-A55F-11896A98769A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDataTask1", "..\TestDataTask1\TestDataTask1.csproj", "{F24E449D-52F9-42FD-A607-E40FAB5AEDAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestDataTask1", "..\TestDataTask1\TestDataTask1.csproj", "{F24E449D-52F9-42FD-A607-E40FAB5AEDAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
