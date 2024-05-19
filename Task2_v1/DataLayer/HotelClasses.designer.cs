@@ -22,13 +22,8 @@ namespace Task2_v1
 	using System;
 	
 	
-<<<<<<<< HEAD:Task2_v1/DataLayer/HotelClasses.designer.cs
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Database1")]
 	public partial class HotelClassesDataContext : System.Data.Linq.DataContext
-========
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Hotel")]
-	public partial class DataClassesDataContext : System.Data.Linq.DataContext
->>>>>>>> 01915facb536b5b68002e2d0dc29a20ba5f2a9af:Task2_v1/DataClasses.designer.cs
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
@@ -49,52 +44,31 @@ namespace Task2_v1
     partial void DeleteUser(User instance);
     #endregion
 		
-<<<<<<<< HEAD:Task2_v1/DataLayer/HotelClasses.designer.cs
 		public HotelClassesDataContext() : 
 				base(global::Task2_v1.Properties.Settings.Default.Database1ConnectionString, mappingSource)
-========
-		public DataClassesDataContext() : 
-				base(global::Task2_v1.Properties.Settings.Default.HotelConnectionString, mappingSource)
->>>>>>>> 01915facb536b5b68002e2d0dc29a20ba5f2a9af:Task2_v1/DataClasses.designer.cs
 		{
 			OnCreated();
 		}
 		
-<<<<<<<< HEAD:Task2_v1/DataLayer/HotelClasses.designer.cs
 		public HotelClassesDataContext(string connection) : 
-========
-		public DataClassesDataContext(string connection) : 
->>>>>>>> 01915facb536b5b68002e2d0dc29a20ba5f2a9af:Task2_v1/DataClasses.designer.cs
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-<<<<<<<< HEAD:Task2_v1/DataLayer/HotelClasses.designer.cs
 		public HotelClassesDataContext(System.Data.IDbConnection connection) : 
-========
-		public DataClassesDataContext(System.Data.IDbConnection connection) : 
->>>>>>>> 01915facb536b5b68002e2d0dc29a20ba5f2a9af:Task2_v1/DataClasses.designer.cs
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-<<<<<<<< HEAD:Task2_v1/DataLayer/HotelClasses.designer.cs
 		public HotelClassesDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
-========
-		public DataClassesDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
->>>>>>>> 01915facb536b5b68002e2d0dc29a20ba5f2a9af:Task2_v1/DataClasses.designer.cs
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-<<<<<<<< HEAD:Task2_v1/DataLayer/HotelClasses.designer.cs
 		public HotelClassesDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
-========
-		public DataClassesDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
->>>>>>>> 01915facb536b5b68002e2d0dc29a20ba5f2a9af:Task2_v1/DataClasses.designer.cs
 				base(connection, mappingSource)
 		{
 			OnCreated();

@@ -1,10 +1,5 @@
-<<<<<<<< HEAD:Task2_v1/DataLayer/HotelClasses.dbml
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Database1" Class="HotelClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+<?xml version="1.0" encoding="utf-8"?><Database Name="Database1" Class="HotelClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True" SettingsObjectName="Task2_v1.Properties.Settings" SettingsPropertyName="Database1ConnectionString" Provider="System.Data.SqlClient" />
-========
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Hotel" Class="DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=TABLET-C23CIME9;Initial Catalog=Hotel;Integrated Security=True;Encrypt=False;Trust Server Certificate=True" SettingsObjectName="Task2_v1.Properties.Settings" SettingsPropertyName="HotelConnectionString" Provider="System.Data.SqlClient" />
->>>>>>>> 01915facb536b5b68002e2d0dc29a20ba5f2a9af:Task2_v1/DataClasses.dbml
   <Table Name="dbo.Catalog" Member="Catalogs">
     <Type Name="Catalog">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
