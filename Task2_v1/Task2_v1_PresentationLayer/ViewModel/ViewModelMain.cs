@@ -65,6 +65,18 @@ namespace PresentationLayer.ViewModel
                 RaisePropertyChanged("Catalog");
             }
         }
+        private Event currentEvent;
+        public Event CurrentEvent { 
+            get 
+            { 
+                return this.currentEvent; 
+            } 
+            set
+            { 
+                this.currentEvent = value; RaisePropertyChanged("CurrentEvent");
+                RefreshAll();
+            } 
+        }
 
         private CommandBase FetchDataCommend { get; }
         private ModelDataAPI modelData = new ModelData();
@@ -89,6 +101,13 @@ namespace PresentationLayer.ViewModel
             this.Catalogs = this.modelData.GetAllCatalogs();
         }
 
+        private void RefreshAll()
+        {
+            this.RefreshAllUsers();
+            this.RefreshAllEvents();
+            this.RefreshAllStates();
+            this.RefreshAllCatalogs();
+        }
         public ViewModelMain()
         {
             modelData = ModelDataAPI.Create();
