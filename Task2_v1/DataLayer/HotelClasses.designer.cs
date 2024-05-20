@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Task2_v1
+namespace DataLayer
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
@@ -45,7 +45,7 @@ namespace Task2_v1
     #endregion
 		
 		public HotelClassesDataContext() : 
-				base(global::Task2_v1.Properties.Settings.Default.Database1ConnectionString, mappingSource)
+				base(global::DataLayer.Properties.Settings.Default.Database1ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

@@ -1,5 +1,6 @@
-namespace Task2_v1
+namespace DataLayer
 {
+
     partial class HotelClassesDataContext
     {
     }
