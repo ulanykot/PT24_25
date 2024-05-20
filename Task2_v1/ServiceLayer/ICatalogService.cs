@@ -11,16 +11,17 @@ namespace ServiceLayer
     {
         void AddUser(User user);
         User GetUser(int id);
-        void RemoveUser(int id);
-        List<User> GetAllUsers();
+        void UpdateUser(User user);
+        void DeleteUser(int id);
+        IEnumerable<User> GetAllUsers();
     }
 
     public interface IStateService
     {
         void AddState(State state);
         State GetState(int id);
-        List<State> GetAllStates();
-        void RemoveState(int id);
+        IEnumerable<State> GetAllStates();
+        void DeleteState(int id);
     }
 
     public interface ICatalogService

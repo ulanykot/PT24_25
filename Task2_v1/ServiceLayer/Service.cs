@@ -134,5 +134,128 @@ namespace ServiceLayer
         }
     }
 
-    // Implement similar classes for State and User if needed
+    public class UserService : IUserService
+    {
+        private readonly string _connectionString;
+
+        public UserService(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
+        public User GetUser(int id)
+        {
+            using (var context = new HotelClassesDataContext(_connectionString))
+            {
+                return context.Users.SingleOrDefault(u => u.Id == id);
+            }
+        }
+
+        public IEnumerable<User> GetAllUsers()
+        {
+            using (var context = new HotelClassesDataContext(_connectionString))
+            {
+                return context.Users.ToList();
+            }
+        }
+
+        public void AddUser(User user)
+        {
+            using (var context = new HotelClassesDataContext(_connectionString))
+            {
+                context.Users.InsertOnSubmit(user);
+                context.SubmitChanges();
+            }
+        }
+
+        public void UpdateUser(User user)
+        {
+            using (var context = new HotelClassesDataContext(_connectionString))
+            {
+                var existingUser = context.Users.SingleOrDefault(u => u.Id == user.Id);
+                if (existingUser != null)
+                {
+                    existingUser.FirstName = user.FirstName;
+                    existingUser.LastName = user.LastName;
+                    existingUser.UserType = user.UserType;
+                    context.SubmitChanges();
+                }
+            }
+        }
+
+        public void DeleteUser(int id)
+        {
+            using (var context = new HotelClassesDataContext(_connectionString))
+            {
+                var user = context.Users.SingleOrDefault(u => u.Id == id);
+                if (user != null)
+                {
+                    context.Users.DeleteOnSubmit(user);
+                    context.SubmitChanges();
+                }
+            }
+        }
+    }
+
+    public class StateService : IStateService
+    {
+        private readonly string _connectionString;
+
+        public StateService(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
+        public State GetState(int id)
+        {
+            using (var context = new HotelClassesDataContext(_connectionString))
+            {
+                return context.States.SingleOrDefault(s => s.Id == id);
+            }
+        }
+
+        public IEnumerable<State> GetAllStates()
+        {
+            using (var context = new HotelClassesDataContext(_connectionString))
+            {
+                return context.States.ToList();
+            }
+        }
+
+        public void AddState(State state)
+        {
+            using (var context = new HotelClassesDataContext(_connectionString))
+            {
+                context.States.InsertOnSubmit(state);
+                context.SubmitChanges();
+            }
+        }
+
+        public void UpdateState(State state)
+        {
+            using (var context = new HotelClassesDataContext(_connectionString))
+            {
+                var existingState = context.States.SingleOrDefault(s => s.Id == state.Id);
+                if (existingState != null)
+                {
+                    existingState.RoomCatalogId = state.RoomCatalogId;
+                    existingState.Price = state.Price;
+                    context.SubmitChanges();
+                }
+            }
+        }
+
+        public void DeleteState(int id)
+        {
+            using (var context = new HotelClassesDataContext(_connectionString))
+            {
+                var state = context.States.SingleOrDefault(s => s.Id == id);
+                if (state != null)
+                {
+                    context.States.DeleteOnSubmit(state);
+                    context.SubmitChanges();
+                }
+            }
+        }
+    }
 }
