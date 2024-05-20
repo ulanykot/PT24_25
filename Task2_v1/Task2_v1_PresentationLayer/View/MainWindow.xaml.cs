@@ -20,7 +20,7 @@ namespace Task2_v1_PresentationLayer
             InitializeComponent();
 
             // Initialize services
-            string connectionString = "Data Source=TABLET-C23CIME9;Initial Catalog=Hotel;Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
+            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\HotelDatabase.mdf;;Integrated Security=False";
             IUserService userService = new UserService(connectionString);
             ICatalogService catalogService = new CatalogService(connectionString);
             IEventService eventService = new EventService(connectionString);

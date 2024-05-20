@@ -9,11 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task2_v1_ServiceLayer", "Se
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task2_v1_PresentationLayer", "Task2_v1_PresentationLayer\Task2_v1_PresentationLayer.csproj", "{F8571004-15FF-42B7-BE88-CCD72C549192}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B9769DAD-2492-4D79-9B97-34A1324E21E7}"
-	ProjectSection(SolutionItems) = preProject
-		DataLayer\HotelDatabase.mdf = DataLayer\HotelDatabase.mdf
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
