@@ -42,9 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ICatalogService.cs" />
+    <Compile Include="IHotelService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CatalogService.cs" />
+    <Compile Include="HotelService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataLayer\Task2_v1_DataLayer.csproj">
