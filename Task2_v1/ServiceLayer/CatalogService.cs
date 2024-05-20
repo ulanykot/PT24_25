@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,9 +8,14 @@ using DataLayer;
 
 namespace ServiceLayer
 {
-    internal class CatalogService : ICatalogService
+    public class CatalogService : ICatalogService
     {
         private readonly string _connectionString;
+
+        public CatalogService CreateCatalogService(string _connectionString)
+        {
+            return new CatalogService(_connectionString);
+        }
 
         public CatalogService(string connectionString)
         {
@@ -73,6 +79,11 @@ namespace ServiceLayer
     public class EventService : IEventService
     {
         private readonly string _connectionString;
+      
+        public EventService CreateEventService(string _connectionString)
+        {
+            return new EventService(_connectionString);
+        }
 
         public EventService(string connectionString)
         {
@@ -138,6 +149,11 @@ namespace ServiceLayer
     {
         private readonly string _connectionString;
 
+        public UserService CreateUserService(string _connectionString)
+        {
+            return new UserService(_connectionString);
+        }
+       
         public UserService(string connectionString)
         {
             _connectionString = connectionString;
@@ -201,6 +217,10 @@ namespace ServiceLayer
     {
         private readonly string _connectionString;
 
+        public StateService CreateStateService(string _connectionString)
+        {
+            return new StateService(_connectionString);
+        }
         public StateService(string connectionString)
         {
             _connectionString = connectionString;
