@@ -68,9 +68,31 @@ namespace PresentationLayer.ViewModel
         private CommandBase FetchDataCommend { get; }
         private ModelDataAPI modelData { get; set; }
 
+        //assigning users, events, states, catalogs to be displayed on the screen
+        private void RefreshAllUsers()
+        {
+            this.Users = this.modelData.GetAllUsers();
+        }
+        private void RefreshAllEvents()
+        {
+            this.Events = this.modelData.GetAllEvents();
+        }
+        private void RefreshAllStates()
+        {
+            this.States = this.modelData.GetAllStates();
+        }
+        private void RefreshAllCatalogs()
+        {
+            this.Catalogs = this.modelData.GetAllCatalogs();
+        }
+
         public ViewModel(ModelDataAPI dataLayer)
         {
             FetchDataCommend = new CommandBase(() => modelData = dataLayer ?? ModelDataAPI.Create());
+            RefreshAllCatalogs();
+            RefreshAllEvents();
+            RefreshAllStates();
+            RefreshAllUsers();
         }
 
 
