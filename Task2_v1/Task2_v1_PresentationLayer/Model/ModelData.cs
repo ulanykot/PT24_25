@@ -20,6 +20,11 @@ namespace Task2_v1_PresentationLayer.Model
             _stateService = stateService;
         }
 
+        public ModelData()
+        {
+            
+        }
+
         // Implementing the abstract methods
         public override void AddUser(User user) => _userService.AddUser(user);
         public override User GetUser(int id) => _userService.GetUser(id);
@@ -40,6 +45,7 @@ namespace Task2_v1_PresentationLayer.Model
         public override State GetState(int id) => _stateService.GetState(id);
         public override IEnumerable<State> GetAllStates() => _stateService.GetAllStates();
         public override void RemoveState(int id) => _stateService.DeleteState(id);
+
 
     }
 }

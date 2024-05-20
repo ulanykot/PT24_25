@@ -15,6 +15,11 @@ namespace Task2_v1_PresentationLayer.Model
             return new ModelData(userService, catalogService, eventService, stateService);
         }
 
+        public static ModelDataAPI Create()
+        {
+            return new ModelData();
+        }
+
         // User operations
         public abstract void AddUser(User user);
         public abstract User GetUser(int id);
