@@ -10,13 +10,17 @@ namespace ServiceLayer
 {
     public class CatalogService : ICatalogService
     {
-        private readonly string _connectionString;
+        private const string V = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\HotelDatabase.mdf;Integrated Security=False";
+        private readonly string _connectionString = V;
 
         public CatalogService CreateCatalogService(string _connectionString)
         {
             return new CatalogService(_connectionString);
         }
-
+        public CatalogService()
+        {
+            
+        }
         public CatalogService(string connectionString)
         {
             _connectionString = connectionString;
@@ -78,8 +82,13 @@ namespace ServiceLayer
 
     public class EventService : IEventService
     {
-        private readonly string _connectionString;
-      
+        private readonly string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\HotelDatabase.mdf;Integrated Security=False";
+
+        public EventService()
+        {
+            
+        }
+
         public EventService CreateEventService(string _connectionString)
         {
             return new EventService(_connectionString);
@@ -147,13 +156,17 @@ namespace ServiceLayer
 
     public class UserService : IUserService
     {
-        private readonly string _connectionString;
+        private readonly string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\HotelDatabase.mdf;Integrated Security=False";
 
         public UserService CreateUserService(string _connectionString)
         {
             return new UserService(_connectionString);
         }
-       
+        public UserService()
+        {
+            
+        }
+
         public UserService(string connectionString)
         {
             _connectionString = connectionString;
@@ -215,7 +228,7 @@ namespace ServiceLayer
 
     public class StateService : IStateService
     {
-        private readonly string _connectionString;
+        private readonly string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\HotelDatabase.mdf;Integrated Security=False";
 
         public StateService CreateStateService(string _connectionString)
         {
@@ -225,7 +238,10 @@ namespace ServiceLayer
         {
             _connectionString = connectionString;
         }
-
+        public StateService()
+        {
+            
+        }
         public State GetState(int id)
         {
             using (var context = new HotelClassesDataContext(_connectionString))

@@ -10,7 +10,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ComboBox Margin="6" ItemsSource="{Binding Path=Events}" DisplayMemberPath="EventName" SelectedItem="{Binding Path=CurrentEvent, Mode=TwoWay}" />
+        <ComboBox Margin="6" ItemsSource="{Binding Path=Users}" DisplayMemberPath="FirstName" SelectedItem="{Binding Path=CurrentUser, Mode=TwoWay}" />
         <DataGrid Margin="10,33,6,-286" AutoGenerateColumns="True"  ItemsSource="{Binding Path=Users}"/>
     </Grid>
 </Window>
