@@ -89,9 +89,9 @@ namespace PresentationLayer.ViewModel
             this.Catalogs = this.modelData.GetAllCatalogs();
         }
 
-        public ViewModelMain(IUserService userService, ICatalogService catalogService, IEventService eventService, IStateService stateService)
+        public ViewModelMain()
         {
-            modelData = ModelDataAPI.Create(userService, catalogService, eventService, stateService);
+            modelData = ModelDataAPI.Create();
             FetchDataCommand = new CommandBase(() =>
             {
                 RefreshAllCatalogs();

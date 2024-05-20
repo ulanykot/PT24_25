@@ -19,18 +19,8 @@ namespace Task2_v1_PresentationLayer
         {
             InitializeComponent();
 
-            // Initialize services
-            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\HotelDatabase.mdf;;Integrated Security=False";
-            IUserService userService = new UserService(connectionString);
-            ICatalogService catalogService = new CatalogService(connectionString);
-            IEventService eventService = new EventService(connectionString);
-            IStateService stateService = new StateService(connectionString);
-
-            // Create model data
-            ModelDataAPI modelData = new ModelData(userService, catalogService, eventService, stateService);
-
             // Initialize the ViewModel with model data
-            viewModel = new ViewModelMain(userService, catalogService, eventService, stateService);
+            viewModel = new ViewModelMain();
 
             // Set DataContext
             this.Loaded += (s, e) => { this.DataContext = this.viewModel; };
