@@ -10,16 +10,15 @@ namespace ServiceLayer
 {
     public class CatalogService : ICatalogService
     {
-        private readonly string _connectionString;
+        private readonly string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\HotelDatabase.mdf;;Integrated Security=False";
 
-        public CatalogService CreateCatalogService(string _connectionString)
+        public CatalogService CreateCatalogService()
         {
-            return new CatalogService(_connectionString);
+            return new CatalogService();
         }
 
-        public CatalogService(string connectionString)
+        public CatalogService()
         {
-            _connectionString = connectionString;
         }
 
         public Catalog GetCatalogById(int id)
@@ -78,16 +77,16 @@ namespace ServiceLayer
 
     public class EventService : IEventService
     {
-        private readonly string _connectionString;
-      
-        public EventService CreateEventService(string _connectionString)
+        private readonly string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\HotelDatabase.mdf;;Integrated Security=False";
+
+        public EventService CreateEventService()
         {
-            return new EventService(_connectionString);
+            return new EventService();
         }
 
-        public EventService(string connectionString)
+        public EventService()
         {
-            _connectionString = connectionString;
+    
         }
 
         public Event GetEventById(int id)
@@ -147,16 +146,16 @@ namespace ServiceLayer
 
     public class UserService : IUserService
     {
-        private readonly string _connectionString;
+        private readonly string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\HotelDatabase.mdf;;Integrated Security=False";
 
-        public UserService CreateUserService(string _connectionString)
+        public UserService CreateUserService()
         {
-            return new UserService(_connectionString);
+            return new UserService();
         }
        
-        public UserService(string connectionString)
+        public UserService()
         {
-            _connectionString = connectionString;
+            
         }
 
         public User GetUser(int id)
@@ -215,15 +214,15 @@ namespace ServiceLayer
 
     public class StateService : IStateService
     {
-        private readonly string _connectionString;
+        private readonly string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\HotelDatabase.mdf;;Integrated Security=False";
 
-        public StateService CreateStateService(string _connectionString)
+        public StateService CreateStateService()
         {
-            return new StateService(_connectionString);
+            return new StateService();
         }
-        public StateService(string connectionString)
+        public StateService()
         {
-            _connectionString = connectionString;
+            
         }
 
         public State GetState(int id)

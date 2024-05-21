@@ -14,7 +14,7 @@ namespace ServiceLayer
         void UpdateUser(User user);
         void DeleteUser(int id);
         IEnumerable<User> GetAllUsers();
-        UserService CreateUserService(string _connectionString);
+        UserService CreateUserService();
     }
 
     public interface IStateService
@@ -23,7 +23,7 @@ namespace ServiceLayer
         State GetState(int id);
         IEnumerable<State> GetAllStates();
         void DeleteState(int id);
-        StateService CreateStateService(string _connectionString);
+        StateService CreateStateService();
 
     }
 
@@ -34,7 +34,7 @@ namespace ServiceLayer
         void AddCatalog(Catalog catalog);
         void UpdateCatalog(Catalog catalog);
         void DeleteCatalog(int id);
-        CatalogService CreateCatalogService(string _connectionString);
+        CatalogService CreateCatalogService();
     }
 
     public interface IEventService
@@ -44,7 +44,7 @@ namespace ServiceLayer
         void AddEvent(Event evnt);
         void UpdateEvent(Event evnt);
         void DeleteEvent(int id);
-        EventService CreateEventService(string _connectionString);
+        EventService CreateEventService();
     }
 
 }
