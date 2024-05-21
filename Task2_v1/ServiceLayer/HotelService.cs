@@ -10,14 +10,18 @@ namespace ServiceLayer
 {
     public class CatalogService : ICatalogService
     {
-        private readonly string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\HotelDatabase.mdf;;Integrated Security=False";
+        private const string V = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\HotelDatabase.mdf;Integrated Security=False";
+        private readonly string _connectionString = V;
 
         public CatalogService CreateCatalogService()
         {
             return new CatalogService();
         }
-
         public CatalogService()
+        {
+            
+        }
+        public CatalogService(string connectionString)
         {
         }
 
@@ -77,9 +81,14 @@ namespace ServiceLayer
 
     public class EventService : IEventService
     {
-        private readonly string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\HotelDatabase.mdf;;Integrated Security=False";
+        private readonly string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\HotelDatabase.mdf;Integrated Security=False";
 
-        public EventService CreateEventService()
+        public EventService()
+        {
+            
+        }
+
+        public EventService CreateEventService(string _connectionString)
         {
             return new EventService();
         }
@@ -146,14 +155,18 @@ namespace ServiceLayer
 
     public class UserService : IUserService
     {
-        private readonly string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\HotelDatabase.mdf;;Integrated Security=False";
+        private readonly string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\HotelDatabase.mdf;Integrated Security=False";
 
         public UserService CreateUserService()
         {
             return new UserService();
         }
-       
         public UserService()
+        {
+            
+        }
+
+        public UserService(string connectionString)
         {
             
         }
@@ -214,7 +227,7 @@ namespace ServiceLayer
 
     public class StateService : IStateService
     {
-        private readonly string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\HotelDatabase.mdf;;Integrated Security=False";
+        private readonly string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\HotelDatabase.mdf;Integrated Security=False";
 
         public StateService CreateStateService()
         {
@@ -224,7 +237,10 @@ namespace ServiceLayer
         {
             
         }
-
+        public StateService()
+        {
+            
+        }
         public State GetState(int id)
         {
             using (var context = new HotelClassesDataContext(_connectionString))

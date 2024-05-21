@@ -4,8 +4,7 @@ using DataLayer;
 
 namespace Task2_v1_PresentationLayer.Model
 {
-
-    internal class ModelData : ModelDataAPI
+        internal class ModelData : ModelDataAPI
     {
         private readonly IUserService _userService;
         private readonly ICatalogService _catalogService;
@@ -20,32 +19,71 @@ namespace Task2_v1_PresentationLayer.Model
             _stateService = stateService;
         }
 
-        public ModelData()
+        public ModelData() : this(new UserService(), new CatalogService(), new EventService(), new StateService()) { }
+
+        public override void AddUser(User user)
         {
-            
+            _userService.AddUser(user);
+            OnDataChanged();
         }
 
-        // Implementing the abstract methods
-        public override void AddUser(User user) => _userService.AddUser(user);
         public override User GetUser(int id) => _userService.GetUser(id);
-        public override void RemoveUser(int id) => _userService.DeleteUser(id);
+
+        public override void RemoveUser(int id)
+        {
+            _userService.DeleteUser(id);
+            OnDataChanged();
+        }
+
         public override IEnumerable<User> GetAllUsers() => _userService.GetAllUsers();
 
-        public override void AddCatalog(Catalog catalog) => _catalogService.AddCatalog(catalog);
+        public override void AddCatalog(Catalog catalog)
+        {
+            _catalogService.AddCatalog(catalog);
+            OnDataChanged();
+        }
+
         public override Catalog GetCatalog(int id) => _catalogService.GetCatalogById(id);
+
         public override IEnumerable<Catalog> GetAllCatalogs() => _catalogService.GetAllCatalogs();
-        public override void RemoveCatalog(int id) => _catalogService.DeleteCatalog(id);
 
-        public override void AddEvent(Event eve) => _eventService.AddEvent(eve);
+        public override void RemoveCatalog(int id)
+        {
+            _catalogService.DeleteCatalog(id);
+            OnDataChanged();
+        }
+
+        public override void AddEvent(Event eve)
+        {
+            _eventService.AddEvent(eve);
+            OnDataChanged();
+        }
+
         public override Event GetEvent(int id) => _eventService.GetEventById(id);
+
         public override IEnumerable<Event> GetAllEvents() => _eventService.GetAllEvents();
-        public override void RemoveEvent(int id) => _eventService.DeleteEvent(id);
 
-        public override void AddState(State state) => _stateService.AddState(state);
+        public override void RemoveEvent(int id)
+        {
+            _eventService.DeleteEvent(id);
+            OnDataChanged();
+        }
+
+        public override void AddState(State state)
+        {
+            _stateService.AddState(state);
+            OnDataChanged();
+        }
+
         public override State GetState(int id) => _stateService.GetState(id);
+
         public override IEnumerable<State> GetAllStates() => _stateService.GetAllStates();
-        public override void RemoveState(int id) => _stateService.DeleteState(id);
 
-
+        public override void RemoveState(int id)
+        {
+            _stateService.DeleteState(id);
+            OnDataChanged();
+        }
     }
 }
+

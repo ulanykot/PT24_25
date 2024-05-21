@@ -14,16 +14,17 @@ namespace Task2_v1_PresentationLayer
     public partial class MainWindow : Window
     {
         private readonly ViewModelBase viewModel;
-
         public MainWindow()
         {
             InitializeComponent();
-
-            // Initialize the ViewModel with model data
-            viewModel = new ViewModelMain();
-
-            // Set DataContext
-            this.Loaded += (s, e) => { this.DataContext = this.viewModel; };
+        }
+         protected override void OnInitialized(EventArgs a)
+        {
+            base.OnInitialized(a);
+            this.Loaded += (s, e) => { DataContext = this.viewModel; };
+            //_vm.ChildWindow = () => new TreeViewMainWindow();
+            //_vm.MessageBoxShowDelegate = text => MessageBox.Show(text, "Button interaction", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
         }
     }
-}
+
