@@ -15,6 +15,7 @@ namespace ServiceLayer
         void DeleteUser(int id);
         IEnumerable<User> GetAllUsers();
         UserService CreateUserService(string _connectionString);
+        Task<IEnumerable<Event>> GetEventsForUser(int userId);
     }
 
     public interface IStateService

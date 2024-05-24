@@ -22,7 +22,7 @@ namespace DataLayer
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Database1")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="HotelDatabase")]
 	public partial class HotelClassesDataContext : System.Data.Linq.DataContext
 	{
 		

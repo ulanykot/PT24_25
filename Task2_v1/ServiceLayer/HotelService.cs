@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Dynamic;
 using System.Linq;
 using System.Text;
@@ -224,6 +225,17 @@ namespace ServiceLayer
                 }
             }
         }
+        public Task<IEnumerable<Event>> GetEventsForUser(int userId)
+        {
+            return Task.Run(() =>
+            {
+                using (var context = new HotelClassesDataContext(_connectionString))
+                {
+                    return context.Events.Where(e => e.UserId == userId).ToList() as IEnumerable<Event>;
+                }
+            });
+        }
+    
     }
 
     public class StateService : IStateService

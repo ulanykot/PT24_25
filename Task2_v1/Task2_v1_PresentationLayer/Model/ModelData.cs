@@ -1,6 +1,8 @@
 ﻿using ServiceLayer;
 using System.Collections.Generic;
 using DataLayer;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace Task2_v1_PresentationLayer.Model
 {
@@ -83,6 +85,11 @@ namespace Task2_v1_PresentationLayer.Model
         {
             _stateService.DeleteState(id);
             OnDataChanged();
+        }
+
+        public override Task<IEnumerable<Event>> GetEventsForUser(int userId)
+        {
+            return _userService.GetEventsForUser(userId);
         }
     }
 }

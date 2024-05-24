@@ -16,6 +16,7 @@ namespace Task2_v1_PresentationLayer.Model
         public abstract User GetUser(int id);
         public abstract void RemoveUser(int id);
         public abstract IEnumerable<User> GetAllUsers();
+        public abstract  Task<IEnumerable<Event>> GetEventsForUser(int userId);
 
         public abstract void AddCatalog(Catalog catalog);
         public abstract Catalog GetCatalog(int id);

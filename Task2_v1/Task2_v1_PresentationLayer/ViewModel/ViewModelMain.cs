@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using DataLayer;
 using Task2_v1_PresentationLayer.Model;
 using Task2_v1_PresentationLayer.ViewModel;
@@ -16,6 +17,36 @@ namespace PresentationLayer.ViewModel
             {
                 _currentUser = value;
                 RaisePropertyChanged(nameof(CurrentUser));
+            }
+        }
+        private Event _currentEvent;
+        public Event CurrentEvent
+        {
+            get => _currentEvent;
+            set
+            {
+                _currentEvent = value;
+                RaisePropertyChanged(nameof(CurrentEvent));
+            }
+        }
+        private State _currentState;
+        public State CurrentState
+        {
+            get => _currentState;
+            set
+            {
+                _currentState = value;
+                RaisePropertyChanged(nameof(CurrentState));
+            }
+        }
+        private Catalog _currentCatalog;
+        public Catalog CurrentCatalog
+        {
+            get => _currentCatalog;
+            set
+            {
+                _currentCatalog = value;
+                RaisePropertyChanged(nameof(CurrentCatalog));
             }
         }
 
@@ -65,6 +96,15 @@ namespace PresentationLayer.ViewModel
 
         private CommandBase FetchDataCommand { get; }
         private ModelDataAPI modelData;
+        private void RefreshAllUsers()
+        {
+            Users = new ObservableCollection<User>(modelData.GetAllUsers());
+        }
+        public async Task RefreshEventsForUser(int userId)
+        {
+            var events = await modelData.GetEventsForUser(userId);
+            Events = new ObservableCollection<Event>(events);
+        }
 
         public ViewModelMain(ModelDataAPI dataLayer)
         {

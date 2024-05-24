@@ -7,10 +7,27 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <ComboBox Margin="6" ItemsSource="{Binding Path=Users}" DisplayMemberPath="FirstName" SelectedItem="{Binding Path=CurrentUser, Mode=TwoWay}" />
-        <DataGrid Margin="10,33,6,-286" AutoGenerateColumns="True"  ItemsSource="{Binding Path=Users}"/>
+        <ComboBox x:Name="UserComboBox" 
+                  ItemsSource="{Binding Path = Users}" 
+                  DisplayMemberPath="LastName" 
+                  SelectedValuePath="Id" 
+                  HorizontalAlignment="Left" 
+                  VerticalAlignment="Top" 
+                  Width="200" 
+                  Margin="10"/>
+
+        <Button Content="Fetch Events" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Margin="220,10,0,0" 
+                Width="100" 
+                Click="FetchEventsButton_Click"/>
+
+        <ListView ItemsSource="{Binding Path = Events}" 
+                  HorizontalAlignment="Left" 
+                  VerticalAlignment="Top" 
+                  Margin="10,50,0,0" 
+                  Width="310"/>
     </Grid>
+
 </Window>
