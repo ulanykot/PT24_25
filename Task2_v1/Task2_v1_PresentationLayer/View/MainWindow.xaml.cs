@@ -13,7 +13,8 @@ namespace Task2_v1_PresentationLayer
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly ViewModelBase viewModel;
+        private static readonly ModelDataAPI modelData = new ModelData();
+        private readonly ViewModelBase viewModel = new ViewModelMain(modelData);
         public MainWindow()
         {
             InitializeComponent();
