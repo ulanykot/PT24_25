@@ -10,12 +10,12 @@ namespace DataLayer.API
     {
         int Id { get; set; }
 
-        int StateId { get; set; }
+        int? StateId { get; set; }
 
-        int UserId { get; set; }
+        int? UserId { get; set; }
 
-        DateTime CheckInDate { get; set; }
+        DateTime? CheckInDate { get; set; }
 
-        DateTime CheckOutDate { get; set; }
+        DateTime? CheckOutDate { get; set; }
     }
 }

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Implementation
 {
-    internal class Event : IEvent
+    partial class Event : IEvent
     {
-        public Event(int id, int stateId, int userId, DateTime checkIn, DateTime checkOut)
+        public Event(int id, int? stateId, int? userId, DateTime? checkIn, DateTime? checkOut)
         {
             Id = id;
             StateId = stateId;
@@ -18,9 +18,9 @@ namespace DataLayer.Implementation
             CheckOutDate = checkOut;
         }
         public int Id { get; set; }
-        public int StateId { get; set; }
-        public int UserId { get; set; }
-        public DateTime CheckInDate { get; set; }
-        public DateTime CheckOutDate { get; set; }
+        public int? StateId { get; set; }
+        public int? UserId { get; set; }
+        public DateTime? CheckInDate { get; set; }
+        public DateTime? CheckOutDate { get; set; }
     }
 }

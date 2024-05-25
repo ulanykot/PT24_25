@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Implementation
 {
-    internal class User : IUser
+    partial class User : IUser
     {
-        public User(int id, string firstName,string lastName, string userType)
+        public User(int id, string firstName, string lastName, string userType)
         {
             Id = id;
             FirstName = firstName;

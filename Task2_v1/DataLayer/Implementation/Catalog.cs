@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Implementation
 {
-    internal class Catalog : ICatalog
+    partial class Catalog : ICatalog
     {
-        public Catalog(int id, int roomNumber, string roomType, bool IsBooked)
+        public Catalog(int id, int? roomNumber, string roomType, bool? IsBooked)
         {
             Id = id;
             RoomNumber = roomNumber;
@@ -18,8 +18,8 @@ namespace DataLayer.Implementation
         }
 
         public int Id { get; set; }
-        public int RoomNumber { get; set; }
+        public int? RoomNumber { get; set; }
         public string RoomType { get; set; }
-        public bool isBooked { get; set; }
+        public bool? isBooked { get; set; }
     }
 }

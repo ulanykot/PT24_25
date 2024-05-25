@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Implementation
 {
-    internal class State : IState
+    partial class State : IState
     {
-        public State(int id, int roomCatalogId, int price)
+        public State(int id, int? roomCatalogId, int? price)
         {
             Id = id;
             RoomCatalogId = roomCatalogId;
             Price = price;
         }
         public int Id { get ; set ; }
-        public int RoomCatalogId { get ; set ; }
-        public int Price { get ; set ; }
+        public int? RoomCatalogId { get ; set ; }
+        public int? Price { get ; set ; }
     }
 }
