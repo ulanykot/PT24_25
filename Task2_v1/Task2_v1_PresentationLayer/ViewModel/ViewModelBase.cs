@@ -12,6 +12,10 @@ namespace Task2_v1_PresentationLayer.ViewModel
 {
     internal class ViewModelBase : INotifyPropertyChanged
     {
+        public ViewModelBase SelectedViewModel;
+
+        public ViewModelBase Parent { get; private set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void RaisePropertyChanged(string propertyName)
         {

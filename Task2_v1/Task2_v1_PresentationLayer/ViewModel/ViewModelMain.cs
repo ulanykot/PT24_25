@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using DataLayer;
+using DataLayer.Database;
 using Task2_v1_PresentationLayer.Model;
 using Task2_v1_PresentationLayer.ViewModel;
 
@@ -95,7 +95,7 @@ namespace PresentationLayer.ViewModel
         }
 
         private CommandBase FetchDataCommand { get; }
-        private ModelDataAPI modelData;
+        private readonly ModelDataAPI modelData;
         private void RefreshAllUsers()
         {
             Users = new ObservableCollection<User>(modelData.GetAllUsers());

@@ -59,12 +59,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HotelClasses.designer.cs">
+    <Compile Include="API\ICatalog.cs" />
+    <Compile Include="API\IDataContext.cs" />
+    <Compile Include="API\IEvent.cs" />
+    <Compile Include="API\IState.cs" />
+    <Compile Include="API\IUser.cs" />
+    <Compile Include="Database\HotelClasses.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HotelClasses.dbml</DependentUpon>
     </Compile>
-    <Compile Include="HotelClassesDataContext.cs" />
+    <Compile Include="Implementation\HotelClassesDataContext.cs" />
+    <Compile Include="Implementation\Catalog.cs" />
+    <Compile Include="Implementation\Event.cs" />
+    <Compile Include="Implementation\State.cs" />
+    <Compile Include="Implementation\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -95,12 +104,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="HotelClasses.dbml">
+    <None Include="Database\HotelClasses.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>HotelClasses.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="HotelClasses.dbml.layout">
+    <None Include="Database\HotelClasses.dbml.layout">
       <DependentUpon>HotelClasses.dbml</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">

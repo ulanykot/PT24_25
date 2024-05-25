@@ -1,14 +1,18 @@
-﻿using System;
+﻿using DataLayer.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataLayer
+namespace DataLayer.Database
 {
-    public partial class HotelClassesDataContext
+    public partial class HotelClassesDataContext : API.IDataContext
     {
-        string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\HotelDatabase.mdf;Integrated Security=False";
+        private readonly string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\HotelDatabase.mdf;Integrated Security=False";
+
+        #region user
+        #endregion user
         public Task<IEnumerable<Event>> GetEventsForUser(int userId)
         {
             return Task.Run(() =>
