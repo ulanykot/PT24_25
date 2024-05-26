@@ -11,15 +11,10 @@ namespace DataLayer.Implementation
 {
     internal class DataRepository : IDataRepository
     {
-
         private IDataContext _context;
         public DataRepository(IDataContext context)
         {
             _context = context;
-        }
-        public IDataRepository CreateDatabase(IDataContext dataContext)
-        {
-            return new DataRepository(dataContext ?? new HotelClassesDataContext());
         }
 
         #region User CRUD
@@ -34,10 +29,7 @@ namespace DataLayer.Implementation
         {
             IUser user = await _context.GetUserAsync(id);
 
-            if (user is null)
-                throw new Exception("This user does not exist!");
-
-            return user;
+            return user is null ? throw new Exception("This user does not exist!") : user;
         }
 
         public async Task UpdateUserAsync(int id, string firstName, string lastName, string userType)

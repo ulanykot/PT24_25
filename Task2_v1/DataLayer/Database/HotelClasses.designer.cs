@@ -22,7 +22,7 @@ namespace DataLayer.Database
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Database1")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="HotelDatabase")]
 	public partial class HotelClassesDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -285,6 +285,8 @@ namespace DataLayer.Database
 		
 		private System.Nullable<System.DateTime> _CheckOutDate;
 		
+		private string _Type;
+		
 		private EntityRef<State> _State;
 		
 		private EntityRef<User> _User;
@@ -303,6 +305,8 @@ namespace DataLayer.Database
     partial void OnCheckInDateChanged();
     partial void OnCheckOutDateChanging(System.Nullable<System.DateTime> value);
     partial void OnCheckOutDateChanged();
+    partial void OnTypeChanging(string value);
+    partial void OnTypeChanged();
     #endregion
 		
 		public Event()
@@ -416,6 +420,26 @@ namespace DataLayer.Database
 					this._CheckOutDate = value;
 					this.SendPropertyChanged("CheckOutDate");
 					this.OnCheckOutDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="NVarChar(50)")]
+		public string Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this.OnTypeChanging(value);
+					this.SendPropertyChanging();
+					this._Type = value;
+					this.SendPropertyChanged("Type");
+					this.OnTypeChanged();
 				}
 			}
 		}

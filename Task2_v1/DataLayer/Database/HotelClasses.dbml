@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Database1" Class="HotelClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HotelDatabase" Class="HotelClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\HotelDatabase.mdf;Integrated Security=True" SettingsObjectName="DataLayer.Properties.Settings" SettingsPropertyName="Database1ConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Catalog" Member="Catalogs">
     <Type Name="Catalog">
@@ -16,6 +16,7 @@
       <Column Name="StateId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CheckInDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="CheckOutDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Type" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="State_Event" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" />
       <Association Name="User_Event" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" />
     </Type>

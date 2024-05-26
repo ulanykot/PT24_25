@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace DataLayer.API
 {
-    internal interface IDataRepository
+    public interface IDataRepository
     {
-        IDataRepository CreateDatabase(IDataContext dataContext);
 
         #region User CRUD
 

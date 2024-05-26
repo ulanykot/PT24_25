@@ -10,7 +10,7 @@ namespace DataLayer.API
 {
     public interface IDataContext
     {
-        IDataContext CreateContext(string connectionString);
+        IDataContext CreateContext();
 
         #region User CRUD
 

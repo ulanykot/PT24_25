@@ -9,10 +9,10 @@ namespace DataLayer.Database
 {
     public partial class HotelClassesDataContext : IDataContext
     {
-        private readonly string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\HotelDatabase.mdf;Integrated Security=False";
-        public IDataContext CreateContext(string connectionString)
+        private static readonly string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\HotelDatabase.mdf;Integrated Security=False";
+        public IDataContext CreateContext()
         {
-            return new HotelClassesDataContext(connectionString);
+            return new HotelClassesDataContext(_connectionString);
         }
 
         #region User CRUD

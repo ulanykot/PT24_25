@@ -1,9 +1,7 @@
-﻿using ServiceLayer;
+﻿using ServiceLayer.API;
 using System.Collections.Generic;
-using DataLayer;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using DataLayer.Database;
 
 namespace Task2_v1_PresentationLayer.Model
 {

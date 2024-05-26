@@ -7,13 +7,19 @@ using System.Threading.Tasks;
 
 namespace ServiceLayer.API
 {
-    internal interface IUserService
+    public interface IUserService
     {
+        int Id { get; set; }
 
+        string FirstName { get; set; }
+
+        string LastName { get; set; }
+
+        string UserType { get; set; }
 
         Task AddUserAsync(int id, string firstName, string lastName, string userType);
 
-        Task<IUser> GetUserAsync(int id);
+        Task<IUserService> GetUserAsync(int id);
 
         Task UpdateUserAsync(int id, string firstName, string lastName, string userType);
 

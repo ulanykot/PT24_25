@@ -70,7 +70,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HotelClasses.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Implementation\DataContextFactory.cs" />
     <Compile Include="Implementation\DataRepository.cs" />
+    <Compile Include="Implementation\DataRepositoryFactory.cs" />
     <Compile Include="Implementation\HotelClassesDataContext.cs" />
     <Compile Include="Implementation\Catalog.cs" />
     <Compile Include="Implementation\Event.cs" />
