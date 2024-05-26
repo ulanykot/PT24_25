@@ -10,6 +10,11 @@ namespace DataLayer.Database
     public partial class HotelClassesDataContext : IDataContext
     {
         private readonly string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\HotelDatabase.mdf;Integrated Security=False";
+        public IDataContext CreateContext(string connectionString)
+        {
+            return new HotelClassesDataContext(connectionString);
+        }
+
         #region User CRUD
 
         public async Task AddUserAsync(IUser user)
@@ -328,7 +333,7 @@ namespace DataLayer.Database
                 }
                 else
                 {
-                    return new Implementation.Event(even.Id, even.StateId, even.UserId, even.CheckInDate, even.CheckOutDate);
+                    return new Implementation.Event(even.Id, even.StateId, even.UserId, even.CheckInDate, even.CheckOutDate, even.Type);
                 }
             }
 
@@ -367,7 +372,7 @@ namespace DataLayer.Database
             {
                 IQueryable<IEvent> eventQuery = from e in context.Events
                                                 select
-                                                    new Implementation.Event(e.Id, e.StateId, e.UserId, e.CheckInDate, e.CheckOutDate) as IEvent;
+                                                    new Implementation.Event(e.Id, e.StateId, e.UserId, e.CheckInDate, e.CheckOutDate, e.Type) as IEvent;
 
                 return await Task.Run(() => eventQuery.ToDictionary(k => k.Id));
             }

@@ -17,5 +17,7 @@ namespace DataLayer.API
         DateTime? CheckInDate { get; set; }
 
         DateTime? CheckOutDate { get; set; }
+
+        string Type { get; set; }
     }
 }

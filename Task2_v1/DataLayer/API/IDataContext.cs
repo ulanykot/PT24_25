@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DataLayer.Database;
+using System;
 using System.Collections.Generic;
+using System.Data.Linq;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +10,8 @@ namespace DataLayer.API
 {
     public interface IDataContext
     {
+        IDataContext CreateContext(string connectionString);
+
         #region User CRUD
 
         Task AddUserAsync(IUser user);
