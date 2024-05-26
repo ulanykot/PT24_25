@@ -1,33 +1,14 @@
-﻿<Window x:Class="Task2_v1_PresentationLayer.MainWindow"
+﻿<Window x:Class="Task2_v1_PresentationLayer.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Task2_v1_PresentationLayer"
+        xmlns:local="clr-namespace:PresentationLayer.ViewModel" d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <ComboBox x:Name="UserComboBox" 
-                  ItemsSource="{Binding Path = Users}" 
-                  DisplayMemberPath="LastName" 
-                  SelectedValuePath="Id" 
-                  HorizontalAlignment="Left" 
-                  VerticalAlignment="Top" 
-                  Width="200" 
-                  Margin="10"/>
+    <Grid Background="MintCream">
+        <ContentControl Content="{Binding SelectedViewModel}">
 
-        <Button Content="Fetch Events" 
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top" 
-                Margin="220,10,0,0" 
-                Width="100" 
-                Click="FetchEventsButton_Click"/>
-
-        <ListView ItemsSource="{Binding Path = Events}" 
-                  HorizontalAlignment="Left" 
-                  VerticalAlignment="Top" 
-                  Margin="10,50,0,0" 
-                  Width="310"/>
+        </ContentControl>
     </Grid>
-
 </Window>

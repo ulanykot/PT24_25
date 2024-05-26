@@ -74,22 +74,40 @@
     <Compile Include="Model\API\IEventModel.cs" />
     <Compile Include="Model\API\IStateModel.cs" />
     <Compile Include="Model\API\IUserModel.cs" />
+    <Compile Include="Model\API\ModelFactory.cs" />
     <Compile Include="Model\Implementation\CatalogModel.cs" />
     <Compile Include="Model\Implementation\EventModel.cs" />
     <Compile Include="Model\Implementation\StateModel.cs" />
     <Compile Include="Model\Implementation\UserModel.cs" />
+    <Compile Include="ViewModel\Commands\CloseApplicationCommand.cs" />
+    <Compile Include="ViewModel\Commands\OnClickCommand.cs" />
     <Compile Include="ViewModel\Commands\SwitchViewCommand.cs" />
-    <Compile Include="ViewModel\DetailView\IDetailEvent.cs" />
-    <Compile Include="ViewModel\MasterView\IMasterEvent.cs" />
+    <Compile Include="ViewModel\DetailView\DetailCatalog.cs" />
+    <Compile Include="ViewModel\DetailView\DetailEvent.cs" />
+    <Compile Include="ViewModel\DetailView\DetailState.cs" />
+    <Compile Include="ViewModel\DetailView\DetailUser.cs" />
+    <Compile Include="ViewModel\HomeViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\MasterView\MasterCatalog.cs" />
     <Compile Include="ViewModel\MasterView\MasterEvent.cs" />
+    <Compile Include="ViewModel\MasterView\MasterState.cs" />
+    <Compile Include="ViewModel\MasterView\MasterUser.cs" />
     <Compile Include="ViewModel\ViewModelFactory.cs" />
+    <Compile Include="View\Detail\DetailCatalogView.xaml.cs">
+      <DependentUpon>DetailCatalogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\HomeView.xaml.cs">
+      <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindow.xaml.cs" />
     <Compile Include="ViewModel\Commands\CommandBase.cs" />
-    <Compile Include="ViewModel\ViewModelMain.cs" />
     <Compile Include="ViewModel\IViewModel.cs" />
     <Compile Include="View\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\Master\MasterCatalogView.xaml.cs">
+      <DependentUpon>MasterCatalogView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -141,9 +159,21 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="View\Detail\DetailCatalogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Master\MasterCatalogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup />

@@ -11,7 +11,6 @@ namespace PresentationLayer.ViewModel
     {
         private IViewModel _selectedViewModel { get; set; }
 
-
         public MainWindowViewModel()
         {
             this._selectedViewModel = new HomeViewModel();

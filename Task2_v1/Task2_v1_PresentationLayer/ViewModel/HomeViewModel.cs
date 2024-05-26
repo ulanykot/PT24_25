@@ -19,7 +19,7 @@ namespace PresentationLayer.ViewModel
         {
             this.StartAppCommand = new SwitchViewCommand("CatalogMasterView");
 
-            //this.ExitAppCommand = new CloseApplicationCommand();
+            this.ExitAppCommand = new CloseApplicationCommand();
         }
     }
 }

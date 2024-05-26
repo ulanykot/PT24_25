@@ -18,6 +18,7 @@ namespace PresentationLayer.ViewModel.Commands
 
         public SwitchViewCommand(string viewModel)
         {
+            this._switchToViewModel = "CatalogMasterView";
             this._switchToViewModel = viewModel;
         }
 
