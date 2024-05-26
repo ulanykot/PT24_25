@@ -70,12 +70,23 @@
     <ApplicationDefinition Include="View\App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="Model\API\ICatalogModel.cs" />
+    <Compile Include="Model\API\IEventModel.cs" />
+    <Compile Include="Model\API\IStateModel.cs" />
+    <Compile Include="Model\API\IUserModel.cs" />
+    <Compile Include="Model\Implementation\CatalogModel.cs" />
+    <Compile Include="Model\Implementation\EventModel.cs" />
+    <Compile Include="Model\Implementation\StateModel.cs" />
+    <Compile Include="Model\Implementation\UserModel.cs" />
+    <Compile Include="ViewModel\Commands\SwitchViewCommand.cs" />
+    <Compile Include="ViewModel\DetailView\IDetailEvent.cs" />
+    <Compile Include="ViewModel\MasterView\IMasterEvent.cs" />
+    <Compile Include="ViewModel\MasterView\MasterEvent.cs" />
+    <Compile Include="ViewModel\ViewModelFactory.cs" />
     <Compile Include="View\MainWindow.xaml.cs" />
-    <Compile Include="Model\ModelData.cs" />
-    <Compile Include="Model\ModelDataAPI.cs" />
-    <Compile Include="ViewModel\CommandBase.cs" />
+    <Compile Include="ViewModel\Commands\CommandBase.cs" />
     <Compile Include="ViewModel\ViewModelMain.cs" />
-    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="ViewModel\IViewModel.cs" />
     <Compile Include="View\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -135,5 +146,6 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

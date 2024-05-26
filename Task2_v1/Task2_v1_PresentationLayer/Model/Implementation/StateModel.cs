@@ -1,4 +1,5 @@
 ﻿using ServiceLayer.API;
+using ServiceLayer.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,10 @@ namespace PresentationLayer.Model.Implementation
     internal class StateModel : IStateModel
     {
         IStateService _service;
+        public StateModel(IStateService service = null)
+        {
+            _service = service ?? ServiceFactory.CreateStateService();
+        }
         public async Task AddAsync(int id, int roomId, int price)
         {
            await _service.AddStateAsync(id, roomId, price); 

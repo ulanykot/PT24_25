@@ -1,4 +1,5 @@
 ﻿using ServiceLayer.API;
+using ServiceLayer.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,10 @@ namespace PresentationLayer.Model.Implementation
     internal class UserModel : IUserModel
     {
         IUserService _service;
+        public UserModel(IUserService service = null)
+        {
+            _service = service ?? ServiceFactory.CreateUserService();
+        }
         public async Task AddAsync(int id, string firstName, string lastName, string userType)
         {
             await _service.AddUserAsync(id, firstName, lastName, userType);

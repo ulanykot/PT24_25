@@ -2,13 +2,12 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using DataLayer.Database;
-using Task2_v1_PresentationLayer.Model;
 using Task2_v1_PresentationLayer.ViewModel;
 
 namespace PresentationLayer.ViewModel
 {
-    internal class ViewModelMain : ViewModelBase
-    {
+    internal class ViewModelMain : IViewModel
+    {/*
         private User _currentUser;
         public User CurrentUser
         {
@@ -95,7 +94,6 @@ namespace PresentationLayer.ViewModel
         }
 
         private CommandBase FetchDataCommand { get; }
-        private readonly ModelDataAPI modelData;
         private void RefreshAllUsers()
         {
             Users = new ObservableCollection<User>(modelData.GetAllUsers());
@@ -133,6 +131,6 @@ namespace PresentationLayer.ViewModel
             Events = new ObservableCollection<Event>(modelData.GetAllEvents());
             States = new ObservableCollection<State>(modelData.GetAllStates());
             Catalogs = new ObservableCollection<Catalog>(modelData.GetAllCatalogs());
-        }
+        }*/
     }
 }

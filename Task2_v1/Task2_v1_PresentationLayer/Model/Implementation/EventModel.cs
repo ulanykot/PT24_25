@@ -1,5 +1,6 @@
 ﻿using DataLayer.API;
 using ServiceLayer.API;
+using ServiceLayer.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,10 @@ namespace PresentationLayer.Model.Implementation
     internal class EventModel : IEventModel
     {
         IEventService _service;
+        public EventModel(IEventService service = null)
+        {
+            _service = service ?? ServiceFactory.CreateEventService();
+        }
         public async Task AddAsync(int id, int stateId, int userId, DateTime checkInDate, DateTime checkOutDate, string type)
         {
             await this._service.AddEventAsync(id, stateId, userId, checkInDate, checkOutDate, type);

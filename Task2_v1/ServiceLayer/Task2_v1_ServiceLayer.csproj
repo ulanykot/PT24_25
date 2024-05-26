@@ -48,6 +48,7 @@
     <Compile Include="API\IUserService.cs" />
     <Compile Include="Implementation\CatalogService.cs" />
     <Compile Include="Implementation\EventService.cs" />
+    <Compile Include="API\ServiceFactory.cs" />
     <Compile Include="Implementation\StateService.cs" />
     <Compile Include="Implementation\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
