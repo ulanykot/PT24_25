@@ -17,7 +17,7 @@ internal class MainWindowViewModel : IViewModel
         {
             _selectedViewModel = value;
 
-            OnPropertyChanged(nameof(SelectedViewModel));
+            RaisePropertyChanged(nameof(SelectedViewModel));
         }
     }
 }
