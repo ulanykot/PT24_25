@@ -11,28 +11,26 @@ namespace PresentationLayer.ViewModel
 {
     internal class MainWindowViewModel : IViewModel
     {
-            public ICommand StartAppCommand { get; set; }
-            public ICommand ExitAppCommand { get; set; }
+        private IViewModel _selectedViewModel { get; set; }
 
-            private IViewModel _selectedViewModel;
 
-            public new IViewModel SelectedViewModel
+        public MainWindowViewModel()
+        {
+            this._selectedViewModel = new HomeViewModel();
+        }
+
+        public new IViewModel SelectedViewModel
+        {
+            get => _selectedViewModel;
+            set
             {
-                get => _selectedViewModel;
-                set
-                {
-                    _selectedViewModel = value;
-                    RaisePropertyChanged(nameof(SelectedViewModel));
-                }
-            }
+                _selectedViewModel = value;
 
-            public MainWindowViewModel()
-            {
-                this.StartAppCommand = new SwitchViewCommand("CatalogMasterView");
-                this.ExitAppCommand = new CloseApplicationCommand();
+                RaisePropertyChanged(nameof(SelectedViewModel));
             }
         }
     }
+}
 
 
 

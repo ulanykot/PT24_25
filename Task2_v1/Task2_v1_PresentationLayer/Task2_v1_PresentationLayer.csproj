@@ -67,7 +67,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="View\App.xaml">
+    <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Compile Include="Model\API\ICatalogModel.cs" />
@@ -82,18 +82,18 @@
     <Compile Include="ViewModel\Commands\CloseApplicationCommand.cs" />
     <Compile Include="ViewModel\Commands\OnClickCommand.cs" />
     <Compile Include="ViewModel\Commands\SwitchViewCommand.cs" />
-    <Compile Include="ViewModel\DetailView\DetailCatalog.cs" />
-    <Compile Include="ViewModel\DetailView\DetailEvent.cs" />
-    <Compile Include="ViewModel\DetailView\DetailState.cs" />
-    <Compile Include="ViewModel\DetailView\DetailUser.cs" />
+    <Compile Include="ViewModel\Catalog\DetailCatalog.cs" />
+    <Compile Include="ViewModel\Event\DetailEvent.cs" />
+    <Compile Include="ViewModel\State\DetailState.cs" />
+    <Compile Include="ViewModel\User\DetailUser.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Compile Include="ViewModel\MasterView\MasterCatalog.cs" />
-    <Compile Include="ViewModel\MasterView\MasterEvent.cs" />
-    <Compile Include="ViewModel\MasterView\MasterState.cs" />
-    <Compile Include="ViewModel\MasterView\MasterUser.cs" />
+    <Compile Include="ViewModel\Catalog\MasterCatalog.cs" />
+    <Compile Include="ViewModel\Event\MasterEvent.cs" />
+    <Compile Include="ViewModel\State\MasterState.cs" />
+    <Compile Include="ViewModel\User\MasterUser.cs" />
     <Compile Include="ViewModel\ViewModelFactory.cs" />
-    <Compile Include="View\Detail\DetailCatalogView.xaml.cs">
+    <Compile Include="View\Catalog\DetailCatalogView.xaml.cs">
       <DependentUpon>DetailCatalogView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\HomeView.xaml.cs">
@@ -102,12 +102,18 @@
     <Compile Include="View\MainWindow.xaml.cs" />
     <Compile Include="ViewModel\Commands\CommandBase.cs" />
     <Compile Include="ViewModel\IViewModel.cs" />
-    <Compile Include="View\App.xaml.cs">
+    <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="View\Master\MasterCatalogView.xaml.cs">
+    <Compile Include="View\Catalog\MasterCatalogView.xaml.cs">
       <DependentUpon>MasterCatalogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\User\DetailUserView.xaml.cs">
+      <DependentUpon>DetailUserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\User\MasterUserView.xaml.cs">
+      <DependentUpon>MasterUserView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -134,7 +140,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="View\App.config" />
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8.1">
@@ -159,7 +165,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="View\Detail\DetailCatalogView.xaml">
+    <Page Include="View\Catalog\DetailCatalogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -171,7 +177,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Master\MasterCatalogView.xaml">
+    <Page Include="View\Catalog\MasterCatalogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\User\DetailUserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\User\MasterUserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

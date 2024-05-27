@@ -25,6 +25,7 @@ namespace ServiceLayer.Implementation
         {
             _repository = repository;
         }
+
         public int Id { get; set; }
         public int? RoomNumber { get; set; }
         public string RoomType { get; set; }
