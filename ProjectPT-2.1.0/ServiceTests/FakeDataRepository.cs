@@ -15,9 +15,9 @@ internal class FakeDataRepository : IDataRepository
 
     #region User CRUD
 
-    public async Task AddUserAsync(int id, string name, string email)
+    public async Task AddUserAsync(int id, string name, string email, string userType)
     {
-        this.Users.Add(id, new FakeUser(id, name, email));
+        this.Users.Add(id, new FakeUser(id, name, email, userType));
     }
 
     public async Task<IUser> GetUserAsync(int id)

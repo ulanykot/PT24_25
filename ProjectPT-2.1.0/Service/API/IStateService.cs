@@ -17,7 +17,6 @@ namespace Service.API
         int Id { get; set; }
         int RoomCatalogId { get; set; }
         int Price { get; set; }
-        int productId { get; }
 
         #region methods
         Task AddStateAsync(int id, int roomId, int price);

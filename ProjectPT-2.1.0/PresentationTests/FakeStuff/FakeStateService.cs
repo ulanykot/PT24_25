@@ -2,21 +2,25 @@
 
 namespace PresentationTests;
 
-internal class FakeStateService : IStateCRUD
+internal class FakeStateService : IStateService
 {
     private readonly FakeDataRepository _fakeRepository = new FakeDataRepository();
+
+    public int Id { get; set; }
+    public int Price { get; set; }
+    public int RoomCatalogId { get;  set; }
 
     public FakeStateService()
     {
 
     }
 
-    public async Task AddStateAsync(int id, int productId, int productQuantity)
+    public async Task AddStateAsync(int id, int productId, int price)
     {
-        await _fakeRepository.AddStateAsync(id, productId, productQuantity);
+        await _fakeRepository.AddStateAsync(id, productId, price);
     }
 
-    public async Task<IStateDTO> GetStateAsync(int id)
+    public async Task<IStateService> GetStateAsync(int id)
     {
         return await this._fakeRepository.GetStateAsync(id);
     }
@@ -31,11 +35,11 @@ internal class FakeStateService : IStateCRUD
         await this._fakeRepository.DeleteStateAsync(id);
     }
 
-    public async Task<Dictionary<int, IStateDTO>> GetAllStatesAsync()
+    public async Task<Dictionary<int, IStateService>> GetAllStatesAsync()
     {
-        Dictionary<int, IStateDTO> result = new Dictionary<int, IStateDTO>();
+        Dictionary<int, IStateService> result = new Dictionary<int, IStateService>();
 
-        foreach (IStateDTO state in (await this._fakeRepository.GetAllStatesAsync()).Values)
+        foreach (IStateService state in (await this._fakeRepository.GetAllStatesAsync()).Values)
         {
             result.Add(state.Id, state);
         }
@@ -47,4 +51,5 @@ internal class FakeStateService : IStateCRUD
     {
         return await this._fakeRepository.GetStatesCountAsync();
     }
+
 }
