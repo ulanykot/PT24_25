@@ -11,9 +11,10 @@ namespace DataLayer.Implementation
 {
     public static class DataContextFactory
     {
+        private static readonly string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|Database\\HotelDatabase.mdf;Integrated Security=False";
         public static IDataContext CreateContext()
         {
-            return CreateContext();
+            return new HotelClassesDataContext(connectionString);
         }
         public static IDataContext CreateContext(string connectionString)
         {

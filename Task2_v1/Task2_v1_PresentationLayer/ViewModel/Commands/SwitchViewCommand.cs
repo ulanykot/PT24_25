@@ -7,6 +7,8 @@ using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Input;
 using PresentationLayer.ViewModel.MasterView;
+using Task2_v1_PresentationLayer;
+using System.Linq.Expressions;
 
 namespace PresentationLayer.ViewModel.Commands
 {
@@ -18,7 +20,6 @@ namespace PresentationLayer.ViewModel.Commands
 
         public SwitchViewCommand(string viewModel)
         {
-            this._switchToViewModel = "CatalogMasterView";
             this._switchToViewModel = viewModel;
         }
 
@@ -26,30 +27,28 @@ namespace PresentationLayer.ViewModel.Commands
         {
             return true;
         }
-
         public void Execute(object parameter)
         {
-            UserControl userControl = parameter as UserControl;
-
-            Window parentWindow = Window.GetWindow(userControl);
-
-            if (parentWindow != null)
+            if (Application.Current.MainWindow?.DataContext is MainWindowViewModel mainViewModel)
             {
-                if (parentWindow.DataContext is MainWindowViewModel mainViewModel)
+                switch (_switchToViewModel)
                 {
-                    switch (this._switchToViewModel)
-                    {
-                        case "CatalogMasterView":
-                            mainViewModel.SelectedViewModel = new MasterCatalog(); break;
-                        case "UserMasterView":
-                            mainViewModel.SelectedViewModel = new MasterUser(); break;
-                        case "StateMasterView":
-                            mainViewModel.SelectedViewModel = new MasterState(); break;
-                        case "EventMasterView":
-                            mainViewModel.SelectedViewModel = new MasterEvent(); break;
-                    }
+                    case "CatalogMasterView":
+                        mainViewModel.SelectedViewModel = new MasterCatalog(); break;
+                    case "UserMasterView":
+                        mainViewModel.SelectedViewModel = new MasterUser(); break;
+                    case "StateMasterView":
+                        mainViewModel.SelectedViewModel = new MasterState(); break;
+                    case "EventMasterView":
+                        mainViewModel.SelectedViewModel = new MasterEvent(); break;
+                    default:
+                        throw new ArgumentException("Unknown ViewModel type");
                 }
+            } else
+            {
+                throw new Exception(_switchToViewModel);
             }
         }
+
     }
 }

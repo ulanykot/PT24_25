@@ -1,31 +1,38 @@
-﻿using System;
+﻿using PresentationLayer.ViewModel.Commands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Task2_v1_PresentationLayer.ViewModel;
 
 namespace PresentationLayer.ViewModel
 {
     internal class MainWindowViewModel : IViewModel
     {
-        private IViewModel _selectedViewModel { get; set; }
+            public ICommand StartAppCommand { get; set; }
+            public ICommand ExitAppCommand { get; set; }
 
-        public MainWindowViewModel()
-        {
-            this._selectedViewModel = new HomeViewModel();
-        }
+            private IViewModel _selectedViewModel;
 
-        public new IViewModel SelectedViewModel
-        {
-            get => _selectedViewModel;
-            set
+            public new IViewModel SelectedViewModel
             {
-                _selectedViewModel = value;
+                get => _selectedViewModel;
+                set
+                {
+                    _selectedViewModel = value;
+                    RaisePropertyChanged(nameof(SelectedViewModel));
+                }
+            }
 
-                RaisePropertyChanged(nameof(SelectedViewModel));
+            public MainWindowViewModel()
+            {
+                this.StartAppCommand = new SwitchViewCommand("CatalogMasterView");
+                this.ExitAppCommand = new CloseApplicationCommand();
             }
         }
     }
-}
+
+
 

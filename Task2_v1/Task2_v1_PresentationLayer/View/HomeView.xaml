@@ -30,16 +30,14 @@
 
         <StackPanel Grid.Column="1" 
                     HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button 
-                Height="40" Width="160"
-                Name="startButton" Content="Start"
-                Command="{Binding StartAppCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                Background="LightSkyBlue" BorderBrush="BlueViolet" />
-            <Button 
-                Height="40" Width="160" Margin="0,15,0,0"
-                Name="exitButton" Content="Exit"
-                Command="{Binding ExitAppCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}"
-                Background="MistyRose" BorderBrush="PaleVioletRed"/>
+            <Button Content="Start App"
+                Command="{Binding StartAppCommand}"
+                Name="startButton" Height="40" Width="160" />
+            <Button Content="Exit App"
+                Command="{Binding ExitAppCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
+                Name="exitButton" Height="40" Width="160" />
+            <ContentControl Content="{Binding SelectedViewModel}"/>
         </StackPanel>
 
     </Grid>
