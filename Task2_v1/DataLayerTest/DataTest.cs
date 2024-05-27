@@ -460,36 +460,6 @@ namespace DataLayerTest
             Assert.IsTrue(DateTime.Equals(checkOut.Date, retrievedEvent.CheckOutDate?.Date), "Check-out date should match the provided date");
         }
 
-        /*[TestMethod]*/
-        /*public async Task UpdateEventAsync_ShouldUpdateExistingEvent()
-        {
-            var dataContext = DataContextFactory.CreateContext(_connectionString);
-            var dataRepository = DataRepositoryFactory.CreateDatabase(dataContext);
-            int eventId = 9;
-            int stateId = 3;
-            int userId = 1;
-            DateTime checkIn = DateTime.Now;
-            DateTime checkOut = DateTime.Now.AddDays(2);
-            string type = "CheckIn";
-            await dataRepository.AddEventAsync(eventId, stateId, userId, checkIn, checkOut, type);
-
-            int newStateId = 2;
-            int newUserId = 2;
-            DateTime newCheckIn = DateTime.Now.AddDays(5);
-            DateTime newCheckOut = DateTime.Now.AddDays(7);
-            string newType = "CheckOut";
-            await dataRepository.UpdateEventAsync(eventId, newStateId, newUserId, newCheckIn, newCheckOut, newType);
-
-            var updatedEvent = await dataRepository.GetEventAsync(eventId);
-
-            Assert.IsNotNull(updatedEvent, "Updated event should not be null");
-            Assert.AreEqual(eventId, updatedEvent.Id, "Event ID should remain unchanged after update");
-            //Assert.AreEqual(newStateId, updatedEvent.StateId, "Event state ID should be updated");
-            Assert.AreEqual(newUserId, updatedEvent.UserId, "Event user ID should be updated");
-            Assert.IsTrue(updatedEvent.CheckInDate == newCheckIn, "Event check-in date should be updated");
-            Assert.IsTrue(updatedEvent.CheckOutDate == newCheckOut, "Event check-out date should be updated");
-        }*/
-
         [TestMethod]
         public async Task DeleteEventAsync_ShouldDeleteExistingEvent()
         {

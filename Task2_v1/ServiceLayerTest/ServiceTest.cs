@@ -388,9 +388,134 @@ namespace ServiceLayerTest
     [TestClass]
     public class EventServiceTest
     {
-        [TestMethod]
-        public void TestMethod1()
+        private string _connectionString;
+        private IDataRepository _dataRepository;
+        private IEventService _eventService;
+        private ICatalogService _catalogService;
+        private IStateService _stateService;
+
+        [TestInitialize]
+        public void TestInitialize()
         {
+            _connectionString = ConfigurationManager.ConnectionStrings["Task2_v1.Properties.Settings.TestHotelConnectionString"].ConnectionString;
+            var dataContext = DataContextFactory.CreateContext(_connectionString);
+            _dataRepository = DataRepositoryFactory.CreateDatabase(dataContext);
+            _catalogService = ServiceFactory.CreateCatalogService(_dataRepository);
+            _eventService = ServiceFactory.CreateEventService(_dataRepository);
+            _stateService = ServiceFactory.CreateStateService(_dataRepository);
+        }
+
+        [TestMethod]
+        public async Task AddEventAsync_ShouldAddEventToDatabase()
+        {
+            int id = 5;
+            int stateId = 3;
+            int userId = 3;
+            DateTime checkInDate = DateTime.Now;
+            DateTime checkOutDate = DateTime.Now.AddDays(1);
+            string type = "CheckIn";
+
+            await _eventService.AddEventAsync(id, stateId, userId, checkInDate, checkOutDate, type);
+
+            var addedEvent = await _eventService.GetEventAsync(id);
+            Assert.IsNotNull(addedEvent);
+            Assert.AreEqual(id, addedEvent.Id);
+            Assert.AreEqual(stateId, addedEvent.StateId);
+            Assert.AreEqual(userId, addedEvent.UserId);
+            Assert.IsTrue(DateTime.Equals(checkInDate.Date, addedEvent.CheckInDate?.Date), "Check-in date should match the provided date");
+            Assert.IsTrue(DateTime.Equals(checkOutDate.Date, addedEvent.CheckOutDate?.Date), "Check-out date should match the provided date");
+        }
+
+        [TestMethod]
+        public async Task DeleteEventAsync_ShouldDeleteEventFromDatabase()
+        {
+            int catalogId = 43;
+            int roomNumber = 101;
+            string roomType = "Single";
+            bool isBooked = false;
+            await _catalogService.AddCatalogAsync(catalogId, roomNumber, roomType, isBooked);
+
+            int stateId = 43;
+            int roomId = catalogId;
+            int price = 100;
+            await _stateService.AddStateAsync(stateId, roomId, price);
+
+            int id = 43;
+
+            await _eventService.AddEventAsync(id, stateId, 3, DateTime.Now, DateTime.Now.AddDays(1), "CheckIn");
+
+            await _eventService.DeleteEventAsync(id);
+
+            await Assert.ThrowsExceptionAsync<Exception>(async () => await _eventService.GetEventAsync(id), "This event does not exist!");
+        }
+
+        [TestMethod]
+        public async Task GetAllEventsAsync_ShouldReturnAllEvents()
+        {
+            int catalogId = 72;
+            int roomNumber = 100;
+            string roomType = "Single";
+            bool isBooked = false;
+            int catalogId2 = 73;
+            int roomNumber2 = 101;
+            string roomType2 = "Single";
+            bool isBooked2 = false;
+            await _catalogService.AddCatalogAsync(catalogId, roomNumber, roomType, isBooked);
+            await _catalogService.AddCatalogAsync(catalogId2, roomNumber2, roomType2, isBooked2);
+
+            int stateId = 72;
+            int roomId = catalogId;
+            int price = 100;
+            int stateId2 = 73;
+            int roomId2 = catalogId2;
+            int price2 = 100;
+            await _stateService.AddStateAsync(stateId, roomId, price);
+            await _stateService.AddStateAsync(stateId2, roomId2, price2);
+
+            var events = new List<(int Id, int StateId, int UserId, DateTime CheckInDate, DateTime CheckOutDate, string Type)>
+            {
+                (7, stateId, 1, DateTime.Now, DateTime.Now.AddDays(1), "CheckIn"),
+                (8, stateId2, 2, DateTime.Now.AddDays(2), DateTime.Now.AddDays(3), "CheckIn")
+            };
+            foreach (var ev in events)
+            {
+                await _eventService.AddEventAsync(ev.Id, ev.StateId, ev.UserId, ev.CheckInDate, ev.CheckOutDate, ev.Type);
+            }
+
+            var allEvents = await _eventService.GetAllEventsAsync();
+
+            foreach (var ev in events)
+            {
+                Assert.IsTrue(allEvents.ContainsKey(ev.Id), $"Event with ID {ev.Id} should be in the retrieved list");
+                var retrievedEvent = allEvents[ev.Id];
+                Assert.AreEqual(ev.StateId, retrievedEvent.StateId, $"State ID should be {ev.StateId}");
+                Assert.AreEqual(ev.UserId, retrievedEvent.UserId, $"User ID should be {ev.UserId}");
+                Assert.IsTrue(DateTime.Equals(ev.CheckInDate.Date, retrievedEvent.CheckInDate?.Date), "Check-in date should match the provided date");
+                Assert.IsTrue(DateTime.Equals(ev.CheckOutDate.Date, retrievedEvent.CheckOutDate?.Date), "Check-out date should match the provided date");
+            }
+        }
+
+        [TestMethod]
+        public async Task GetEventAsync_ShouldReturnEventIfExists()
+        {
+            int catalogId = 26;
+            int roomNumber = 101;
+            string roomType = "Single";
+            bool isBooked = false;
+            await _catalogService.AddCatalogAsync(catalogId, roomNumber, roomType, isBooked);
+
+            int stateId = 26;
+            int roomId = catalogId;
+            int price = 100;
+            await _stateService.AddStateAsync(stateId, roomId, price);
+
+            int id = 9;
+            await _eventService.AddEventAsync(id, stateId, 3, DateTime.Now, DateTime.Now.AddDays(1), "CheckIn");
+
+            var retrievedEvent = await _eventService.GetEventAsync(id);
+
+            Assert.IsNotNull(retrievedEvent, "Retrieved event should not be null");
+            Assert.AreEqual(id, retrievedEvent.Id, "Retrieved event ID should match the provided ID");
         }
     }
 }
