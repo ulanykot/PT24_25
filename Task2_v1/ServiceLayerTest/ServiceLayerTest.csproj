@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{73727331-6AE9-40BA-B7D5-03E88550D04B}</ProjectGuid>
+    <ProjectGuid>{1B0F0C64-501D-4EFD-95AF-B2F32FB2CEB0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ServiceLayerTest</RootNamespace>
@@ -46,6 +46,7 @@
       <HintPath>..\packages\MSTest.TestFramework.2.2.10\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
@@ -53,13 +54,27 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataLayer\Task2_v1_DataLayer.csproj">
+      <Project>{ea47fda2-6b7c-4c00-a59b-b0252472010d}</Project>
+      <Name>Task2_v1_DataLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceLayer\Task2_v1_ServiceLayer.csproj">
       <Project>{a5d6d86c-944a-4d85-91c5-cd3d6e48f2f5}</Project>
       <Name>Task2_v1_ServiceLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestHotelDatabase.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestHotelDatabase_log.ldf">
+      <DependentUpon>TestHotelDatabase.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
