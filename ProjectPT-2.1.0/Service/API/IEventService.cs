@@ -38,6 +38,5 @@ namespace Service.API
         Task<Dictionary<int, IEventService>> GetAllEventsAsync();
 
         Task<int> GetEventsCountAsync();
-        Task<IEnumerable<IEventService>> GetEventsForUser(int userId);
     }
 }

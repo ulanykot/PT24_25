@@ -13,14 +13,19 @@ internal class FakeEventService : IEventService
     public DateTime CheckOutDate { get ; set ; }
     public string Type { get ; set ; }
 
-    public FakeEventService()
+    public FakeEventService(int id, int stateId, int userId, DateTime checkIn, DateTime checkOut, string type)
     {
-
+        this.Id = id;
+        this.StateId = stateId;
+        this.UserId = userId;
+        this.CheckInDate = checkIn;
+        this.CheckOutDate = checkOut;
+        this.Type = type;
     }
-    
-    public async Task AddEventAsync(int id, int stateId, int userId, string type, int quantity = 0)
+
+    public async Task AddEventAsync(int id, int stateId, int userId, DateTime CheckInDate, DateTime CheckOutDate, string Type)
     {
-        await this._fakeRepository.AddEventAsync(id, stateId, userId, type, quantity);
+        await this._fakeRepository.AddEventAsync(id, stateId, userId, CheckInDate, CheckOutDate, Type);
     }
 
     public async Task<IEventService> GetEventAsync(int id)
@@ -28,9 +33,9 @@ internal class FakeEventService : IEventService
         return await this._fakeRepository.GetEventAsync(id);
     }
 
-    public async Task UpdateEventAsync(int id, int stateId, int userId, DateTime occurrenceDate, string type, int? quantity)
+    public async Task UpdateEventAsync(int id, int stateId, int userId, DateTime CheckInDate, DateTime CheckOutDate, string Type)
     {
-        await this._fakeRepository.UpdateEventAsync(id, stateId, userId, occurrenceDate, type, quantity);
+        await this._fakeRepository.UpdateEventAsync(id, stateId, userId, CheckInDate, CheckOutDate, Type);
     }
 
     public async Task DeleteEventAsync(int id)
@@ -55,28 +60,4 @@ internal class FakeEventService : IEventService
         return await this._fakeRepository.GetEventsCountAsync();
     }
 
-    public Task AddEventAsync(int id, int stateId, int userId, DateTime checkInDate, DateTime checkOutDate, string type)
-    {
-        throw new NotImplementedException();
-    }
-
-    Task<IEventService> IEventService.GetEventAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task UpdateEventAsync(int id, int stateId, int userId, DateTime checkInDate, DateTime checkOutDate, string type)
-    {
-        throw new NotImplementedException();
-    }
-
-    Task<Dictionary<int, IEventService>> IEventService.GetAllEventsAsync()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<IEnumerable<IEventService>> GetEventsForUser(int userId)
-    {
-        throw new NotImplementedException();
-    }
 }

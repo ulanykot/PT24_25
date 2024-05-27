@@ -68,11 +68,6 @@ namespace Service.Implementation
             return await this._repository.GetEventsCountAsync();
         }
 
-        public Task<IEnumerable<IEventService>> GetEventsForUser(int userId)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task UpdateEventAsync(int id, int stateId, int userId, DateTime checkInDate, DateTime checkOutDate, string type)
         {
             await this._repository.UpdateEventAsync(id, stateId, userId, checkInDate, checkOutDate, type);

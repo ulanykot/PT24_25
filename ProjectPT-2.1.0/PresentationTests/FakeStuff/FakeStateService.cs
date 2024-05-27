@@ -10,9 +10,11 @@ internal class FakeStateService : IStateService
     public int Price { get; set; }
     public int RoomCatalogId { get;  set; }
 
-    public FakeStateService()
+    public FakeStateService(int id, int roomId, int price)
     {
-
+        this.Id = id;
+        this.Price = price;
+        this.RoomCatalogId = roomId;
     }
 
     public async Task AddStateAsync(int id, int productId, int price)

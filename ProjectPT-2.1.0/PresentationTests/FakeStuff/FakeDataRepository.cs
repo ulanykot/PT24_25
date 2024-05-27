@@ -7,7 +7,7 @@ internal class FakeDataRepository
 {
     public Dictionary<int, IUserService> Users = new Dictionary<int, IUserService>();
 
-    public Dictionary<int, ICatalogService> Products = new Dictionary<int, ICatalogService>();
+    public Dictionary<int, ICatalogService> Catalogs = new Dictionary<int, ICatalogService>();
 
     public Dictionary<int, IEventService> Events = new Dictionary<int, IEventService>();
 
@@ -15,9 +15,9 @@ internal class FakeDataRepository
 
     #region User CRUD
 
-    public async Task AddUserAsync(int id, int roomNumber, string roomType, bool isBooked)
+    public async Task AddUserAsync(int id, string FirstName, string LastName, string UserType)
     {
-        this.Users.Add(id, new FakeUserService(id, roomNumber, roomType, isBooked));
+        this.Users.Add(id, new FakeUserService(id, FirstName, LastName, UserType));
     }
 
     public async Task<IUserService> GetUserAsync(int id)
@@ -25,10 +25,11 @@ internal class FakeDataRepository
         return await Task.FromResult(this.Users[id]);
     }
 
-    public async Task UpdateUserAsync(int id, string name, string email)
+    public async Task UpdateUserAsync(int id, string FirstName, string LastName, string UserType)
     {
-        this.Users[id].Name = name;
-        this.Users[id].Email = email;
+        this.Users[id].FirstName = FirstName;
+        this.Users[id].LastName = LastName;
+        this.Users[id].UserType = UserType;
     }
 
     public async Task DeleteUserAsync(int id)
@@ -54,38 +55,38 @@ internal class FakeDataRepository
     #endregion User CRUD
 
 
-    #region Product CRUD
+    #region Catalog CRUD
 
-    public async Task AddProductAsync(int id, string name, double price)
+    public async Task AddCatalogAsync(int id, int roomNumber, string roomType, bool isBooked)
     {
-        this.Products.Add(id, new FakeProductService(id, name, price));
+        this.Catalogs.Add(id, new FakeCatalogService(id, roomNumber, roomType, isBooked));
     }
 
-    public async Task<ICatalogService> GetProductAsync(int id)
+    public async Task<ICatalogService> GetCatalogAsync(int id)
     {
-        return await Task.FromResult(this.Products[id]);
+        return await Task.FromResult(this.Catalogs[id]);
     }
 
-    public async Task UpdateProductAsync(int id, string type, int number, bool isBooked)
+    public async Task UpdateCatalogAsync(int id, int number, string type, bool isBooked)
     {
-        this.Products[id].RoomType = type;
-        this.Products[id].RoomNumber = number;
-        this.Products[id].isBooked = isBooked;
+        this.Catalogs[id].RoomType = type;
+        this.Catalogs[id].RoomNumber = number;
+        this.Catalogs[id].isBooked = isBooked;
     }
 
-    public async Task DeleteProductAsync(int id)
+    public async Task DeleteCatalogAsync(int id)
     {
-        this.Products.Remove(id);
+        this.Catalogs.Remove(id);
     }
 
-    public async Task<Dictionary<int, ICatalogService>> GetAllProductsAsync()
+    public async Task<Dictionary<int, ICatalogService>> GetAllCatalogAsync()
     {
-        return await Task.FromResult(this.Products);
+        return await Task.FromResult(this.Catalogs);
     }
 
-    public async Task<int> GetProductsCountAsync()
+    public async Task<int> GetCatalogsCountAsync()
     {
-        return await Task.FromResult(this.Products.Count);
+        return await Task.FromResult(this.Catalogs.Count);
     }
 
     #endregion
@@ -93,9 +94,9 @@ internal class FakeDataRepository
 
     #region State CRUD
 
-    public async Task AddStateAsync(int id, int productId, int productQuantity)
+    public async Task AddStateAsync(int id, int roomId, int price)
     {
-        this.States.Add(id, new FakeStateService(id, productId, productQuantity));
+        this.States.Add(id, new FakeStateService(id, roomId, price));
     }
 
     public async Task<IStateService> GetStateAsync(int id)
@@ -103,9 +104,9 @@ internal class FakeDataRepository
         return await Task.FromResult(this.States[id]);
     }
 
-    public async Task UpdateStateAsync(int id, int productId, int price)
+    public async Task UpdateStateAsync(int id, int roomId, int price)
     {
-        this.States[id].RoomCatalogId = productId;
+        this.States[id].RoomCatalogId = roomId;
         this.States[id].Price = price;
     }
 
@@ -129,79 +130,26 @@ internal class FakeDataRepository
 
     #region Event CRUD
 
-    public async Task AddEventAsync(int id, int stateId, int userId, string type, int quantity = 0)
+    public async Task AddEventAsync(int id, int stateId, int userId, DateTime CheckInDate, DateTime CheckOutDate, string Type)
     {
         IUserService user = await this.GetUserAsync(userId);
         IStateService state = await this.GetStateAsync(stateId);
-        ICatalogService product = await this.GetProductAsync(state.productId);
 
-        switch (type)
-        {
-            case "PurchaseEvent":
-                
-                if (state.productQuantity == 0)
-                    throw new Exception("Product unavailable, please check later!");
-
-                await this.UpdateStateAsync(stateId, product.Id, state.productQuantity - 1);
-                await this.UpdateUserAsync(userId, user.Name, user.Email);
-
-                break;
-
-            case "ReturnEvent":
-                Dictionary<int, IEventDTO> events = await this.GetAllEventsAsync();
-                Dictionary<int, IStateDTO> states = await this.GetAllStatesAsync();
-
-                int copiesBought = 0;
-
-                foreach
-                (
-                    IEventDTO even in
-                    from even in events.Values
-                    from stat in states.Values
-                    where even.userId == user.Id &&
-                          even.stateId == stat.Id &&
-                          stat.productId == product.Id
-                    select even
-                )
-                    if (((FakeEventDTO)even).Type == "PurchaseEvent")
-                        copiesBought++;
-                    else if (((FakeEventDTO)even).Type == "ReturnEvent")
-                        copiesBought--;
-
-                copiesBought--;
-
-                if (copiesBought < 0)
-                    throw new Exception("You do not own this product!");
-
-                await this.UpdateStateAsync(stateId, product.Id, state.productQuantity + 1);
-                await this.UpdateUserAsync(userId, user.Name, user.Email);
-
-                break;
-
-            case "SupplyEvent":
-                if (quantity <= 0)
-                    throw new Exception("Can not supply with this amount!");
-
-                await this.UpdateStateAsync(stateId, product.Id, state.productQuantity + quantity);
-
-                break;
-        }
-
-        this.Events.Add(id, new FakeEventDTO(id, stateId, userId, type, quantity));
+        this.Events.Add(id, new FakeEventService(id, stateId, userId, CheckInDate, CheckOutDate, Type));
     }
 
-    public async Task<IEventDTO> GetEventAsync(int id)
+    public async Task<IEventService> GetEventAsync(int id)
     {
         return await Task.FromResult(this.Events[id]);
     }
 
-    public async Task UpdateEventAsync(int id, int stateId, int userId, DateTime occurrenceDate, string type, int? quantity)
+    public async Task UpdateEventAsync(int id, int stateId, int userId, DateTime CheckInDate, DateTime CheckOutDate, string type)
     {
-        ((FakeEventDTO)this.Events[id]).stateId = stateId;
-        ((FakeEventDTO)this.Events[id]).userId = userId;
-        ((FakeEventDTO)this.Events[id]).occurrenceDate = occurrenceDate;
-        ((FakeEventDTO)this.Events[id]).Type = type;
-        ((FakeEventDTO)this.Events[id]).Quantity = quantity ?? ((FakeEventDTO)this.Events[id]).Quantity;
+        this.Events[id].StateId = stateId;
+        this.Events[id].UserId = userId;
+        this.Events[id].CheckInDate = CheckInDate;
+        this.Events[id].CheckOutDate = CheckOutDate;
+        this.Events[id].Type = type;
     }
 
     public async Task DeleteEventAsync(int id)
@@ -209,7 +157,7 @@ internal class FakeDataRepository
         this.Events.Remove(id);
     }
 
-    public async Task<Dictionary<int, IEventDTO>> GetAllEventsAsync()
+    public async Task<Dictionary<int, IEventService>> GetAllEventsAsync()
     {
         return await Task.FromResult(this.Events);
     }
