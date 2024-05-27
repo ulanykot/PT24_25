@@ -42,7 +42,7 @@
                 </Grid.ColumnDefinitions>
                 <Label  Margin="0,-10,200,345"
                        HorizontalAlignment="Right"
-                       Content="States" FontSize="15" Width="94"/>
+                       Content="States" FontSize="15" FontWeight="Heavy" Width="94"/>
                 <ListView Margin="0,25,95,192" 
                     ItemsSource="{Binding States, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     SelectedItem="{Binding SelectedDetailViewModel}"
@@ -102,13 +102,16 @@
             </Grid>
             <Grid Height="100"/>
         </StackPanel>
-        <Button Grid.Column="2" Content="Rooms" HorizontalAlignment="Left" Margin="459,50,0,0" VerticalAlignment="Top" Width="90" Height="38"
-         Command="{Binding SwitchToProductMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" Grid.Row="1"/>
+        <Button Grid.Column="2" Grid.Row="1" Margin="459,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Height="38"
+        Command="{Binding SwitchToProductMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}"
+        Background="#007ACC" Content="Rooms" Foreground="White" BorderBrush="#007ACC" BorderThickness="2" />
 
         <Button Grid.Column="2" Content="Events" HorizontalAlignment="Left" Margin="459,14,0,0" VerticalAlignment="Top" Width="90" Height="38" Grid.RowSpan="2"
-         Command="{Binding SwitchToEventMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+         Command="{Binding SwitchToEventMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}"
+                Background="#007ACC" Foreground="White" BorderBrush="#007ACC" BorderThickness="2"/>
         <Button Grid.Column="2" Content="Users" HorizontalAlignment="Left" Margin="459,112,0,0" VerticalAlignment="Top" Width="90" Height="38"
-     Command="{Binding SwitchToUserMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Grid.Row="1"/>
+          Command="{Binding SwitchToUserMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Grid.Row="1"
+          Background="#007ACC" Foreground="White" BorderBrush="#007ACC" BorderThickness="2"/>
 
     </Grid>
 </UserControl>

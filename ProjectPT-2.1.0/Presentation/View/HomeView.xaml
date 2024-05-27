@@ -7,39 +7,38 @@
              xmlns:viewmodels="clr-namespace:Presentation.ViewModel"
              mc:Ignorable="d"
              d:DesignHeight="550" d:DesignWidth="800">
-    
+
     <UserControl.DataContext>
         <viewmodels:HomeViewModel/>
     </UserControl.DataContext>
 
-    <Grid Background="BlanchedAlmond">
-        
+    <Grid Background="CornflowerBlue">
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="239*" />
+            <ColumnDefinition Width="349"/>
+            <ColumnDefinition Width="212*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" 
-                    Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock 
-                Width="Auto" 
-                Text="ShopBoard" 
-                TextAlignment="Center" TextWrapping="Wrap" 
-                FontSize="48" FontWeight="ExtraBold"/>
-        </StackPanel>
+        <!-- TextBlock -->
+        <TextBlock 
+                   Text="Welcome to Our Hotel"
+                   HorizontalAlignment="Left" VerticalAlignment="Top"
+                   FontSize="30" FontWeight="Heavy" Margin="3,136,0,0" Grid.Column="1" Height="40" Width="330"/>
 
+        <!-- Buttons StackPanel -->
         <StackPanel Grid.Column="1" 
-                    HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button 
-                Height="40" Width="160"
-                Name="startButton" Content="Start"
-                Command="{Binding StartAppCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                Background="LightSkyBlue" BorderBrush="BlueViolet" />
-            <Button 
-                Height="40" Width="160" Margin="0,15,0,0"
-                Name="exitButton" Content="Exit"
-                Command="{Binding ExitAppCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}"
-                Background="MistyRose" BorderBrush="PaleVioletRed"/>
+                    HorizontalAlignment="Center" VerticalAlignment="Top" Height="94" Width="160" Margin="0,278,0,0">
+            <!-- Start Button -->
+            <Button Height="40" Width="160"
+                    Name="startButton" Content="Start"
+                    Command="{Binding StartAppCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                    Background="AliceBlue" BorderBrush="CadetBlue" Margin="0,0,0,15"/>
+            <!-- Exit Button -->
+            <Button Height="40" Width="160"
+                    Name="exitButton" Content="Exit"
+                    Command="{Binding ExitAppCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}"
+                    Background="PaleVioletRed" BorderBrush="IndianRed" Margin="0,0,0,0"/>
         </StackPanel>
 
     </Grid>
