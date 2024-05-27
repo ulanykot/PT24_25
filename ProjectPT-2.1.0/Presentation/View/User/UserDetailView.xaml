@@ -47,9 +47,9 @@ Background="White">
             VerticalAlignment="Top"
             Background="White" Orientation="Horizontal">
 
-                    <Label Content="Name:" Width="85"/>
+                    <Label Content="First Name:" Width="85"/>
                     <TextBox Height="20" Width="120"
-                         Text="{Binding Name , ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         Text="{Binding FirstName , ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                          TextWrapping="Wrap"
                          BorderBrush="Gray">
                         <Validation.ErrorTemplate>
@@ -67,11 +67,31 @@ Background="White">
 VerticalAlignment="Top"
 Background="White" Orientation="Horizontal">
 
-                    <Label Content="Email:" Width="85"/>
+                    <Label Content="Last Name:" Width="85"/>
                     <TextBox Height="20" Width="120" 
-                         Text="{Binding Email , ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         Text="{Binding LastName , ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                          TextWrapping="Wrap"
                          BorderBrush="Gray">
+                        <Validation.ErrorTemplate>
+                            <ControlTemplate>
+                                <StackPanel>
+                                    <AdornedElementPlaceholder x:Name="placeholder"/>
+                                    <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                </StackPanel>
+                            </ControlTemplate>
+                        </Validation.ErrorTemplate>
+                    </TextBox>
+                    
+                </StackPanel>
+                <StackPanel Margin="0,5,0,0"
+VerticalAlignment="Top"
+Background="White" Orientation="Horizontal">
+
+                    <Label Content="Type of user:" Width="85"/>
+                    <TextBox Height="20" Width="120"
+             Text="{Binding UserType , ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+             TextWrapping="Wrap"
+             BorderBrush="Gray">
                         <Validation.ErrorTemplate>
                             <ControlTemplate>
                                 <StackPanel>

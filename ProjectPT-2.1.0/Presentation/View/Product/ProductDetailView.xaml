@@ -40,9 +40,9 @@
                     </Validation.ErrorTemplate>
                 </TextBox>
 
-                <Label Content="Name:"/>
+                <Label Content="Room No:"/>
                 <TextBox Height="20" Width="120" Margin="50,0,10,0"
-                         Text="{Binding Name , ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         Text="{Binding RoomNumber , ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                          TextWrapping="Wrap"
                          BorderBrush="Gray">
                     <Validation.ErrorTemplate>
@@ -55,9 +55,23 @@
                     </Validation.ErrorTemplate>
                 </TextBox>
 
-                <Label Content="Price:"/>
+                <Label Content="Room type:"/>
                 <TextBox Height="20" Width="120" Margin="50,0,10,0"
-                         Text="{Binding Price , ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         Text="{Binding RoomType , ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         TextWrapping="Wrap"
+                         BorderBrush="Gray">
+                    <Validation.ErrorTemplate>
+                        <ControlTemplate>
+                            <StackPanel>
+                                <AdornedElementPlaceholder x:Name="placeholder"/>
+                                <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Validation.ErrorTemplate>
+                </TextBox>
+                <Label Content="Booked status:"/>
+                <TextBox Height="20" Width="120" Margin="50,0,10,0"
+                         Text="{Binding IsBooked , ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                          TextWrapping="Wrap"
                          BorderBrush="Gray">
                     <Validation.ErrorTemplate>

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Presentation.View;assembly=Presentation"
              xmlns:view="clr-namespace:Presentation.View"
              xmlns:viewmodels="clr-namespace:Presentation.ViewModel"
-             mc:Ignorable="d" d:DesignWidth="800" Height="480">
+             mc:Ignorable="d" d:DesignWidth="800" Height="550">
 
     <UserControl.DataContext>
         <ObjectDataProvider ObjectType="viewmodels:StateMasterViewModel">
@@ -17,7 +17,7 @@
         </ObjectDataProvider>
     </UserControl.DataContext>
 
-    <Grid Background="White" Margin="0,0,0,10">
+    <Grid Background="AliceBlue" Margin="0,0,0,10">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="27"/>
@@ -34,23 +34,23 @@
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" 
                     Width="570" Margin="0,5,0,0"
                     HorizontalAlignment="Left"
-                    Background="White" Height="410" VerticalAlignment="Top" Grid.RowSpan="2">
+                    Background="AliceBlue" Height="410" VerticalAlignment="Top" Grid.RowSpan="2">
             <Grid Height="385" Margin="10,5,10,5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="202*"/>
                     <ColumnDefinition Width="73*"/>
                 </Grid.ColumnDefinitions>
-                <Label Margin="0,0,294,342"
+                <Label  Margin="0,-10,200,345"
                        HorizontalAlignment="Right"
                        Content="States" FontSize="15" Width="94"/>
-                <ListView Margin="0,40,95,192" 
+                <ListView Margin="0,25,95,192" 
                     ItemsSource="{Binding States, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     SelectedItem="{Binding SelectedDetailViewModel}"
                     >
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Id" Width="140" DisplayMemberBinding="{Binding Id}" />
-                            <GridViewColumn Header="Product ID" Width="140" DisplayMemberBinding="{Binding ProductId}" />
+                            <GridViewColumn Header="Id" Width="50" DisplayMemberBinding="{Binding Id}" />
+                            <GridViewColumn Header="Product ID" Width="190" DisplayMemberBinding="{Binding ProductId}" />
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -62,10 +62,10 @@
                     <Button Content="Delete" Background="IndianRed" HorizontalAlignment="Left" Margin="385,256,0,0" VerticalAlignment="Top" Height="26" Width="90"
                         Command="{Binding RemoveState}"/>
                 </Grid>
-                <StackPanel Margin="16,193,202,0"
+                <StackPanel Margin="16,210,202,0"
                     VerticalAlignment="Top"
-                    Background="White" Height="189">
-                    <Label Content="Product ID:" FontSize="10"/>
+                    Background="AliceBlue" Height="172">
+                    <Label Content="Room ID:" FontSize="10"/>
                     <TextBox Height="20" Width="120" Margin="50,0,10,0"
                          Text="{Binding ProductId , ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                          TextWrapping="Wrap"
@@ -80,9 +80,9 @@
                         </Validation.ErrorTemplate>
                     </TextBox>
 
-                    <Label Content="Product Quantity:" FontSize="10"/>
+                    <Label Content="Price:" FontSize="10"/>
                     <TextBox Height="20" Width="120" Margin="50,0,10,0"
-                         Text="{Binding ProductQuantity , ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         Text="{Binding Price , ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                          TextWrapping="Wrap"
                          BorderBrush="Gray">
                         <Validation.ErrorTemplate>
@@ -102,13 +102,13 @@
             </Grid>
             <Grid Height="100"/>
         </StackPanel>
-        <Button Grid.Column="2" Content="Users" HorizontalAlignment="Left" Margin="352,14,0,0" VerticalAlignment="Top" Width="90" Height="38" Grid.RowSpan="2"
-                Command="{Binding SwitchToUserMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+        <Button Grid.Column="2" Content="Rooms" HorizontalAlignment="Left" Margin="459,50,0,0" VerticalAlignment="Top" Width="90" Height="38"
+         Command="{Binding SwitchToProductMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" Grid.Row="1"/>
 
         <Button Grid.Column="2" Content="Events" HorizontalAlignment="Left" Margin="459,14,0,0" VerticalAlignment="Top" Width="90" Height="38" Grid.RowSpan="2"
-                Command="{Binding SwitchToEventMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}"/>
-        <Button Grid.Column="2" Content="Products" HorizontalAlignment="Center" Margin="0,14,0,0" VerticalAlignment="Top" Width="90" Height="38" Grid.RowSpan="2"
-            Command="{Binding SwitchToProductMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+         Command="{Binding SwitchToEventMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+        <Button Grid.Column="2" Content="Users" HorizontalAlignment="Left" Margin="459,112,0,0" VerticalAlignment="Top" Width="90" Height="38"
+     Command="{Binding SwitchToUserMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Grid.Row="1"/>
 
     </Grid>
 </UserControl>
