@@ -1,24 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Input;
-using PresentationLayer.ViewModel.MasterView;
+using PresentationLayer.ViewModel;
 
 namespace PresentationLayer.ViewModel.Commands
 {
     internal class SwitchViewCommand : ICommand
     {
+
         public event EventHandler CanExecuteChanged;
 
         private string _switchToViewModel;
 
         public SwitchViewCommand(string viewModel)
         {
-            this._switchToViewModel = "CatalogMasterView";
             this._switchToViewModel = viewModel;
         }
 

@@ -3,9 +3,8 @@ using ServiceLayer;
 using System;
 using System.Configuration;
 using System.Windows;
-using Task2_v1_PresentationLayer.ViewModel;
 
-namespace Task2_v1_PresentationLayer.View
+namespace PresentationLayer.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

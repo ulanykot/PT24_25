@@ -2,7 +2,7 @@
 
 namespace Task2_v1_PresentationLayer.ViewModel
 {
-    internal class IViewModel : INotifyPropertyChanged
+    public class IViewModel : INotifyPropertyChanged
     {
         public IViewModel SelectedViewModel;
 
