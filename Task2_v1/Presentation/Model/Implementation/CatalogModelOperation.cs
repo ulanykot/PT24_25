@@ -31,7 +31,7 @@ internal class CatalogModelOperation : ICatalogModelOperation
         return this.Map(await this._productCRUD.GetCatalogAsync(id));
     }
 
-    public async Task UpdateAsync(int id, int? roomNumber, string roomType, bool? isBooked)
+    public async Task UpdateAsync(int id, int roomNumber, string roomType, bool isBooked)
     {
         await this._productCRUD.UpdateCatalogAsync(id, roomNumber, roomType, isBooked);
     }

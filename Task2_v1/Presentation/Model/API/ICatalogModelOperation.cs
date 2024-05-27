@@ -17,7 +17,7 @@ public interface ICatalogModelOperation
 
     Task<ICatalogModel> GetAsync(int id);
 
-    Task UpdateAsync(int id, int? roomNumber, string roomType, bool? isBooked);
+    Task UpdateAsync(int id, int roomNumber, string roomType, bool isBooked);
 
     Task DeleteAsync(int id);
 

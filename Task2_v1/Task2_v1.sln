@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayerTest", "DataLayerT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "Presentation\Presentation.csproj", "{F46F8611-A81B-4551-A567-A07142E414AF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "C:\Users\milka\Downloads\ProjectPT-2.1.0\Data\Data.csproj", "{0FEB806E-B7C7-46D7-ACBC-399BFAB5EEE2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{F46F8611-A81B-4551-A567-A07142E414AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F46F8611-A81B-4551-A567-A07142E414AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F46F8611-A81B-4551-A567-A07142E414AF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0FEB806E-B7C7-46D7-ACBC-399BFAB5EEE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0FEB806E-B7C7-46D7-ACBC-399BFAB5EEE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0FEB806E-B7C7-46D7-ACBC-399BFAB5EEE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0FEB806E-B7C7-46D7-ACBC-399BFAB5EEE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

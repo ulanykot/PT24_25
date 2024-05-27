@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ServiceLayer\Task2_v1_ServiceLayer.csproj" />
+    <ProjectReference Include="..\..\ServiceLayer\ServiceLayer.csproj" />
   </ItemGroup>
 
 </Project>

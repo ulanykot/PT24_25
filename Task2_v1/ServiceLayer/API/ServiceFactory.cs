@@ -13,19 +13,19 @@ namespace ServiceLayer.Implementation
     {
         public static ICatalogService CreateCatalogService(IDataRepository repository = null)
         {
-            return new CatalogService(repository ?? DataRepositoryFactory.CreateDatabase());
+            return new CatalogService(repository ?? IDataRepository.CreateDatabase());
         }
         public static IEventService CreateEventService(IDataRepository repository = null)
         {
-            return new EventService(repository ?? DataRepositoryFactory.CreateDatabase());
+            return new EventService(repository ?? IDataRepository.CreateDatabase());
         }
         public static IStateService CreateStateService(IDataRepository repository = null)
         {
-            return new StateService(repository ?? DataRepositoryFactory.CreateDatabase());
+            return new StateService(repository ?? IDataRepository.CreateDatabase());
         }
         public static IUserService CreateUserService(IDataRepository repository = null)
         {
-            return new UserService(repository ?? DataRepositoryFactory.CreateDatabase());
+            return new UserService(repository ?? IDataRepository.CreateDatabase());
         }
     }
 }
