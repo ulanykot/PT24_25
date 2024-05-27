@@ -11,7 +11,7 @@ internal class FixedGenerator : IGenerator
 
     public void GenerateUserModels(IUserMasterViewModel viewModel)
     {
-        IUserModelOperation operation = IUserModelOperation.CreateModelOperation(new FakeUserCRUD());
+        IUserModelOperation operation = IUserModelOperation.CreateModelOperation(new FakeUserService());
 
         viewModel.Users.Add(IUserDetailViewModel.CreateViewModel(1, "Alice", "alice@example.com", operation, _informer));
         viewModel.Users.Add(IUserDetailViewModel.CreateViewModel(2, "Bob", "bob@example.com", operation, _informer));
@@ -22,7 +22,7 @@ internal class FixedGenerator : IGenerator
 
     public void GenerateProductModels(IProductMasterViewModel viewModel)
     {
-        ICatalogModelOperation operation = ICatalogModelOperation.CreateModelOperation(new FakeProductCRUD());
+        ICatalogModelOperation operation = ICatalogModelOperation.CreateModelOperation(new FakeProductService());
 
         viewModel.Products.Add(IProductDetailViewModel.CreateViewModel(1, "Apples", 61.99, operation, _informer));
         viewModel.Products.Add(IProductDetailViewModel.CreateViewModel(2, "Oranges", 32.99, operation, _informer));
@@ -34,7 +34,7 @@ internal class FixedGenerator : IGenerator
 
     public void GenerateStateModels(IStateMasterViewModel viewModel)
     {
-        IStateModelOperation operation = IStateModelOperation.CreateModelOperation(new FakeStateCRUD());
+        IStateModelOperation operation = IStateModelOperation.CreateModelOperation(new FakeStateService());
 
         viewModel.States.Add(IStateDetailViewModel.CreateViewModel(1, 1, 3, operation, _informer));
         viewModel.States.Add(IStateDetailViewModel.CreateViewModel(2, 2, 9, operation, _informer));
@@ -46,7 +46,7 @@ internal class FixedGenerator : IGenerator
 
     public void GenerateEventModels(IEventMasterViewModel viewModel)
     {
-        IEventModelOperation operation = IEventModelOperation.CreateModelOperation(new FakeEventCRUD());
+        IEventModelOperation operation = IEventModelOperation.CreateModelOperation(new FakeEventService());
 
         viewModel.Events.Add(IEventDetailViewModel.CreateViewModel(1, 1, 1, DateTime.Now, "SupplyEvent", 10, operation, _informer));
         viewModel.Events.Add(IEventDetailViewModel.CreateViewModel(2, 2, 2, DateTime.Now, "SupplyEvent", 123, operation, _informer));

@@ -11,7 +11,7 @@ internal class RandomGenerator : IGenerator
 
     public void GenerateUserModels(IUserMasterViewModel viewModel)
     {
-        IUserModelOperation operation = IUserModelOperation.CreateModelOperation(new FakeUserCRUD());
+        IUserModelOperation operation = IUserModelOperation.CreateModelOperation(new FakeUserService());
 
         for (int i = 1; i <= 10; i++)
         {
@@ -21,7 +21,7 @@ internal class RandomGenerator : IGenerator
 
     public void GenerateProductModels(IProductMasterViewModel viewModel)
     {
-        ICatalogModelOperation operation = ICatalogModelOperation.CreateModelOperation(new FakeProductCRUD());
+        ICatalogModelOperation operation = ICatalogModelOperation.CreateModelOperation(new FakeProductService());
 
         for (int i = 1; i <= 10; i++)
         {
@@ -31,7 +31,7 @@ internal class RandomGenerator : IGenerator
 
     public void GenerateStateModels(IStateMasterViewModel viewModel)
     {
-        IStateModelOperation operation = IStateModelOperation.CreateModelOperation(new FakeStateCRUD());
+        IStateModelOperation operation = IStateModelOperation.CreateModelOperation(new FakeStateService());
 
         for (int i = 1; i <= 10; i++)
         {
@@ -41,7 +41,7 @@ internal class RandomGenerator : IGenerator
 
     public void GenerateEventModels(IEventMasterViewModel viewModel)
     {
-        IEventModelOperation operation = IEventModelOperation.CreateModelOperation(new FakeEventCRUD());
+        IEventModelOperation operation = IEventModelOperation.CreateModelOperation(new FakeEventService());
 
         for (int i = 1; i <= 10; i++)
         {

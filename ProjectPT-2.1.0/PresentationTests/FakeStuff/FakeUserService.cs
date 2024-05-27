@@ -3,11 +3,11 @@ using Service.API;
 
 namespace PresentationTest;
 
-internal class FakeUserCRUD : IUserCRUD
+internal class FakeUserService : IUserCRUD
 {
     private readonly FakeDataRepository _fakeRepository = new FakeDataRepository();
 
-    public FakeUserCRUD()
+    public FakeUserService()
     {
 
     }

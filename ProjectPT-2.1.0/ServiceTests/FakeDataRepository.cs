@@ -1,4 +1,5 @@
 ﻿using Data.API;
+using Data.Database;
 
 namespace ServiceTests;
 
@@ -24,10 +25,11 @@ internal class FakeDataRepository : IDataRepository
         return await Task.FromResult(this.Users[id]);
     }
 
-    public async Task UpdateUserAsync(int id, string name, string email)
+    public async Task UpdateUserAsync(int id, string name, string email, string userType)
     {
-        this.Users[id].Name = name;
-        this.Users[id].Email = email;
+        this.Users[id].FirstName = name;
+        this.Users[id].LastName = email;
+        this.Users[id].UserType = userType;
     }
 
     public async Task DeleteUserAsync(int id)
@@ -126,59 +128,29 @@ internal class FakeDataRepository : IDataRepository
     {
         IUser user = await this.GetUserAsync(userId);
         IState state = await this.GetStateAsync(stateId);
-        ICatalog product = await this.GetProductAsync(state.productId);
+        ICatalog catalog = await this.GetProductAsync(state.productId);
 
         switch (type)
         {
-            case "PurchaseEvent":
+            case "CheckIn":
+                if (catalog.isBooked == true)
+                    throw new Exception("Room unavailable, please check later!");
+                await UpdateProductAsync((int)state.RoomCatalogId, catalog.RoomNumber, catalog.RoomType, catalog.isBooked = true);
+                await UpdateUserAsync(userId, user.FirstName, user.LastName, user.UserType);
+                break;
 
-                if (state.productQuantity == 0)
-                    throw new Exception("Product unavailable, please check later!");
+            case "CheckOut":
+                if (catalog.isBooked == false)
+                    throw new Exception("Room is not even booked!");
 
-
-                await this.UpdateStateAsync(stateId, product.Id, state.productQuantity - 1);
-                await this.UpdateUserAsync(userId, user.Name, user.Email);
+                await UpdateProductAsync((int)state.RoomCatalogId, catalog.RoomNumber, catalog.RoomType, false);
+                await UpdateUserAsync(userId, user.FirstName, user.LastName, user.UserType);
 
                 break;
 
-            case "ReturnEvent":
-                Dictionary<int, IEvent> events = await this.GetAllEventsAsync();
-                Dictionary<int, IState> states = await this.GetAllStatesAsync();
 
-                int copiesBought = 0;
-
-                foreach
-                (
-                    IEvent even in
-                    from even in events.Values
-                    from stat in states.Values
-                    where even.userId == user.Id &&
-                          even.stateId == stat.Id &&
-                          stat.productId == product.Id
-                    select even
-                )
-                    if (((FakeEvent)even).Type == "PurchaseEvent")
-                        copiesBought++;
-                    else if (((FakeEvent)even).Type == "ReturnEvent")
-                        copiesBought--;
-
-                copiesBought--;
-
-                if (copiesBought < 0)
-                    throw new Exception("You do not own this product!");
-
-                await this.UpdateStateAsync(stateId, product.Id, state.productQuantity + 1);
-                await this.UpdateUserAsync(userId, user.Name, user.Email);
-
-                break;
-
-            case "SupplyEvent":
-                if (quantity <= 0)
-                    throw new Exception("Can not supply with this amount!");
-
-                await this.UpdateStateAsync(stateId, product.Id, state.productQuantity + quantity);
-
-                break;
+            default:
+                throw new Exception("This event type does not exist!");
         }
 
         this.Events.Add(id, new FakeEvent(id, stateId, userId, type, quantity));
@@ -189,11 +161,11 @@ internal class FakeDataRepository : IDataRepository
         return await Task.FromResult(this.Events[id]);
     }
 
-    public async Task UpdateEventAsync(int id, int stateId, int userId, DateTime occurrenceDate, string type, int? quantity)
+    public async Task UpdateEventAsync(int id, int stateId, int userId, DateTime dateTime, DateTime checkOut, string type, int? quantity)
     {
         ((FakeEvent)this.Events[id]).stateId = stateId;
         ((FakeEvent)this.Events[id]).userId = userId;
-        ((FakeEvent)this.Events[id]).occurrenceDate = occurrenceDate;
+        ((FakeEvent)this.Events[id]).occurrenceDate = checkOut;
         ((FakeEvent)this.Events[id]).Type = type;
         ((FakeEvent)this.Events[id]).Quantity = quantity ?? ((FakeEvent)this.Events[id]).Quantity;
     }

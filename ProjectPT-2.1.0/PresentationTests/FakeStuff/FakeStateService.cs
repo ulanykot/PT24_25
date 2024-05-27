@@ -2,11 +2,11 @@
 
 namespace PresentationTests;
 
-internal class FakeStateCRUD : IStateCRUD
+internal class FakeStateService : IStateCRUD
 {
     private readonly FakeDataRepository _fakeRepository = new FakeDataRepository();
 
-    public FakeStateCRUD()
+    public FakeStateService()
     {
 
     }
