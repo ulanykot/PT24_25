@@ -4,9 +4,9 @@ using Presentation.Model.API;
 
 namespace Presentation.ViewModel;
 
-internal class ProductDetailViewModel : IViewModel, IProductDetailViewModel
+internal class CatalogDetailViewModel : IViewModel, ICatalogDetailViewModel
 {
-    public ICommand UpdateProduct { get; set; }
+    public ICommand UpdateCatalog { get; set; }
 
     private readonly ICatalogModelOperation _modelOperation;
 
@@ -60,22 +60,22 @@ internal class ProductDetailViewModel : IViewModel, IProductDetailViewModel
         }
     }
 
-    public ProductDetailViewModel(ICatalogModelOperation? model = null, IErrorInformer? informer = null)
+    public CatalogDetailViewModel(ICatalogModelOperation? model = null, IErrorInformer? informer = null)
     {
-        UpdateProduct = new OnClickCommand(e => Update(), c => CanUpdate());
+        UpdateCatalog = new OnClickCommand(e => Update(), c => CanUpdate());
 
         _modelOperation = model ?? ICatalogModelOperation.CreateModelOperation();
         _informer = informer ?? new PopupErrorInformer();
     }
 
-    public ProductDetailViewModel(int id, int roomNumber, string roomType, bool isBooked, ICatalogModelOperation? model = null, IErrorInformer? informer = null)
+    public CatalogDetailViewModel(int id, int roomNumber, string roomType, bool isBooked, ICatalogModelOperation? model = null, IErrorInformer? informer = null)
     {
         Id = id;
         RoomNumber = roomNumber;
         RoomType = roomType;
         IsBooked = isBooked;
 
-        UpdateProduct = new OnClickCommand(e => Update(), c => CanUpdate());
+        UpdateCatalog = new OnClickCommand(e => Update(), c => CanUpdate());
 
         _modelOperation = model ?? ICatalogModelOperation.CreateModelOperation();
         _informer = informer ?? new PopupErrorInformer();
@@ -87,7 +87,7 @@ internal class ProductDetailViewModel : IViewModel, IProductDetailViewModel
         {
             _modelOperation.UpdateAsync(Id, RoomNumber, RoomType, IsBooked);
 
-            _informer.InformSuccess("Product successfully updated!");
+            _informer.InformSuccess("Catalog successfully updated!");
         });
     }
 

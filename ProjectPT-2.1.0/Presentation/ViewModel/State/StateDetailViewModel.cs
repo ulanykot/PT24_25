@@ -24,15 +24,15 @@ internal class StateDetailViewModel : IViewModel, IStateDetailViewModel
         }
     }
 
-    private int _productId;
+    private int _roomCatalogId;
 
-    public int ProductId
+    public int RoomCatalogId
     {
-        get => _productId;
+        get => _roomCatalogId;
         set
         {
-            _productId = value;
-            OnPropertyChanged(nameof(ProductId));
+            _roomCatalogId = value;
+            OnPropertyChanged(nameof(RoomCatalogId));
         }
     }
 
@@ -56,11 +56,11 @@ internal class StateDetailViewModel : IViewModel, IStateDetailViewModel
         this._informer = informer ?? new PopupErrorInformer();
     }
 
-    public StateDetailViewModel(int id, int productId, int productQuantity, IStateModelOperation? model = null, IErrorInformer? informer = null)
+    public StateDetailViewModel(int id, int roomCatalogId, int price, IStateModelOperation? model = null, IErrorInformer? informer = null)
     {
         this.Id = id;
-        this.ProductId = productId;
-        this.Price = productQuantity;
+        this.RoomCatalogId = roomCatalogId;
+        this.Price = price;
 
         this.UpdateState = new OnClickCommand(e => this.Update(), c => this.CanUpdate());
 
@@ -72,7 +72,7 @@ internal class StateDetailViewModel : IViewModel, IStateDetailViewModel
     {
         Task.Run(() =>
         {
-            this._modelOperation.UpdateAsync(this.Id, this.ProductId, this.Price);
+            this._modelOperation.UpdateAsync(this.Id, this.RoomCatalogId, this.Price);
 
             this._informer.InformSuccess("State successfully updated!");
         });

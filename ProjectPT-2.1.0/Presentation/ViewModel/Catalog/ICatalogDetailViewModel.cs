@@ -3,15 +3,15 @@ using Presentation.Model.API;
 
 namespace Presentation.ViewModel;
 
-public interface IProductDetailViewModel
+public interface ICatalogDetailViewModel
 {
-    static IProductDetailViewModel CreateViewModel(int id, int roomNumber, string roomType, bool isBooked,
+    static ICatalogDetailViewModel CreateViewModel(int id, int roomNumber, string roomType, bool isBooked,
          ICatalogModelOperation model, IErrorInformer informer)
     {
-        return new ProductDetailViewModel(id, roomNumber, roomType, isBooked, model, informer);
+        return new CatalogDetailViewModel(id, roomNumber, roomType, isBooked, model, informer);
     }
 
-    ICommand UpdateProduct { get; set; }
+    ICommand UpdateCatalog { get; set; }
 
     int Id { get; set; }
 

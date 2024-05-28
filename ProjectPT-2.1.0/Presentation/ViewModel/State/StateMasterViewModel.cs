@@ -48,15 +48,15 @@ internal class StateMasterViewModel : IViewModel, IStateMasterViewModel
         }
     }
 
-    private int _productId;
+    private int _roomCatalogId;
 
-    public int ProductId
+    public int RoomCatalogId
     {
-        get => _productId;
+        get => _roomCatalogId;
         set
         {
-            _productId = value;
-            OnPropertyChanged(nameof(ProductId));
+            _roomCatalogId = value;
+            OnPropertyChanged(nameof(RoomCatalogId));
         }
     }
 
@@ -134,7 +134,7 @@ internal class StateMasterViewModel : IViewModel, IStateMasterViewModel
     private bool CanStoreState()
     {
         return !(
-            string.IsNullOrWhiteSpace(this.ProductId.ToString()) ||
+            string.IsNullOrWhiteSpace(this.RoomCatalogId.ToString()) ||
             string.IsNullOrWhiteSpace(this.Price.ToString()) ||
             this.Price < 0
         );
@@ -148,7 +148,7 @@ internal class StateMasterViewModel : IViewModel, IStateMasterViewModel
             {
                 int lastId = await this._modelOperation.GetCountAsync() + 1;
 
-                await this._modelOperation.AddAsync(lastId, this.ProductId, this.Price);
+                await this._modelOperation.AddAsync(lastId, this.RoomCatalogId, this.Price);
 
                 this.LoadStates();
 

@@ -12,7 +12,7 @@ internal class EventMasterViewModel : IViewModel, IEventMasterViewModel
 {
     private readonly IErrorInformer _informer;
     public ICommand SwitchToUserMasterPage { get; set; }
-    public ICommand SwitchToProductMasterPage { get; set; }
+    public ICommand SwitchToCatalogMasterPage { get; set; }
     public ICommand SwitchToStateMasterPage { get; set; }
     public ICommand CheckInEvent { get; set; }
     public ICommand CheckOutEvent { get; set; }
@@ -108,7 +108,7 @@ internal class EventMasterViewModel : IViewModel, IEventMasterViewModel
     {
         this.SwitchToUserMasterPage = new SwitchViewCommand("UserMasterView");
         this.SwitchToStateMasterPage = new SwitchViewCommand("StateMasterView");
-        this.SwitchToProductMasterPage = new SwitchViewCommand("ProductMasterView");
+        this.SwitchToCatalogMasterPage = new SwitchViewCommand("CatalogMasterView");
 
         this.CheckInEvent = new OnClickCommand(e => this.HotelCheckInEvent(), c => this.CanPurchaseEvent());
         this.CheckOutEvent = new OnClickCommand(e => this.HotelCheckOutEvent(), c => this.CanReturnEvent());

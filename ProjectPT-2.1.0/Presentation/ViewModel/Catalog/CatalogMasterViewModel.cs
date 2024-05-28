@@ -8,7 +8,7 @@ using Presentation.Model.API;
 
 namespace Presentation.ViewModel;
 
-internal class ProductMasterViewModel : IViewModel, IProductMasterViewModel
+internal class CatalogMasterViewModel : IViewModel, ICatalogMasterViewModel
 {
     public ICommand SwitchToUserMasterPage { get; set; }
 
@@ -16,23 +16,23 @@ internal class ProductMasterViewModel : IViewModel, IProductMasterViewModel
 
     public ICommand SwitchToEventMasterPage { get; set; }
 
-    public ICommand CreateProduct { get; set; }
+    public ICommand CreateCatalog { get; set; }
 
-    public ICommand RemoveProduct { get; set; }
+    public ICommand RemoveCatalog { get; set; }
 
     private readonly ICatalogModelOperation _modelOperation;
 
     private readonly IErrorInformer _informer;
 
-    private ObservableCollection<IProductDetailViewModel> _products;
+    private ObservableCollection<ICatalogDetailViewModel> _catalogs;
 
-    public ObservableCollection<IProductDetailViewModel> Products
+    public ObservableCollection<ICatalogDetailViewModel> Catalogs
     {
-        get => _products;
+        get => _catalogs;
         set
         {
-            _products = value;
-            OnPropertyChanged(nameof(Products));
+            _catalogs = value;
+            OnPropertyChanged(nameof(Catalogs));
         }
     }
 
@@ -84,73 +84,73 @@ internal class ProductMasterViewModel : IViewModel, IProductMasterViewModel
         }
     }
 
-    private bool _isProductSelected;
+    private bool _isCatalogSelected;
 
-    public bool IsProductSelected
+    public bool IsCatalogSelected
     {
-        get => _isProductSelected;
+        get => _isCatalogSelected;
         set
         {
-            IsProductDetailVisible = value ? Visibility.Visible : Visibility.Hidden;
+            IsCatalogDetailVisible = value ? Visibility.Visible : Visibility.Hidden;
 
-            _isProductSelected = value;
-            OnPropertyChanged(nameof(IsProductSelected));
+            _isCatalogSelected = value;
+            OnPropertyChanged(nameof(IsCatalogSelected));
         }
     }
 
-    private Visibility _isProductDetailVisible;
+    private Visibility _isCatalogDetailVisible;
 
-    public Visibility IsProductDetailVisible
+    public Visibility IsCatalogDetailVisible
     {
-        get => _isProductDetailVisible;
+        get => _isCatalogDetailVisible;
         set
         {
-            _isProductDetailVisible = value;
-            OnPropertyChanged(nameof(IsProductDetailVisible));
+            _isCatalogDetailVisible = value;
+            OnPropertyChanged(nameof(IsCatalogDetailVisible));
         }
     }
 
-    private IProductDetailViewModel _selectedDetailViewModel;
+    private ICatalogDetailViewModel _selectedDetailViewModel;
 
-    public IProductDetailViewModel SelectedDetailViewModel
+    public ICatalogDetailViewModel SelectedDetailViewModel
     {
         get => _selectedDetailViewModel;
         set
         {
             _selectedDetailViewModel = value;
-            IsProductSelected = true;
+            IsCatalogSelected = true;
 
             OnPropertyChanged(nameof(SelectedDetailViewModel));
         }
     }
 
-    public ProductMasterViewModel(ICatalogModelOperation? model = null, IErrorInformer? informer = null)
+    public CatalogMasterViewModel(ICatalogModelOperation? model = null, IErrorInformer? informer = null)
     {
         SwitchToUserMasterPage = new SwitchViewCommand("UserMasterView");
         SwitchToStateMasterPage = new SwitchViewCommand("StateMasterView");
         SwitchToEventMasterPage = new SwitchViewCommand("EventMasterView");
 
-        CreateProduct = new OnClickCommand(e => StoreProduct(), c => CanStoreProduct());
-        RemoveProduct = new OnClickCommand(e => DeleteProduct());
+        CreateCatalog = new OnClickCommand(e => StoreCatalog(), c => CanStoreCatalog());
+        RemoveCatalog = new OnClickCommand(e => DeleteCatalog());
 
-        Products = new ObservableCollection<IProductDetailViewModel>();
+        Catalogs = new ObservableCollection<ICatalogDetailViewModel>();
 
         _modelOperation = model ?? ICatalogModelOperation.CreateModelOperation();
         _informer = informer ?? new PopupErrorInformer();
 
-        IsProductSelected = false;
+        IsCatalogSelected = false;
 
-        Task.Run(this.LoadProducts);
+        Task.Run(this.LoadCatalogs);
     }
 
-    private bool CanStoreProduct()
+    private bool CanStoreCatalog()
     {
         return !(
             string.IsNullOrWhiteSpace(this.RoomType)
         );
     }
 
-    private void StoreProduct()
+    private void StoreCatalog()
     {
         Task.Run(async () =>
         {
@@ -158,14 +158,14 @@ internal class ProductMasterViewModel : IViewModel, IProductMasterViewModel
 
             await this._modelOperation.AddAsync(lastId, RoomNumber, RoomType, IsBooked);
 
-            LoadProducts();
+            LoadCatalogs();
 
-            _informer.InformSuccess("Product added successfully!");
+            _informer.InformSuccess("Catalog added successfully!");
 
         });
     }
 
-    private void DeleteProduct()
+    private void DeleteCatalog()
     {
         Task.Run(async () =>
         {
@@ -173,31 +173,31 @@ internal class ProductMasterViewModel : IViewModel, IProductMasterViewModel
             {
                 await _modelOperation.DeleteAsync(SelectedDetailViewModel.Id);
 
-                LoadProducts();
+                LoadCatalogs();
 
-                _informer.InformSuccess("Product deleted successfully!");
+                _informer.InformSuccess("Catalog deleted successfully!");
             }
             catch (Exception e)
             {
-                _informer.InformError("Error while deleting product! Remember to remove all associated states!");
+                _informer.InformError("Error while deleting catalog! Remember to remove all associated states!");
             }
         });
     }
 
-    private async void LoadProducts()
+    private async void LoadCatalogs()
     {
-        Dictionary<int, ICatalogModel> Products = await _modelOperation.GetAllAsync();
+        Dictionary<int, ICatalogModel> Catalogs = await _modelOperation.GetAllAsync();
 
         Application.Current.Dispatcher.Invoke(() =>
         {
-            _products.Clear();
+            _catalogs.Clear();
 
-            foreach (ICatalogModel p in Products.Values)
+            foreach (ICatalogModel p in Catalogs.Values)
             {
-                _products.Add(new ProductDetailViewModel(p.Id, (int)p.RoomNumber, p.RoomType, (bool)p.isBooked));
+                _catalogs.Add(new CatalogDetailViewModel(p.Id, (int)p.RoomNumber, p.RoomType, (bool)p.isBooked));
             }
         });
 
-        OnPropertyChanged(nameof(Products));
+        OnPropertyChanged(nameof(Catalogs));
     }
 }

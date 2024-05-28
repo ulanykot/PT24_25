@@ -21,7 +21,7 @@ public interface IStateMasterViewModel
 
     public int Id { get; set; }
 
-    public int ProductId { get; set; }
+    public int RoomCatalogId { get; set; }
 
     public int Price { get; set; }
 

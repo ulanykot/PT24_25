@@ -18,6 +18,10 @@ internal class FakeCatalogService : ICatalogService
         this.RoomType = roomType;
         this.isBooked = isBooked;
     }
+    public FakeCatalogService()
+    {
+
+    }
 
     public async Task AddCatalogAsync(int id, int roomNumber, string roomType, bool isBooked)
     {

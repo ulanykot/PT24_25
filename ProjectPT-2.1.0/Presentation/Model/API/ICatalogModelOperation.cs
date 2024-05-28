@@ -7,9 +7,9 @@ namespace Presentation.Model.API;
 
 public interface ICatalogModelOperation
 {
-    static ICatalogModelOperation CreateModelOperation(ICatalogService? productCrud = null)
+    static ICatalogModelOperation CreateModelOperation(ICatalogService? catalogCrud = null)
     {
-        return new CatalogModelOperation(productCrud ?? ICatalogService.CreateCatalogService());
+        return new CatalogModelOperation(catalogCrud ?? ICatalogService.CreateCatalogService());
     }
 
     Task AddAsync(int id, int roomNumber, string roomType, bool isBooked);

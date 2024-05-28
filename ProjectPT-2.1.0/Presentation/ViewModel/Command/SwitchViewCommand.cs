@@ -33,8 +33,8 @@ internal class SwitchViewCommand : ICommand
             {
                 switch (this._switchToViewModel)
                 {
-                    case "ProductMasterView":
-                        mainViewModel.SelectedViewModel = new ProductMasterViewModel(); break;
+                    case "CatalogMasterView":
+                        mainViewModel.SelectedViewModel = new CatalogMasterViewModel(); break;
                     case "UserMasterView":
                         mainViewModel.SelectedViewModel = new UserMasterViewModel(); break;
                     case "StateMasterView":

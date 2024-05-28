@@ -15,14 +15,15 @@ public class PresentationTests
     [TestMethod]
     public void UserMasterViewModelTests()
     {
-        IUserCRUD fakeUserCrud = new FakeUserService();
+        IUserService fakeUserCrud = new FakeUserService();
 
         IUserModelOperation operation = IUserModelOperation.CreateModelOperation(fakeUserCrud);
 
         IUserMasterViewModel viewModel = IUserMasterViewModel.CreateViewModel(operation, _informer);
 
-        viewModel.Name = "Test";
-        viewModel.Email = "Test.test@gmai.com";
+        viewModel.FirstName = "Test";
+        viewModel.LastName = "Tester";
+        viewModel.UserType = "Guest";
 
         Assert.IsNotNull(viewModel.CreateUser);
         Assert.IsNotNull(viewModel.RemoveUser);
@@ -35,78 +36,80 @@ public class PresentationTests
     [TestMethod]
     public void UserDetailViewModelTests()
     {
-        IUserCRUD fakeUserCrud = new FakeUserService();
+        IUserService fakeUserCrud = new FakeUserService();
 
         IUserModelOperation operation = IUserModelOperation.CreateModelOperation(fakeUserCrud);
 
-        IUserDetailViewModel detail = IUserDetailViewModel.CreateViewModel(1, "Test", "test.email", operation, _informer);
+        IUserDetailViewModel detail = IUserDetailViewModel.CreateViewModel(1, "Test", "Tester", "Guest", operation, _informer);
 
         Assert.AreEqual(1, detail.Id);
-        Assert.AreEqual("Test", detail.Name);
-        Assert.AreEqual("test.email", detail.Email);
+        Assert.AreEqual("Test", detail.FirstName);
+        Assert.AreEqual("Tester", detail.LastName);
+        Assert.AreEqual("Guest", detail.UserType);
 
         Assert.IsTrue(detail.UpdateUser.CanExecute(null));
     }
 
     [TestMethod]
-    public void ProductMasterViewModelTests()
+    public void CatalogMasterViewModelTests()
     {
-        IProductCRUD fakeProductCrud = new FakeProductService();
+        ICatalogService fakeCatalogCrud = new FakeCatalogService();
 
-        ICatalogModelOperation operation = ICatalogModelOperation.CreateModelOperation(fakeProductCrud);
+        ICatalogModelOperation operation = ICatalogModelOperation.CreateModelOperation(fakeCatalogCrud);
 
-        IProductMasterViewModel master = IProductMasterViewModel.CreateViewModel(operation, _informer);
+        ICatalogMasterViewModel master = ICatalogMasterViewModel.CreateViewModel(operation, _informer);
 
-        master.Name = "Chocolate";
-        master.Price = 13;
+        master.RoomNumber = 101;
+        master.RoomType = "Single";
+        master.IsBooked = false;
 
-        Assert.IsNotNull(master.CreateProduct);
-        Assert.IsNotNull(master.RemoveProduct);
+        Assert.IsNotNull(master.CreateCatalog);
+        Assert.IsNotNull(master.RemoveCatalog);
 
-        Assert.IsTrue(master.CreateProduct.CanExecute(null));
+        Assert.IsTrue(master.CreateCatalog.CanExecute(null));
 
-        master.Price = -1;
+        master.RoomNumber = -1;
 
-        Assert.IsFalse(master.CreateProduct.CanExecute(null));
+        Assert.IsFalse(master.CreateCatalog.CanExecute(null));
 
-        Assert.IsTrue(master.RemoveProduct.CanExecute(null));
+        Assert.IsTrue(master.RemoveCatalog.CanExecute(null));
     }
 
     [TestMethod]
-    public void ProductDetailViewModelTests()
+    public void CatalogDetailViewModelTests()
     {
-        IProductCRUD fakeProductCrud = new FakeProductService();
+        ICatalogService fakeCatalogCrud = new FakeCatalogService();
 
-        ICatalogModelOperation operation = ICatalogModelOperation.CreateModelOperation(fakeProductCrud);
+        ICatalogModelOperation operation = ICatalogModelOperation.CreateModelOperation(fakeCatalogCrud);
 
-        IProductDetailViewModel detail = IProductDetailViewModel.CreateViewModel(1, "Banana", 200, 
-            operation, _informer);
+        ICatalogDetailViewModel detail = ICatalogDetailViewModel.CreateViewModel(1, 115, "Suite", false, operation, _informer);
 
         Assert.AreEqual(1, detail.Id);
-        Assert.AreEqual("Banana", detail.Name);
-        Assert.AreEqual(200, detail.Price);
+        Assert.AreEqual(115, detail.RoomNumber);
+        Assert.AreEqual("Suite", detail.RoomType);
+        Assert.AreEqual(false, detail.IsBooked);
 
-        Assert.IsTrue(detail.UpdateProduct.CanExecute(null));
+        Assert.IsTrue(detail.UpdateCatalog.CanExecute(null));
     }
 
     [TestMethod]
     public void StateMasterViewModelTests()
     {
-        IStateCRUD fakeStateCrud = new FakeStateService();
+        IStateService fakeStateCrud = new FakeStateService();
 
         IStateModelOperation operation = IStateModelOperation.CreateModelOperation( fakeStateCrud);
 
         IStateMasterViewModel master = IStateMasterViewModel.CreateViewModel(operation, _informer);
 
-        master.ProductId = 1;
-        master.ProductQuantity = 1;
+        master.RoomCatalogId = 1;
+        master.Price = 1;
 
         Assert.IsNotNull(master.CreateState);
         Assert.IsNotNull(master.RemoveState);
 
         Assert.IsTrue(master.CreateState.CanExecute(null));
 
-        master.ProductQuantity = -1;
+        master.Price = -1;
 
         Assert.IsFalse(master.CreateState.CanExecute(null));
 
@@ -116,15 +119,15 @@ public class PresentationTests
     [TestMethod]
     public void StateDetailViewModelTests()
     {
-        IStateCRUD fakeStateCrud = new FakeStateService();
+        IStateService fakeStateCrud = new FakeStateService();
 
         IStateModelOperation operation = IStateModelOperation.CreateModelOperation(fakeStateCrud);
 
-        IStateDetailViewModel detail = IStateDetailViewModel.CreateViewModel(1, 1, 1, operation, _informer);
+        IStateDetailViewModel detail = IStateDetailViewModel.CreateViewModel(1, 1, 100, operation, _informer);
 
         Assert.AreEqual(1, detail.Id);
-        Assert.AreEqual(1, detail.ProductId);
-        Assert.AreEqual(1, detail.ProductQuantity);
+        Assert.AreEqual(1, detail.RoomCatalogId);
+        Assert.AreEqual(1, detail.Price);
 
         Assert.IsTrue(detail.UpdateState.CanExecute(null));
     }
@@ -132,7 +135,7 @@ public class PresentationTests
     [TestMethod]
     public void EventMasterViewModelTests()
     {
-        IEventCRUD fakeEventCrud = new FakeEventService();
+        IEventService fakeEventCrud = new FakeEventService();
 
         IEventModelOperation operation = IEventModelOperation.CreateModelOperation(fakeEventCrud);
 
@@ -141,18 +144,12 @@ public class PresentationTests
         master.StateId = 1;
         master.UserId = 1;
 
-        Assert.IsNotNull(master.PurchaseEvent);
-        Assert.IsNotNull(master.ReturnEvent);
-        Assert.IsNotNull(master.SupplyEvent);
+        Assert.IsNotNull(master.CheckInEvent);
+        Assert.IsNotNull(master.CheckOutEvent);
         Assert.IsNotNull(master.RemoveEvent);
 
-        Assert.IsTrue(master.PurchaseEvent.CanExecute(null));
-        Assert.IsTrue(master.ReturnEvent.CanExecute(null));
-        Assert.IsFalse(master.SupplyEvent.CanExecute(null));
-
-        master.Quantity = 1;
-
-        Assert.IsTrue(master.SupplyEvent.CanExecute(null));
+        Assert.IsTrue(master.CheckInEvent.CanExecute(null));
+        Assert.IsTrue(master.CheckOutEvent.CanExecute(null));
 
         Assert.IsTrue(master.RemoveEvent.CanExecute(null));
     }
@@ -160,18 +157,19 @@ public class PresentationTests
     [TestMethod]
     public void EventDetailViewModelTests()
     {
-        IEventCRUD fakeEventCrud = new FakeEventService();
+        IEventService fakeEventCrud = new FakeEventService();
 
         IEventModelOperation operation = IEventModelOperation.CreateModelOperation(fakeEventCrud);
 
-        IEventDetailViewModel detail = IEventDetailViewModel.CreateViewModel(1, 1, 1, new DateTime(2001, 1, 1),
-            "PurchaseEvent", null, operation, _informer);
+        IEventDetailViewModel detail = IEventDetailViewModel.CreateViewModel(1, 1, 1, new DateTime(2001, 1, 1), new DateTime(2001, 1, 4),
+            "CheckIn", operation, _informer);
 
         Assert.AreEqual(1, detail.Id);
         Assert.AreEqual(1, detail.StateId);
         Assert.AreEqual(1, detail.UserId);
-        Assert.AreEqual(new DateTime(2001, 1, 1), detail.OccurrenceDate);
-        Assert.AreEqual("PurchaseEvent", detail.Type);
+        Assert.AreEqual(new DateTime(2001, 1, 1), detail.CheckIn);
+        Assert.AreEqual(new DateTime(2001, 1, 4), detail.CheckOut);
+        Assert.AreEqual("CheckIn", detail.Type);
 
         Assert.IsTrue(detail.UpdateEvent.CanExecute(null));
     }
@@ -181,30 +179,30 @@ public class PresentationTests
     {
         IGenerator fixedGenerator = new FixedGenerator();
 
-        IUserCRUD fakeUserCrud = new FakeUserService();
+        IUserService fakeUserCrud = new FakeUserService();
         IUserModelOperation userOperation = IUserModelOperation.CreateModelOperation(fakeUserCrud);
         IUserMasterViewModel userViewModel = IUserMasterViewModel.CreateViewModel(userOperation, _informer);
 
-        IProductCRUD fakeProductCrud = new FakeProductService();
-        ICatalogModelOperation productOperation = ICatalogModelOperation.CreateModelOperation(fakeProductCrud);
-        IProductMasterViewModel productViewModel = IProductMasterViewModel.CreateViewModel(productOperation, _informer);
+        ICatalogService fakeProductCrud = new FakeCatalogService();
+        ICatalogModelOperation catalogOperation = ICatalogModelOperation.CreateModelOperation(fakeProductCrud);
+        ICatalogMasterViewModel catalogViewModel = ICatalogMasterViewModel.CreateViewModel(catalogOperation, _informer);
 
 
-        IStateCRUD fakeStateCrud = new FakeStateService();
+        IStateService fakeStateCrud = new FakeStateService();
         IStateModelOperation stateOperation = IStateModelOperation.CreateModelOperation(fakeStateCrud);
         IStateMasterViewModel stateViewModel = IStateMasterViewModel.CreateViewModel(stateOperation, _informer);
 
-        IEventCRUD fakeEventCrud = new FakeEventService();
+        IEventService fakeEventCrud = new FakeEventService();
         IEventModelOperation eventOperation = IEventModelOperation.CreateModelOperation(fakeEventCrud);
         IEventMasterViewModel eventViewModel = IEventMasterViewModel.CreateViewModel(eventOperation, _informer);
 
         fixedGenerator.GenerateUserModels(userViewModel);
-        fixedGenerator.GenerateProductModels(productViewModel);
+        fixedGenerator.GenerateCatalogModels(catalogViewModel);
         fixedGenerator.GenerateStateModels(stateViewModel);
         fixedGenerator.GenerateEventModels(eventViewModel);
 
         Assert.AreEqual(5, userViewModel.Users.Count);
-        Assert.AreEqual(6, productViewModel.Products.Count);
+        Assert.AreEqual(6, catalogViewModel.Catalogs.Count);
         Assert.AreEqual(6, stateViewModel.States.Count);
         Assert.AreEqual(6, eventViewModel.Events.Count);
     }
@@ -214,30 +212,30 @@ public class PresentationTests
     {
         IGenerator randomGenerator = new RandomGenerator();
 
-        IUserCRUD fakeUserCrud = new FakeUserService();
+        IUserService fakeUserCrud = new FakeUserService();
         IUserModelOperation userOperation = IUserModelOperation.CreateModelOperation(fakeUserCrud);
         IUserMasterViewModel userViewModel = IUserMasterViewModel.CreateViewModel(userOperation, _informer);
 
-        IProductCRUD fakeProductCrud = new FakeProductService();
-        ICatalogModelOperation productOperation = ICatalogModelOperation.CreateModelOperation(fakeProductCrud);
-        IProductMasterViewModel productViewModel = IProductMasterViewModel.CreateViewModel(productOperation, _informer);
+        ICatalogService fakeProductCrud = new FakeCatalogService();
+        ICatalogModelOperation catalogOperation = ICatalogModelOperation.CreateModelOperation(fakeProductCrud);
+        ICatalogMasterViewModel catalogViewModel = ICatalogMasterViewModel.CreateViewModel(catalogOperation, _informer);
 
 
-        IStateCRUD fakeStateCrud = new FakeStateService();
+        IStateService fakeStateCrud = new FakeStateService();
         IStateModelOperation stateOperation = IStateModelOperation.CreateModelOperation(fakeStateCrud);
         IStateMasterViewModel stateViewModel = IStateMasterViewModel.CreateViewModel(stateOperation, _informer);
 
-        IEventCRUD fakeEventCrud = new FakeEventService();
+        IEventService fakeEventCrud = new FakeEventService();
         IEventModelOperation eventOperation = IEventModelOperation.CreateModelOperation(fakeEventCrud);
         IEventMasterViewModel eventViewModel = IEventMasterViewModel.CreateViewModel(eventOperation, _informer);
 
         randomGenerator.GenerateUserModels(userViewModel);
-        randomGenerator.GenerateProductModels(productViewModel);
+        randomGenerator.GenerateCatalogModels(catalogViewModel);
         randomGenerator.GenerateStateModels(stateViewModel);
         randomGenerator.GenerateEventModels(eventViewModel);
 
         Assert.AreEqual(10, userViewModel.Users.Count);
-        Assert.AreEqual(10, productViewModel.Products.Count);
+        Assert.AreEqual(10, catalogViewModel.Catalogs.Count);
         Assert.AreEqual(10, stateViewModel.States.Count);
         Assert.AreEqual(10, eventViewModel.Events.Count);
     }

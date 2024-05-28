@@ -7,10 +7,10 @@ namespace Presentation.Model.Implementation;
 
 internal class CatalogModelOperation : ICatalogModelOperation
 {
-    private ICatalogService _productCRUD;
-    public CatalogModelOperation(ICatalogService? productCrud = null)
+    private ICatalogService _catalogCRUD;
+    public CatalogModelOperation(ICatalogService? catalogCrud = null)
     {
-        this._productCRUD = productCrud ?? ICatalogService.CreateCatalogService();
+        this._catalogCRUD = catalogCrud ?? ICatalogService.CreateCatalogService();
     }
 
     private ICatalogModel Map(ICatalogService catalog)
@@ -19,29 +19,29 @@ internal class CatalogModelOperation : ICatalogModelOperation
     }
     public async Task AddAsync(int id, int roomNumber, string roomType, bool isBooked)
     {
-        await this._productCRUD.AddCatalogAsync(id, roomNumber, roomType, isBooked);
+        await this._catalogCRUD.AddCatalogAsync(id, roomNumber, roomType, isBooked);
     }
 
     public async Task<ICatalogModel> GetAsync(int id)
     {
-        return this.Map(await this._productCRUD.GetCatalogAsync(id));
+        return this.Map(await this._catalogCRUD.GetCatalogAsync(id));
     }
 
     public async Task UpdateAsync(int id, int roomNumber, string roomType, bool isBooked)
     {
-        await this._productCRUD.UpdateCatalogAsync(id, roomNumber, roomType, isBooked);
+        await this._catalogCRUD.UpdateCatalogAsync(id, roomNumber, roomType, isBooked);
     }
 
     public async Task DeleteAsync(int id)
     {
-        await this._productCRUD.DeleteCatalogAsync(id);
+        await this._catalogCRUD.DeleteCatalogAsync(id);
     }
 
     public async Task<Dictionary<int, ICatalogModel>> GetAllAsync()
     {
         Dictionary<int, ICatalogModel> result = new Dictionary<int, ICatalogModel>();
 
-        foreach (ICatalogService Catalog in (await this._productCRUD.GetAllCatalogsAsync()).Values)
+        foreach (ICatalogService Catalog in (await this._catalogCRUD.GetAllCatalogsAsync()).Values)
         {
             result.Add(Catalog.Id, this.Map(Catalog));
         }
@@ -51,6 +51,6 @@ internal class CatalogModelOperation : ICatalogModelOperation
 
     public async Task<int> GetCountAsync()
     {
-        return await this._productCRUD.GetCatalogsCountAsync();
+        return await this._catalogCRUD.GetCatalogsCountAsync();
     }
 }

@@ -22,6 +22,10 @@ internal class FakeEventService : IEventService
         this.CheckOutDate = checkOut;
         this.Type = type;
     }
+    public FakeEventService()
+    {
+
+    }
 
     public async Task AddEventAsync(int id, int stateId, int userId, DateTime CheckInDate, DateTime CheckOutDate, string Type)
     {

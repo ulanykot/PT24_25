@@ -15,17 +15,17 @@ internal class RandomGenerator : IGenerator
 
         for (int i = 1; i <= 10; i++)
         {
-            viewModel.Users.Add(IUserDetailViewModel.CreateViewModel(i, RandomString(10), RandomEmail(), operation, _informer));
+            viewModel.Users.Add(IUserDetailViewModel.CreateViewModel(i, RandomString(10), RandomString(15), RandomString(10), operation, _informer));
         }
     }
 
-    public void GenerateProductModels(IProductMasterViewModel viewModel)
+    public void GenerateCatalogModels(ICatalogMasterViewModel viewModel)
     {
-        ICatalogModelOperation operation = ICatalogModelOperation.CreateModelOperation(new FakeProductService());
+        ICatalogModelOperation operation = ICatalogModelOperation.CreateModelOperation(new FakeCatalogService());
 
         for (int i = 1; i <= 10; i++)
         {
-            viewModel.Products.Add(IProductDetailViewModel.CreateViewModel(i, RandomString(7), RandomNumber<double>(4), operation, _informer));
+            viewModel.Catalogs.Add(ICatalogDetailViewModel.CreateViewModel(i, RandomNumber<int>(3), RandomString(10), RandomBool(), operation, _informer));
         }
     }
 
@@ -45,7 +45,7 @@ internal class RandomGenerator : IGenerator
 
         for (int i = 1; i <= 10; i++)
         {
-            viewModel.Events.Add(IEventDetailViewModel.CreateViewModel(i, i, i, DateTime.Now, "SupplyEvent", RandomNumber<int>(1), operation, _informer));
+            viewModel.Events.Add(IEventDetailViewModel.CreateViewModel(i, i, i, DateTime.Now, RandomDate(), "CheckIn", operation, _informer));
         }
     }
 
@@ -119,4 +119,9 @@ internal class RandomGenerator : IGenerator
             .AddSeconds(random.Next(60));
     }
 
+    private bool RandomBool()
+    {
+        Random random = new Random();
+        return random.Next(2) == 0;
+    }
 }
