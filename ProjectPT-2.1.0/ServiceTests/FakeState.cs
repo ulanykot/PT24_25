@@ -4,16 +4,16 @@ namespace ServiceTests;
 
 internal class FakeState : IState
 {
-    public FakeState(int id, int productId, int productQuantity = 0)
+    public FakeState(int id, int roomCatalogId, int price)
     {
         this.Id = id;
-        this.productId = productId;
-        this.productQuantity = productQuantity;
+        this.RoomCatalogId = roomCatalogId;
+        this.Price = price;
     }
 
     public int Id { get; set; }
 
-    public int productId { get; set; }
+    public int RoomCatalogId { get; set; }
 
-    public int productQuantity { get; set; }
+    public int Price { get; set; }
 }

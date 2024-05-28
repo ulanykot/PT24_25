@@ -8,7 +8,7 @@ internal class FakeStateService : IStateService
 
     public int Id { get; set; }
     public int Price { get; set; }
-    public int RoomCatalogId { get;  set; }
+    public int RoomCatalogId { get; set; }
 
     public FakeStateService(int id, int roomId, int price)
     {
@@ -17,9 +17,14 @@ internal class FakeStateService : IStateService
         this.RoomCatalogId = roomId;
     }
 
-    public async Task AddStateAsync(int id, int productId, int price)
+    public FakeStateService()
     {
-        await _fakeRepository.AddStateAsync(id, productId, price);
+
+    }
+
+    public async Task AddStateAsync(int id, int roomCatalogId, int price)
+    {
+        await _fakeRepository.AddStateAsync(id, roomCatalogId, price);
     }
 
     public async Task<IStateService> GetStateAsync(int id)
@@ -27,9 +32,9 @@ internal class FakeStateService : IStateService
         return await this._fakeRepository.GetStateAsync(id);
     }
 
-    public async Task UpdateStateAsync(int id, int productId, int productQuantity)
+    public async Task UpdateStateAsync(int id, int roomCatalogId, int price)
     {
-        await this._fakeRepository.UpdateStateAsync(id, productId, productQuantity);
+        await this._fakeRepository.UpdateStateAsync(id, roomCatalogId, price);
     }
 
     public async Task DeleteStateAsync(int id)

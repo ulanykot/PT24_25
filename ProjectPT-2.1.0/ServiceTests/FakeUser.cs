@@ -4,16 +4,19 @@ namespace ServiceTests;
 
 internal class FakeUser : IUser
 {
-    public FakeUser(int id, string name, string email)
+    public FakeUser(int id, string firstName, string lastName, string userType)
     {
         Id = id;
-        Name = name;
-        Email = email;
+        FirstName = firstName;
+        LastName = lastName;
+        UserType = userType;
     }
 
     public int Id { get; set; }
 
-    public string Name { get; set; }
+    public string FirstName { get; set; }
 
-    public string Email { get; set; }
+    public string LastName { get; set; }
+
+    public string UserType { get; set; }
 }

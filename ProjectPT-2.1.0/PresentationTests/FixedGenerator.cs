@@ -13,23 +13,23 @@ internal class FixedGenerator : IGenerator
     {
         IUserModelOperation operation = IUserModelOperation.CreateModelOperation(new FakeUserService());
 
-        viewModel.Users.Add(IUserDetailViewModel.CreateViewModel(1, "Alice", "alice@example.com", operation, _informer));
-        viewModel.Users.Add(IUserDetailViewModel.CreateViewModel(2, "Bob", "bob@example.com", operation, _informer));
-        viewModel.Users.Add(IUserDetailViewModel.CreateViewModel(3, "Charlie", "charlie@example.com", operation, _informer));
-        viewModel.Users.Add(IUserDetailViewModel.CreateViewModel(4, "Diana", "diana@example.com", operation, _informer));
-        viewModel.Users.Add(IUserDetailViewModel.CreateViewModel(5, "Eve", "eve@example.com", operation, _informer));
+        viewModel.Users.Add(IUserDetailViewModel.CreateViewModel(1, "Alice", "Smith", "Standard", operation, _informer));
+        viewModel.Users.Add(IUserDetailViewModel.CreateViewModel(2, "Bob", "Johnson", "Standard", operation, _informer));
+        viewModel.Users.Add(IUserDetailViewModel.CreateViewModel(3, "Charlie", "Williams", "Standard", operation, _informer));
+        viewModel.Users.Add(IUserDetailViewModel.CreateViewModel(4, "Diana", "Brown", "Standard", operation, _informer));
+        viewModel.Users.Add(IUserDetailViewModel.CreateViewModel(5, "Eve", "Davis", "Standard", operation, _informer));
     }
 
-    public void GenerateProductModels(IProductMasterViewModel viewModel)
+    public void GenerateCatalogModels(IProductMasterViewModel viewModel)
     {
-        ICatalogModelOperation operation = ICatalogModelOperation.CreateModelOperation(new FakeProductService());
+        ICatalogModelOperation operation = ICatalogModelOperation.CreateModelOperation(new FakeCatalogService());
 
-        viewModel.Products.Add(IProductDetailViewModel.CreateViewModel(1, "Apples", 61.99, operation, _informer));
-        viewModel.Products.Add(IProductDetailViewModel.CreateViewModel(2, "Oranges", 32.99, operation, _informer));
-        viewModel.Products.Add(IProductDetailViewModel.CreateViewModel(3, "Sausage", 2.99, operation, _informer));
-        viewModel.Products.Add(IProductDetailViewModel.CreateViewModel(4, "Tomato", 9.99, operation, _informer));
-        viewModel.Products.Add(IProductDetailViewModel.CreateViewModel(5, "Ice cream", 1.99, operation, _informer));
-        viewModel.Products.Add(IProductDetailViewModel.CreateViewModel(6, "Pizza", 39.99, operation, _informer));
+        viewModel.Products.Add(IProductDetailViewModel.CreateViewModel(1, 101, "Suite", true, operation, _informer));
+        viewModel.Products.Add(IProductDetailViewModel.CreateViewModel(2, 102, "Single", false, operation, _informer));
+        viewModel.Products.Add(IProductDetailViewModel.CreateViewModel(3, 103, "Suite", true, operation, _informer));
+        viewModel.Products.Add(IProductDetailViewModel.CreateViewModel(4, 104, "Double", false, operation, _informer));
+        viewModel.Products.Add(IProductDetailViewModel.CreateViewModel(5, 105, "Single", true, operation, _informer));
+        viewModel.Products.Add(IProductDetailViewModel.CreateViewModel(6, 106, "Suite", true, operation, _informer));
     }
 
     public void GenerateStateModels(IStateMasterViewModel viewModel)
@@ -48,12 +48,12 @@ internal class FixedGenerator : IGenerator
     {
         IEventModelOperation operation = IEventModelOperation.CreateModelOperation(new FakeEventService());
 
-        viewModel.Events.Add(IEventDetailViewModel.CreateViewModel(1, 1, 1, DateTime.Now, "SupplyEvent", 10, operation, _informer));
-        viewModel.Events.Add(IEventDetailViewModel.CreateViewModel(2, 2, 2, DateTime.Now, "SupplyEvent", 123, operation, _informer));
-        viewModel.Events.Add(IEventDetailViewModel.CreateViewModel(3, 3, 3, DateTime.Now, "SupplyEvent", 3, operation, _informer));
-        viewModel.Events.Add(IEventDetailViewModel.CreateViewModel(4, 4, 4, DateTime.Now, "SupplyEvent", 5, operation, _informer));
-        viewModel.Events.Add(IEventDetailViewModel.CreateViewModel(5, 5, 5, DateTime.Now, "SupplyEvent", 15, operation, _informer));
-        viewModel.Events.Add(IEventDetailViewModel.CreateViewModel(6, 6, 6, DateTime.Now, "SupplyEvent", 23, operation, _informer));
+        viewModel.Events.Add(IEventDetailViewModel.CreateViewModel(1, 1, 1, DateTime.Now, DateTime.Now.AddDays(2), "CheckIn", operation, _informer));
+        viewModel.Events.Add(IEventDetailViewModel.CreateViewModel(2, 2, 2, DateTime.Now, DateTime.Now.AddDays(3), "CheckIn", operation, _informer));
+        viewModel.Events.Add(IEventDetailViewModel.CreateViewModel(3, 3, 3, DateTime.Now.AddDays(2), DateTime.Now.AddDays(5), "CheckIn", operation, _informer));
+        viewModel.Events.Add(IEventDetailViewModel.CreateViewModel(4, 4, 4, DateTime.Now, DateTime.Now.AddDays(2), "CheckIn", operation, _informer));
+        viewModel.Events.Add(IEventDetailViewModel.CreateViewModel(5, 5, 5, DateTime.Now, DateTime.Now.AddDays(4), "CheckIn", operation, _informer));
+        viewModel.Events.Add(IEventDetailViewModel.CreateViewModel(6, 6, 6, DateTime.Now.AddDays(7), DateTime.Now.AddDays(12), "CheckIn", operation, _informer));
 
     }
 }

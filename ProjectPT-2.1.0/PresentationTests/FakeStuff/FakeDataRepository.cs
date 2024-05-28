@@ -7,7 +7,7 @@ internal class FakeDataRepository
 {
     public Dictionary<int, IUserService> Users = new Dictionary<int, IUserService>();
 
-    public Dictionary<int, ICatalogService> Catalogs = new Dictionary<int, ICatalogService>();
+    public Dictionary<int, ICatalogService> Products = new Dictionary<int, ICatalogService>();
 
     public Dictionary<int, IEventService> Events = new Dictionary<int, IEventService>();
 
@@ -59,34 +59,34 @@ internal class FakeDataRepository
 
     public async Task AddCatalogAsync(int id, int roomNumber, string roomType, bool isBooked)
     {
-        this.Catalogs.Add(id, new FakeCatalogService(id, roomNumber, roomType, isBooked));
+        this.Products.Add(id, new FakeCatalogService(id, roomNumber, roomType, isBooked));
     }
 
     public async Task<ICatalogService> GetCatalogAsync(int id)
     {
-        return await Task.FromResult(this.Catalogs[id]);
+        return await Task.FromResult(this.Products[id]);
     }
 
     public async Task UpdateCatalogAsync(int id, int number, string type, bool isBooked)
     {
-        this.Catalogs[id].RoomType = type;
-        this.Catalogs[id].RoomNumber = number;
-        this.Catalogs[id].isBooked = isBooked;
+        this.Products[id].RoomType = type;
+        this.Products[id].RoomNumber = number;
+        this.Products[id].isBooked = isBooked;
     }
 
     public async Task DeleteCatalogAsync(int id)
     {
-        this.Catalogs.Remove(id);
+        this.Products.Remove(id);
     }
 
     public async Task<Dictionary<int, ICatalogService>> GetAllCatalogAsync()
     {
-        return await Task.FromResult(this.Catalogs);
+        return await Task.FromResult(this.Products);
     }
 
-    public async Task<int> GetCatalogsCountAsync()
+    public async Task<int> GetProductsCountAsync()
     {
-        return await Task.FromResult(this.Catalogs.Count);
+        return await Task.FromResult(this.Products.Count);
     }
 
     #endregion

@@ -14,6 +14,15 @@ internal class FakeUserService : IUserService
     public string LastName { get; set; }
 
     public string UserType { get; set; }
+    public FakeUserService(int id, string firstName, string lastName, string UserType)
+    {
+        this.Id = id;
+        this.FirstName = firstName;
+        this.LastName = lastName;
+        this.UserType = UserType;
+
+    }
+
     public FakeUserService()
     {
 

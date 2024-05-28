@@ -6,7 +6,7 @@ public interface IGenerator
 {
     void GenerateUserModels(IUserMasterViewModel viewModel);
 
-    void GenerateProductModels(IProductMasterViewModel viewModel);
+    void GenerateCatalogModels(IProductMasterViewModel viewModel);
 
     void GenerateStateModels(IStateMasterViewModel viewModel);
 

@@ -18,6 +18,10 @@ internal class FakeCatalogService : ICatalogService
         this.RoomType = roomType;
         this.isBooked = isBooked;
     }
+    public FakeCatalogService()
+    {
+
+    }
 
     public async Task AddCatalogAsync(int id, int roomNumber, string roomType, bool isBooked)
     {
@@ -53,6 +57,6 @@ internal class FakeCatalogService : ICatalogService
 
     public async Task<int> GetCatalogsCountAsync()
     {
-        return await this._fakeRepository.GetCatalogsCountAsync();
+        return await this._fakeRepository.GetProductsCountAsync();
     }
 }

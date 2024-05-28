@@ -12,201 +12,166 @@ public class ServiceTests
     [TestMethod]
     public async Task UserServiceTests()
     {
-        IUserCRUD userCrud = IUserCRUD.CreateUserCRUD(this._repository);
+        IUserService userCrud = IUserService.CreateUserService(this._repository);
 
-        await userCrud.AddUserAsync(1, "Maciek", "maciek.kowalski@gmail.pl");
+        await userCrud.AddUserAsync(1, "Maciek", "Kowal", "guest");
 
-        IUserDTO user = await userCrud.GetUserAsync(1);
+        IUserService user = await userCrud.GetUserAsync(1);
 
         Assert.IsNotNull(user);
         Assert.AreEqual(1, user.Id);
-        Assert.AreEqual("Maciek", user.Name);
-        Assert.AreEqual("maciek.kowalski@gmail.pl", user.Email);
+        Assert.AreEqual("Maciek", user.FirstName);
+        Assert.AreEqual("Kowal", user.LastName);
+        Assert.AreEqual("guest", user.UserType);
 
         Assert.IsNotNull(await userCrud.GetAllUsersAsync());
         Assert.IsTrue(await userCrud.GetUsersCountAsync() > 0);
 
-        await userCrud.UpdateUserAsync(1, "Patrycja", "patrycja.palanowska@gmail.com");
+        await userCrud.UpdateUserAsync(1, "Marcin", "Kowals", "admin");
 
-        IUserDTO updatedUser = await userCrud.GetUserAsync(1);
+        IUserService updatedUser = await userCrud.GetUserAsync(1);
 
         Assert.IsNotNull(updatedUser);
         Assert.AreEqual(1, updatedUser.Id);
-        Assert.AreEqual("Patrycja", updatedUser.Name);
-        Assert.AreEqual("patrycja.palanowska@gmail.com", updatedUser.Email);
+        Assert.AreEqual("Marcin", updatedUser.FirstName);
+        Assert.AreEqual("Kowals", updatedUser.LastName);
+        Assert.AreEqual("admin", updatedUser.UserType);
 
         await userCrud.DeleteUserAsync(1);
     }
 
     [TestMethod]
-    public async Task ProductServiceTests()
+    public async Task CatalogServiceTests()
     {
-        IProductCRUD productCrud = IProductCRUD.CreateProductCRUD(this._repository);
+        ICatalogService catalogCrud = ICatalogService.CreateCatalogService(this._repository);
 
-        await productCrud.AddProductAsync(1, "Kanapa", 200);
+        await catalogCrud.AddCatalogAsync(1, 100, "Single", false);
 
-        IProductDTO product = await productCrud.GetProductAsync(1);
+        ICatalogService catalog = await catalogCrud.GetCatalogAsync(1);
 
-        Assert.IsNotNull(product);
-        Assert.AreEqual(1, product.Id);
-        Assert.AreEqual("Kanapa", product.Name);
-        Assert.AreEqual(200, product.Price);
+        Assert.IsNotNull(catalog);
+        Assert.AreEqual(1, catalog.Id);
+        Assert.AreEqual(100, catalog.RoomNumber);
+        Assert.AreEqual("Single", catalog.RoomType);
+        Assert.AreEqual(false, catalog.isBooked);
 
-        Assert.IsNotNull(await productCrud.GetAllProductsAsync());
-        Assert.IsTrue(await productCrud.GetProductsCountAsync() > 0);
+        Assert.IsNotNull(await catalogCrud.GetAllCatalogsAsync());
+        Assert.IsTrue(await catalogCrud.GetCatalogsCountAsync() > 0);
 
-        await productCrud.UpdateProductAsync(1, "Pralka", 300);
+        await catalogCrud.UpdateCatalogAsync(1, 101, "Double", false);
 
-        IProductDTO updatedProduct = await productCrud.GetProductAsync(1);
+        ICatalogService updatedCatalog = await catalogCrud.GetCatalogAsync(1);
 
-        Assert.IsNotNull(updatedProduct);
-        Assert.AreEqual(1, updatedProduct.Id);
-        Assert.AreEqual("Pralka", updatedProduct.Name);
-        Assert.AreEqual(300, updatedProduct.Price);
+        Assert.IsNotNull(updatedCatalog);
+        Assert.AreEqual(1, updatedCatalog.Id);
+        Assert.AreEqual(101, updatedCatalog.RoomNumber);
+        Assert.AreEqual("Double", updatedCatalog.RoomType);
+        Assert.AreEqual(false, updatedCatalog.isBooked);
 
-        await productCrud.DeleteProductAsync(1);
+        await catalogCrud.DeleteCatalogAsync(1);
     }
 
     [TestMethod]
     public async Task StateServiceTests()
     {
-        IProductCRUD productCrud = IProductCRUD.CreateProductCRUD(this._repository);
+        ICatalogService catalogCrud = ICatalogService.CreateCatalogService(this._repository);
 
-        await productCrud.AddProductAsync(1, "Kanapa", 200);
+        await catalogCrud.AddCatalogAsync(1, 101, "Double", false);
 
-        IProductDTO product = await productCrud.GetProductAsync(1);
+        ICatalogService catalog = await catalogCrud.GetCatalogAsync(1);
 
-        IStateCRUD stateCrud = IStateCRUD.CreateStateCRUD(this._repository);
+        IStateService stateCrud = IStateService.CreateStateService(this._repository);
 
-        await stateCrud.AddStateAsync(1, product.Id, 10);
+        await stateCrud.AddStateAsync(1, 1, 140);
 
-        IStateDTO state = await stateCrud.GetStateAsync(1);
+        IStateService state = await stateCrud.GetStateAsync(1);
 
         Assert.IsNotNull(state);
         Assert.AreEqual(1, state.Id);
-        Assert.AreEqual(1, state.productId);
-        Assert.AreEqual(10, state.productQuantity);
+        Assert.AreEqual(1, state.RoomCatalogId);
+        Assert.AreEqual(140, state.Price);
 
-        await stateCrud.UpdateStateAsync(1, product.Id, 12);
+        await stateCrud.UpdateStateAsync(1, 1, 150);
 
-        IStateDTO updatedState = await stateCrud.GetStateAsync(1);
+        IStateService updatedState = await stateCrud.GetStateAsync(1);
 
         Assert.IsNotNull(updatedState);
         Assert.AreEqual(1, updatedState.Id);
-        Assert.AreEqual(1, updatedState.productId);
-        Assert.AreEqual(12, updatedState.productQuantity);
+        Assert.AreEqual(1, updatedState.RoomCatalogId);
+        Assert.AreEqual(150, updatedState.Price);
 
         await stateCrud.DeleteStateAsync(1);
-        await productCrud.DeleteProductAsync(1);
+        await catalogCrud.DeleteCatalogAsync(1);
     }
 
     [TestMethod]
-    public async Task PurchaseEventServiceTests()
+    public async Task CheckInEventServiceTests()
     {
-        IProductCRUD productCrud = IProductCRUD.CreateProductCRUD(this._repository);
+        ICatalogService catalogCrud = ICatalogService.CreateCatalogService(this._repository);
 
-        await productCrud.AddProductAsync(1, "Kanapa", 200);
+        await catalogCrud.AddCatalogAsync(1, 101, "Double", false);
 
-        IProductDTO product = await productCrud.GetProductAsync(1);
+        ICatalogService catalog = await catalogCrud.GetCatalogAsync(1);
 
-        IStateCRUD stateCrud = IStateCRUD.CreateStateCRUD(this._repository);
+        IStateService stateCrud = IStateService.CreateStateService(this._repository);
 
-        await stateCrud.AddStateAsync(1, product.Id, 10);
+        await stateCrud.AddStateAsync(1, catalog.Id, 120);
 
-        IStateDTO state = await stateCrud.GetStateAsync(1);
+        IStateService state = await stateCrud.GetStateAsync(1);
 
-        IUserCRUD userCrud = IUserCRUD.CreateUserCRUD(this._repository);
+        IUserService userCrud = IUserService.CreateUserService(this._repository);
 
-        await userCrud.AddUserAsync(1, "Maciek", "maciek.kowalski@gmail.pl");
+        await userCrud.AddUserAsync(1, "Pan", "Jan", "guest");
 
-        IUserDTO user = await userCrud.GetUserAsync(1);
+        IUserService user = await userCrud.GetUserAsync(1);
 
-        IEventCRUD eventCrud = IEventCRUD.CreateEventCRUD(this._repository);
+        IEventService eventCrud = IEventService.CreateEventService(this._repository);
 
-        await eventCrud.AddEventAsync(1, state.Id, user.Id, "PurchaseEvent");
+        await eventCrud.AddEventAsync(1, state.Id, user.Id, DateTime.Now, DateTime.Now.AddDays(2), "CheckIn");
 
         user = await userCrud.GetUserAsync(1);
         state = await stateCrud.GetStateAsync(1);
 
-        Assert.AreEqual(9, state.productQuantity);
-
         await eventCrud.DeleteEventAsync(1);
         await stateCrud.DeleteStateAsync(1);
-        await productCrud.DeleteProductAsync(1);
+        await catalogCrud.DeleteCatalogAsync(1);
         await userCrud.DeleteUserAsync(1);
     }
 
     [TestMethod]
-    public async Task ReturnEventServiceTests()
+    public async Task CheckOutEventServiceTests()
     {
-        IProductCRUD productCrud = IProductCRUD.CreateProductCRUD(this._repository);
+        ICatalogService catalogCrud = ICatalogService.CreateCatalogService(this._repository);
 
-        await productCrud.AddProductAsync(2, "Kanapa", 200);
+        await catalogCrud.AddCatalogAsync(2, 101, "Double", false);
 
-        IProductDTO product = await productCrud.GetProductAsync(2);
+        ICatalogService catalog = await catalogCrud.GetCatalogAsync(2);
 
-        IStateCRUD stateCrud = IStateCRUD.CreateStateCRUD(this._repository);
+        IStateService stateCrud = IStateService.CreateStateService(this._repository);
 
-        await stateCrud.AddStateAsync(2, product.Id, 10);
+        await stateCrud.AddStateAsync(2, catalog.Id, 130);
 
-        IStateDTO state = await stateCrud.GetStateAsync(2);
+        IStateService state = await stateCrud.GetStateAsync(2);
 
-        IUserCRUD userCrud = IUserCRUD.CreateUserCRUD(this._repository);
+        IUserService userCrud = IUserService.CreateUserService(this._repository);
 
-        await userCrud.AddUserAsync(2, "Maciek", "maciek.kowalski@gmail.pl");
+        await userCrud.AddUserAsync(2, "Anna", "Chrzan", "guest");
 
-        IUserDTO user = await userCrud.GetUserAsync(2);
+        IUserService user = await userCrud.GetUserAsync(2);
 
-        IEventCRUD eventCrud = IEventCRUD.CreateEventCRUD(this._repository);
+        IEventService eventCrud = IEventService.CreateEventService(this._repository);
 
-        await eventCrud.AddEventAsync(2, state.Id, user.Id, "PurchaseEvent");
+        await eventCrud.AddEventAsync(2, state.Id, user.Id, DateTime.Now.AddDays(-3), DateTime.Now, "CheckIn");
 
-        await eventCrud.AddEventAsync(3, state.Id, user.Id, "ReturnEvent");
+        await eventCrud.AddEventAsync(3, state.Id, user.Id, DateTime.Now.AddDays(-3), DateTime.Now, "CheckOut");
 
         user = await userCrud.GetUserAsync(2);
         state = await stateCrud.GetStateAsync(2);
 
-        Assert.AreEqual(10, state.productQuantity);
-
         await eventCrud.DeleteEventAsync(2);
         await eventCrud.DeleteEventAsync(3);
         await stateCrud.DeleteStateAsync(2);
-        await productCrud.DeleteProductAsync(2);
+        await catalogCrud.DeleteCatalogAsync(2);
         await userCrud.DeleteUserAsync(2);
-    }
-
-    [TestMethod]
-    public async Task SupplyEventServiceTests()
-    {
-        IProductCRUD productCrud = IProductCRUD.CreateProductCRUD(this._repository);
-
-        await productCrud.AddProductAsync(4, "Kanapa", 200);
-
-        IProductDTO product = await productCrud.GetProductAsync(4);
-
-        IStateCRUD stateCrud = IStateCRUD.CreateStateCRUD(this._repository);
-
-        await stateCrud.AddStateAsync(4, product.Id, 10);
-
-        IStateDTO state = await stateCrud.GetStateAsync(4);
-
-        IUserCRUD userCrud = IUserCRUD.CreateUserCRUD(this._repository);
-
-        await userCrud.AddUserAsync(4, "Maciek", "maciek.kowalski@gmail.pl");
-
-        IUserDTO user = await userCrud.GetUserAsync(4);
-
-        IEventCRUD eventCrud = IEventCRUD.CreateEventCRUD(this._repository);
-
-        await eventCrud.AddEventAsync(4, state.Id, user.Id, "SupplyEvent", 20);
-
-        state = await stateCrud.GetStateAsync(4);
-
-        Assert.AreEqual(30, state.productQuantity);
-
-        await eventCrud.DeleteEventAsync(4);
-        await stateCrud.DeleteStateAsync(4);
-        await productCrud.DeleteProductAsync(4);
-        await userCrud.DeleteUserAsync(4);
     }
 }

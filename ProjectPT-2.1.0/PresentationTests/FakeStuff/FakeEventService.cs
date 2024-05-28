@@ -6,12 +6,12 @@ internal class FakeEventService : IEventService
 {
     private readonly FakeDataRepository _fakeRepository = new FakeDataRepository();
 
-    public int Id { get ; set ; }
-    public int StateId { get ; set ; }
-    public int UserId { get ; set ; }
-    public DateTime CheckInDate { get ; set ; }
-    public DateTime CheckOutDate { get ; set ; }
-    public string Type { get ; set ; }
+    public int Id { get; set; }
+    public int StateId { get; set; }
+    public int UserId { get; set; }
+    public DateTime CheckInDate { get; set; }
+    public DateTime CheckOutDate { get; set; }
+    public string Type { get; set; }
 
     public FakeEventService(int id, int stateId, int userId, DateTime checkIn, DateTime checkOut, string type)
     {
@@ -21,6 +21,10 @@ internal class FakeEventService : IEventService
         this.CheckInDate = checkIn;
         this.CheckOutDate = checkOut;
         this.Type = type;
+    }
+    public FakeEventService()
+    {
+
     }
 
     public async Task AddEventAsync(int id, int stateId, int userId, DateTime CheckInDate, DateTime CheckOutDate, string Type)
@@ -59,5 +63,6 @@ internal class FakeEventService : IEventService
     {
         return await this._fakeRepository.GetEventsCountAsync();
     }
+
 
 }
