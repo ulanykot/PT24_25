@@ -232,10 +232,6 @@ internal class DataRepository : IDataRepository
     {
         return await _context.GetEventsCountAsync();
     }
-    public async Task<IEnumerable<IEvent>> GetEventsForUser(int userId)
-    {
-        return await _context.GetEventsForUser(userId);
-    }
 
     #endregion
 }

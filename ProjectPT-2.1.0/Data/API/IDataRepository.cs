@@ -72,7 +72,6 @@ public interface IDataRepository
     Task<Dictionary<int, IEvent>> GetAllEventsAsync();
 
     Task<int> GetEventsCountAsync();
-    Task<IEnumerable<IEvent>> GetEventsForUser(int userId);
 
     #endregion
 }

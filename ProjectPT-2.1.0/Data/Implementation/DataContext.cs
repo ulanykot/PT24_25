@@ -144,9 +144,9 @@ internal class DataContext : IDataContext
             Database.Catalog Catalog = await Task.Run(() =>
             {
                 IQueryable<Database.Catalog> query =
-                    from p in context.Catalogs
-                    where p.Id == Id
-                    select p;
+                    from c in context.Catalogs
+                    where c.Id == Id
+                    select c;
 
                 return query.FirstOrDefault();
             });
@@ -166,7 +166,7 @@ internal class DataContext : IDataContext
     {
         using (var context = new DatabaseDataContext(_connectionString))
         {
-            Database.Catalog toUpdate = (from p in context.Catalogs where p.Id == Catalog.Id select p).FirstOrDefault();
+            Database.Catalog toUpdate = (from c in context.Catalogs where c.Id == Catalog.Id select c).FirstOrDefault();
 
             toUpdate.RoomNumber = Catalog.RoomNumber;
             toUpdate.RoomType = Catalog.RoomType;
@@ -180,7 +180,7 @@ internal class DataContext : IDataContext
     {
         using (var context = new DatabaseDataContext(_connectionString))
         {
-            Database.Catalog toDelete = (from p in context.Catalogs where p.Id == Id select p).FirstOrDefault();
+            Database.Catalog toDelete = (from c in context.Catalogs where c.Id == Id select c).FirstOrDefault();
 
             context.Catalogs.DeleteOnSubmit(toDelete);
 
@@ -192,9 +192,9 @@ internal class DataContext : IDataContext
     {
         using (var context = new DatabaseDataContext(_connectionString))
         {
-            IQueryable<ICatalog> CatalogQuery = from p in context.Catalogs
+            IQueryable<ICatalog> CatalogQuery = from c in context.Catalogs
                                                 select
-                                                    new Implementation.Catalog(p.Id, p.RoomNumber, p.RoomType, p.IsBooked) as ICatalog;
+                                                    new Implementation.Catalog(c.Id, c.RoomNumber, c.RoomType, c.IsBooked) as ICatalog;
 
             return await Task.Run(() => CatalogQuery.ToDictionary(k => k.Id));
         }
