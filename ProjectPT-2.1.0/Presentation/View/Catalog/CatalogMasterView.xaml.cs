@@ -3,11 +3,11 @@
 namespace Presentation.View;
 
 /// <summary>
-/// Interaction logic for ProductMasterView.xaml
+/// Interaction logic for CatalogMasterView.xaml
 /// </summary>
-public partial class ProductMasterView : UserControl
+public partial class CatalogMasterView : UserControl
 {
-    public ProductMasterView()
+    public CatalogMasterView()
     {
         InitializeComponent();
     }
