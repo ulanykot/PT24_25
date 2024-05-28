@@ -41,7 +41,7 @@ public class ServiceTests
     }
 
     [TestMethod]
-    public async Task ProductServiceTests()
+    public async Task CatalogServiceTests()
     {
         ICatalogService catalogCrud = ICatalogService.CreateCatalogService(this._repository);
 
@@ -68,7 +68,7 @@ public class ServiceTests
         Assert.AreEqual("Double", updatedCatalog.RoomType);
         Assert.AreEqual(false, updatedCatalog.isBooked);
 
-        await catalog.DeleteCatalogAsync(1);
+        await catalogCrud.DeleteCatalogAsync(1);
     }
 
     [TestMethod]
@@ -143,7 +143,7 @@ public class ServiceTests
     {
         ICatalogService catalogCrud = ICatalogService.CreateCatalogService(this._repository);
 
-        await catalogCrud.AddCatalogAsync(2, 101, "Double", true);
+        await catalogCrud.AddCatalogAsync(2, 101, "Double", false);
 
         ICatalogService catalog = await catalogCrud.GetCatalogAsync(2);
 

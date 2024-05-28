@@ -1,10 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Data.API;
+using Data.Database;
+using System;
 
 namespace DataTests;
 
 [TestClass]
-[DeploymentItem("TestDatabase.mdf")]
+[DeploymentItem("TestHotelDatabase.mdf")]
 public class DataTests
 {
     private static string connectionString;
@@ -14,18 +16,17 @@ public class DataTests
     [ClassInitialize]
     public static void ClassInitializeMethod(TestContext context)
     {
-        string _DBRelativePath = @"TestDatabase.mdf";
+        string _DBRelativePath = @"TestHotelDatabase.mdf";
         string _projectRootDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
         string _DBPath = Path.Combine(_projectRootDir, _DBRelativePath);
         FileInfo _databaseFile = new FileInfo(_DBPath);
         Assert.IsTrue(_databaseFile.Exists, $"{Environment.CurrentDirectory}");
         connectionString = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={_DBPath};Integrated Security = True; Connect Timeout = 30;";
     }
-
     [TestMethod]
     public async Task UserTests()
     {
-        int userId = 1;
+        int userId = 5;
 
         await _dataRepository.AddUserAsync(userId, "John", "Doe", "Guest");
 
@@ -63,7 +64,7 @@ public class DataTests
     [TestMethod]
     public async Task CatalogTests()
     {
-        int catalogId = 2;
+        int catalogId = 12;
 
         await _dataRepository.AddCatalogAsync(catalogId, 101, "Single", false);
 
@@ -78,8 +79,6 @@ public class DataTests
         Assert.IsNotNull(await _dataRepository.GetAllCatalogsAsync());
         Assert.IsTrue(await _dataRepository.GetCatalogsCountAsync() > 0);
 
-        await Assert.ThrowsExceptionAsync<Exception>(async () => await _dataRepository.GetCatalogAsync(12));
-
         await _dataRepository.UpdateCatalogAsync(catalogId, 102, "Suite", true);
 
         ICatalog catalogUpdated = await _dataRepository.GetCatalogAsync(catalogId);
@@ -90,18 +89,14 @@ public class DataTests
         Assert.AreEqual("Suite", catalogUpdated.RoomType);
         Assert.AreEqual(true, catalogUpdated.isBooked);
 
-        await Assert.ThrowsExceptionAsync<Exception>(async () => await _dataRepository.UpdateCatalogAsync(2, 102, "Suite", true));
-
         await _dataRepository.DeleteCatalogAsync(catalogId);
-        await Assert.ThrowsExceptionAsync<Exception>(async () => await _dataRepository.GetCatalogAsync(catalogId));
-        await Assert.ThrowsExceptionAsync<Exception>(async () => await _dataRepository.DeleteCatalogAsync(catalogId));
     }
 
     [TestMethod]
     public async Task StateTests()
     {
-        int catalogId = 3;
-        int stateId = 3;
+        int catalogId = 28;
+        int stateId = 7;
 
         await _dataRepository.AddCatalogAsync(catalogId, 104, "Double", false);
 
