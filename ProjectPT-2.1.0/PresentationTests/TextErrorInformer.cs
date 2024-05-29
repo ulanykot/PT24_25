@@ -1,5 +1,7 @@
 ﻿
 
+using PresentationViewModel;
+
 namespace PresentationTests;
 
 internal class TextErrorInformer : IErrorInformer

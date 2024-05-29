@@ -9,7 +9,7 @@ public partial class StateMasterView : UserControl
 {
     public StateMasterView()
     {
-        this.DataContext = new StateMasterView();
+        this.DataContext = new StateMasterViewModel();
         InitializeComponent();
     }
 }
