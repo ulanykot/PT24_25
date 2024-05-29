@@ -7,9 +7,6 @@
              xmlns:viewmodel="clr-namespace:PresentationViewModel;assembly=PresentationViewModel"
              mc:Ignorable="d" 
              Width="220" Height="320">
-    <UserControl.DataContext>
-        viewmodel:StateDetailViewModel
-    </UserControl.DataContext>
 
     <Grid Background="White" Margin="0,0,0,86">
 

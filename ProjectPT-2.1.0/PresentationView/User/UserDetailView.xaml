@@ -6,16 +6,6 @@
              xmlns:local="clr-namespace:PresentationView"
              xmlns:viewmodels="clr-namespace:PresentationViewModel;assembly=PresentationViewModel"
              mc:Ignorable="d" Width="220" Height="340">
-
-    <UserControl.DataContext>
-        <ObjectDataProvider ObjectType="viewmodels:UserDetailViewModel">
-            <ObjectDataProvider.ConstructorParameters>
-                <x:Null/>
-                <x:Null/>
-            </ObjectDataProvider.ConstructorParameters>
-        </ObjectDataProvider>
-    </UserControl.DataContext>
-
     <Grid Background="White" Margin="0,0,0,21">
 
         <GroupBox Width="220"

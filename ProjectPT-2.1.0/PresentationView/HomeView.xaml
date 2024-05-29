@@ -8,10 +8,6 @@
              mc:Ignorable="d"
              d:DesignHeight="550" d:DesignWidth="800">
 
-    <UserControl.DataContext>
-        viewmodels:HomeViewModel
-    </UserControl.DataContext>
-
     <Grid Background="CornflowerBlue">
 
         <Grid.ColumnDefinitions>

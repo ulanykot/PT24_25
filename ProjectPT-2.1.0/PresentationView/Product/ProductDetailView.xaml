@@ -7,10 +7,6 @@
              xmlns:viewmodels="clr-namespace:PresentationViewModel;assembly=PresentationViewModel"
              mc:Ignorable="d" Width="220" Height="282">
 
-    <UserControl.DataContext>
-        viewmodels:ProductDetailViewModel            
-    </UserControl.DataContext>
-
     <Grid Background="White" Margin="0,0,0,10">
 
         <GroupBox Width="220"
