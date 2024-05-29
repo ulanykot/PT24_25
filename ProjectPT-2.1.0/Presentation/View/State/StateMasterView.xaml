@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:Presentation.View;assembly=Presentation"
              xmlns:view="clr-namespace:Presentation.View"
-             xmlns:viewmodels="clr-namespace:Presentation.ViewModel"
+             xmlns:viewmodels="clr-namespace:PresentationViewModel"
              mc:Ignorable="d" d:DesignWidth="800" Height="550">
 
     <UserControl.DataContext>

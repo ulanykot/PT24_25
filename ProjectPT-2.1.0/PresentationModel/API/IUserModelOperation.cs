@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System;
 using PresentationModel.Implementation;
 
-namespace Presentation.Model.API;
+namespace PresentationModel;
 
 public interface IUserModelOperation
 {

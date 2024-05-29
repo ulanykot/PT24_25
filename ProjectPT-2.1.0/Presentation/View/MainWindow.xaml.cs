@@ -1,4 +1,4 @@
-﻿using Presentation.ViewModel;
+﻿using PresentationViewModel;
 using System.Windows;
 
 namespace Presentation.View

@@ -17,7 +17,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Presentation\Presentation.csproj" />
+	  <ProjectReference Include="..\PresentationModel\PresentationModel.csproj" />
+	  <ProjectReference Include="..\PresentationViewModel\PresentationViewModel.csproj" />
+	  <ProjectReference Include="..\Service\Service.csproj" />
 	</ItemGroup>
 
 </Project>

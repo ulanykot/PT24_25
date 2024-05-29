@@ -1,4 +1,4 @@
-﻿namespace Presentation.Model.API;
+﻿namespace PresentationModel;
 
 public interface IStateModel
 {

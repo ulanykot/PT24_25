@@ -1,7 +1,7 @@
 ﻿using Presentation.Model.API;
 using System.Windows.Input;
 
-namespace Presentation.ViewModel;
+namespace PresentationViewModel;
 
 public interface IStateDetailViewModel
 {

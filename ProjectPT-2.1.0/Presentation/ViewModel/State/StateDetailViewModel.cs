@@ -2,7 +2,7 @@
 using System.Windows.Input;
 using Presentation.Model.API;
 
-namespace Presentation.ViewModel;
+namespace PresentationViewModel;
 
 internal class StateDetailViewModel : IViewModel, IStateDetailViewModel
 {

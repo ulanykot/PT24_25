@@ -1,6 +1,6 @@
-﻿using Presentation;
-using Presentation.Model.API;
-using Presentation.ViewModel;
+﻿
+using PresentationModel;
+using PresentationViewModel;
 using PresentationTest;
 using Service.API;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

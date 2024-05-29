@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Presentation.ViewModel;
+namespace PresentationViewModel;
 
 public interface IEventMasterViewModel
 {

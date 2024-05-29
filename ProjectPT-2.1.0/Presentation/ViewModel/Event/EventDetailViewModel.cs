@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Presentation.Model.API;
 
-namespace Presentation.ViewModel;
+namespace PresentationViewModel;
 
 internal class EventDetailViewModel : IViewModel, IEventDetailViewModel
 {

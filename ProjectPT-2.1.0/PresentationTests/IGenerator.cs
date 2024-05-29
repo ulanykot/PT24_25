@@ -1,4 +1,4 @@
-﻿using Presentation.ViewModel;
+﻿using PresentationViewModel;
 
 namespace PresentationTests;
 

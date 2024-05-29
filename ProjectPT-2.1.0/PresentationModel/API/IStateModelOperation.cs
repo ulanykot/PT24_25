@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using PresentationModel.Implementation;
 using Service.API;
 
-namespace Presentation.Model.API;
+namespace PresentationModel;
 
 public interface IStateModelOperation
 {

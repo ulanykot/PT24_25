@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace Presentation.ViewModel;
+namespace PresentationViewModel;
 
 internal class CloseApplicationCommand : ICommand
 {
