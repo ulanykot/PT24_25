@@ -316,6 +316,7 @@ internal class DataContext : IDataContext
                 UserId = even.UserId,
                 CheckInDate = even.CheckInDate,
                 CheckOutDate = even.CheckOutDate,
+                Type = even.Type,
             };
 
             context.Events.InsertOnSubmit(entity);
@@ -360,6 +361,7 @@ internal class DataContext : IDataContext
             toUpdate.UserId = even.UserId;
             toUpdate.CheckInDate = even.CheckInDate;
             toUpdate.CheckOutDate = even.CheckOutDate;
+            toUpdate.Type = even.Type;
 
             await Task.Run(() => context.SubmitChanges());
         }

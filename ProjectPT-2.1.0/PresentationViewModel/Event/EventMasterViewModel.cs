@@ -70,6 +70,16 @@ public class EventMasterViewModel : IViewModel, IEventMasterViewModel
             OnPropertyChanged(nameof(UserId));
         }
     }
+    private int _type;
+    public int Type
+    {
+        get => _type;
+        set
+        {
+            _type = value;
+            OnPropertyChanged(nameof(Type));
+        }
+    }
     private bool _isEventSelected;
     public bool IsEventSelected
     {

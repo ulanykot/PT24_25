@@ -9,7 +9,7 @@ public partial class UserMasterView : UserControl
 {
     public UserMasterView()
     {
-        this.DataContext = new UserDetailViewModel();
+        this.DataContext = new UserMasterViewModel();
         InitializeComponent();
     }
 }
