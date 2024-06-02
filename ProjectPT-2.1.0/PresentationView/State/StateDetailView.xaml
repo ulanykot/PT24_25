@@ -8,14 +8,14 @@
              mc:Ignorable="d" 
              Width="220" Height="320">
 
-    <Grid Background="White" Margin="0,0,0,86">
+    <Grid Background="AliceBlue" Margin="0,0,0,86">
 
         <GroupBox Width="220"
                   HorizontalAlignment="Center"
-                  Header="Information about the state" Margin="0,16,0,0" Height="220" VerticalAlignment="Top">
+                  Header="Information about the state" Background="AliceBlue" Margin="0,0,0,-36">
             <StackPanel Margin="0,5,0,0"
                         VerticalAlignment="Top"
-                        Background="White">
+                        Background="AliceBlue">
                 <Label Content="ID:"/>
                 <TextBox Height="20" Width="120" Margin="50,0,10,0"
                          Text="{Binding Id , ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
@@ -63,7 +63,7 @@
 
             </StackPanel>
         </GroupBox>
-        <Button Content="Update" Background="GreenYellow" HorizontalAlignment="Center" Margin="0,198,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.227,0.242" Height="26" Width="90"
-            Command="{Binding UpdateState}"/>
+        <Button Content="Update" Background="GreenYellow" HorizontalAlignment="Center" Margin="0,198,0,0" RenderTransformOrigin="0.227,0.242" Width="90"
+            Command="{Binding UpdateState}" Height="26" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>

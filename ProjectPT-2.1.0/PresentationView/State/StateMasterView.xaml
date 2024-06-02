@@ -46,10 +46,10 @@
                 </ListView>
                 <Grid Grid.ColumnSpan="2" Visibility="{Binding IsStateDetailVisible}">
                     <view:StateDetailView
-                        Margin="320,24,10,79"
+                        Margin="320,14,10,97"
                         DataContext="{Binding SelectedDetailViewModel}"
                         />
-                    <Button Content="Delete" Background="IndianRed" HorizontalAlignment="Left" Margin="385,256,0,0" VerticalAlignment="Top" Height="26" Width="90"
+                    <Button Content="Delete" Background="IndianRed" HorizontalAlignment="Left" Margin="385,241,0,0" VerticalAlignment="Top" Height="26" Width="90"
                         Command="{Binding RemoveState}"/>
                 </Grid>
                 <StackPanel Margin="16,210,202,0"

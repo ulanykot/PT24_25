@@ -48,10 +48,10 @@
                 </ListView>
                 <Grid Grid.ColumnSpan="2" Visibility="{Binding IsProductDetailVisible}">
                     <view:ProductDetailView
-                        Margin="320,26,10,20"
+                        Margin="320,-14,10,63"
                         DataContext="{Binding SelectedDetailViewModel}"
                         />
-                    <Button Content="Delete" Background="IndianRed" HorizontalAlignment="Left" Margin="385,321,0,0" VerticalAlignment="Top" Height="26" Width="90"
+                    <Button Content="Delete" Background="IndianRed" HorizontalAlignment="Left" Margin="385,282,0,0" VerticalAlignment="Top" Height="26" Width="90"
                         Command="{Binding RemoveProduct}"/>
                 </Grid>
                 <StackPanel Margin="10,209,208,0"

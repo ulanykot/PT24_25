@@ -5,18 +5,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:PresentationView"
              xmlns:viewmodels="clr-namespace:PresentationViewModel;assembly=PresentationViewModel"
-             mc:Ignorable="d" Width="220" Height="340">
-    <Grid Background="White" Margin="0,0,0,21">
+             mc:Ignorable="d" Width="220" Height="292">
+    <Grid Background="AliceBlue" Margin="0,0,0,65">
 
         <GroupBox Width="220"
                   HorizontalAlignment="Center"
-                  Header="User details" Margin="0,16,0,-14">
+                  Header="User details" Background="AliceBlue" Margin="0,0,0,-58">
             <StackPanel Margin="0,5,0,0"
 VerticalAlignment="Top"
-Background="White">
+Background="AliceBlue">
                 <StackPanel Margin="0,5,0,0"
                         VerticalAlignment="Top"
-                        Background="White" Orientation="Horizontal">
+                        Background="AliceBlue" Orientation="Horizontal">
                     <Label Content="ID:" Width="85"/>
                     <TextBox Height="20" Width="120"
                          Text="{Binding Id , ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
@@ -35,7 +35,7 @@ Background="White">
                 </StackPanel>
                 <StackPanel Margin="0,5,0,0"
             VerticalAlignment="Top"
-            Background="White" Orientation="Horizontal">
+            Background="AliceBlue" Orientation="Horizontal">
 
                     <Label Content="First Name:" Width="85"/>
                     <TextBox Height="20" Width="120"
@@ -55,7 +55,7 @@ Background="White">
                 </StackPanel>
                 <StackPanel Margin="0,5,0,0"
 VerticalAlignment="Top"
-Background="White" Orientation="Horizontal">
+Background="AliceBlue" Orientation="Horizontal">
 
                     <Label Content="Last Name:" Width="85"/>
                     <TextBox Height="20" Width="120" 
@@ -75,7 +75,7 @@ Background="White" Orientation="Horizontal">
                 </StackPanel>
                 <StackPanel Margin="0,5,0,0"
 VerticalAlignment="Top"
-Background="White" Orientation="Horizontal">
+Background="AliceBlue" Orientation="Horizontal">
 
                     <Label Content="Type of user:" Width="85"/>
                     <TextBox Height="20" Width="120"
@@ -100,7 +100,7 @@ Background="White" Orientation="Horizontal">
                 </StackPanel>
             </StackPanel>
         </GroupBox>
-        <Button Content="Update" Background="GreenYellow" HorizontalAlignment="Center" Margin="0,283,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.227,0.242" Height="26" Width="90"
+        <Button Content="Update" Background="GreenYellow" HorizontalAlignment="Center" Margin="0,201,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.227,0.242" Height="26" Width="90"
             Command="{Binding UpdateUser}"/>
     </Grid>
 </UserControl>

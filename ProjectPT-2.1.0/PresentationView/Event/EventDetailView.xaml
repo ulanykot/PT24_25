@@ -7,14 +7,14 @@
              xmlns:viewmodel="clr-namespace:PresentationViewModel;assembly=PresentationViewModel"
              mc:Ignorable="d" 
              Width="220" Height="410">
-    <Grid Background="White" Margin="0,0,0,86">
+    <Grid Background="AliceBlue" Margin="0,0,0,93">
 
         <GroupBox Width="220"
                   HorizontalAlignment="Center"
-                  Header="Information about the event" Margin="0,16,0,-75">
+                  Header="Information about the event" Background="AliceBlue" Margin="0,0,0,-37">
             <StackPanel Margin="0,5,0,0"
                         VerticalAlignment="Top"
-                        Background="White">
+                        Background="AliceBlue">
                 <Label Content="State ID:"/>
                 <TextBox Height="20" Width="120" Margin="50,0,10,0"
                          Text="{Binding StateId , ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
@@ -92,7 +92,7 @@
 
             </StackPanel>
         </GroupBox>
-        <Button Content="Update" Background="GreenYellow" HorizontalAlignment="Center" Margin="0,278,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.227,0.242" Height="26" Width="90"
+        <Button Content="Update" Background="GreenYellow" HorizontalAlignment="Center" Margin="0,283,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.227,0.242" Height="26" Width="90"
             Command="{Binding UpdateEvent}"/>
     </Grid>
 </UserControl>
