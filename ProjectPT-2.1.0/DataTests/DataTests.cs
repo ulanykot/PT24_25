@@ -124,7 +124,49 @@ public class DataTests
         await _dataRepository.DeleteStateAsync(stateId);
         await _dataRepository.DeleteCatalogAsync(catalogId);
     }
+    [TestMethod]
+    public async Task EventTests()
+    {
+        int eventId = 24;
+        int userId = 24;
+        int catalogId = 24;
+        int stateId = 24;
 
-    
+        await _dataRepository.AddCatalogAsync(catalogId, 109, "Suite", false);
+        await _dataRepository.AddStateAsync(stateId, catalogId, 130);
+        await _dataRepository.AddUserAsync(userId, "Michael", "Pitt", "Guest");
+
+        ICatalog catalog = await _dataRepository.GetCatalogAsync(catalogId);
+        IState state = await _dataRepository.GetStateAsync(stateId);
+        IUser user = await _dataRepository.GetUserAsync(userId);
+
+        await _dataRepository.AddEventAsync(eventId, stateId, userId, DateTime.Now, DateTime.Now.AddDays(2), "CheckIn");
+
+        IEvent anotherEvent = await _dataRepository.GetEventAsync(eventId);
+
+        Assert.IsNotNull(anotherEvent);
+        Assert.AreEqual(eventId, anotherEvent.Id);
+        Assert.AreEqual(stateId, anotherEvent.StateId);
+        Assert.AreEqual(userId, anotherEvent.UserId);
+
+        Assert.IsNotNull(await _dataRepository.GetAllEventsAsync());
+        Assert.IsTrue(await _dataRepository.GetEventsCountAsync() > 0);
+
+        await _dataRepository.UpdateEventAsync(eventId, stateId, userId, DateTime.Now.AddDays(2), DateTime.Now.AddDays(4), "CheckIn");
+
+        IEvent eventUpdated = await _dataRepository.GetEventAsync(eventId);
+
+        Assert.IsNotNull(eventUpdated);
+        Assert.AreEqual(eventId, eventUpdated.Id);
+        Assert.AreEqual(stateId, eventUpdated.StateId);
+        Assert.AreEqual(userId, eventUpdated.UserId);
+
+        await _dataRepository.DeleteEventAsync(eventId);
+        await _dataRepository.DeleteStateAsync(stateId);
+        await _dataRepository.DeleteCatalogAsync(catalogId);
+        await _dataRepository.DeleteUserAsync(userId);
+    }
+
+   
 }
 
