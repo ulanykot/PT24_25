@@ -40,7 +40,7 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Id" Width="50" DisplayMemberBinding="{Binding Id}" />
-                            <GridViewColumn Header="Product ID" Width="190" DisplayMemberBinding="{Binding ProductId}" />
+                            <GridViewColumn Header="Room ID" Width="190" DisplayMemberBinding="{Binding ProductId}" />
                         </GridView>
                     </ListView.View>
                 </ListView>
